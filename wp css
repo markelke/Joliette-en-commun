@@ -1,0 +1,387 @@
+/* ==========================================================================
+   JOLIETTE EN COMMUN — Feuille de style personnalisée (corrigée)
+   --------------------------------------------------------------------------
+   Palette :
+     Crème (fond) .......... #faf6f0
+     Vert forêt (en-tête) .. #2d5a3d
+     Vert foncé (survol) ... #1e3d2a
+     Sauge (slogan/lignes) . #c8dfc8
+
+   Corrections appliquées :
+     - Fond crème restauré comme source UNIQUE (plus d'override vert foncé
+       #1e3d2a sur le <body> — c'était la cause du fond sombre non désiré).
+     - Règles de fond redondantes regroupées en un seul bloc.
+     - Une seule "timeline" (verticale) — plus de conflit entre les deux versions.
+     - Commentaire cassé "//*" corrigé en "/*".
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. EN-TÊTE — VERT FORÊT
+   ========================================================================== */
+.site-header,
+header#masthead,
+.inside-header,
+.inside-header.grid-container,
+div.inside-header.grid-container {
+  background-color: #2d5a3d !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding-top: max(20px, env(safe-area-inset-top)) !important;
+  padding-bottom: 20px !important;
+  margin-bottom: 0 !important;
+}
+
+.inside-header {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.site-branding-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+.site-branding {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+img.header-image.is-logo-image {
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+}
+
+/* Titre du site */
+p.main-title a {
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.02em !important;
+  line-height: 1.1 !important;
+  display: block !important;
+}
+
+/* Slogan */
+p.site-description {
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 0.9rem !important;
+  color: #c8dfc8 !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  margin-top: 4px !important;
+  display: block !important;
+}
+
+
+/* ==========================================================================
+   2. FOND CRÈME GLOBAL — source unique de la couleur de fond
+   ========================================================================== */
+html, body,
+.site-content, .grid-container, .entry-content, .entry-content > *,
+.inside-article, .inside-article > *, #primary, .site-main,
+.wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
+  background-color: #faf6f0 !important;
+}
+
+/* Espacements verticaux : pas de marge en haut */
+.grid-container, #primary, .site-main,
+.wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Respiration crème entre l'en-tête et le contenu */
+.site-content, .inside-article, .entry-content {
+  margin-top: 0 !important;
+  padding-top: 30px !important;
+}
+
+
+/* ==========================================================================
+   3. MISE EN PAGE — COLONNES DE HAUTEUR ÉGALE (forum + sondage)
+   ========================================================================== */
+.wp-block-columns {
+  display: flex !important;
+  align-items: stretch !important;
+}
+.wp-block-column {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#wpforo-wrap, .forminator-poll {
+  flex: 1 !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Espace entre le bloc forum/sondage et les événements */
+.gb-element-56de59ba {
+  margin-top: 40px !important;
+  padding-top: 20px !important;
+}
+
+
+/* ==========================================================================
+   4. BOUTONS — CALENDRIER & RETOUR
+   ========================================================================== */
+a.gb-text-169aeb6e,
+a.gb-text-d96ad459 {
+  background-color: #2d5a3d !important;
+  color: #faf6f0 !important;
+  border-color: #2d5a3d !important;
+}
+a.gb-text-169aeb6e:hover,
+a.gb-text-d96ad459:hover {
+  background-color: #1e3d2a !important;
+  border-color: #1e3d2a !important;
+}
+
+a.jc-retour-btn,
+a.jc-retour-btn:hover {
+  color: #faf6f0 !important;
+}
+
+
+/* ==========================================================================
+   5. SONDAGE FORMINATOR
+   ========================================================================== */
+.forminator-poll {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  padding: 26px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+  border: 1px solid #eaeaea !important;
+}
+.forminator-poll .forminator-poll-title {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  margin-bottom: 20px !important;
+  line-height: 1.4 !important;
+}
+.forminator-poll .forminator-radio {
+  background: #f9fafb !important;
+  border: 1px solid #f3f4f6 !important;
+  border-radius: 10px !important;
+  padding: 12px 14px !important;
+  margin-bottom: 10px !important;
+}
+.forminator-poll .forminator-radio:hover {
+  background: #f3f4f6 !important;
+  border-color: #e5e7eb !important;
+}
+.forminator-poll .forminator-button-submit {
+  width: 100% !important;
+  background: #2d5a3d !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 14px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin-top: 8px !important;
+  cursor: pointer !important;
+}
+.forminator-poll .forminator-button-submit:hover {
+  background: #1e3d2a !important;
+}
+
+/* Message « déjà voté » */
+.forminator-poll .forminator-response-message {
+  background-color: #e8f4ec !important;
+  border: 1px solid #a8d4b4 !important;
+  border-left: 4px solid #2d5a3d !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
+}
+.forminator-poll .forminator-label--forminator-error {
+  font-size: 0 !important;
+  color: transparent !important;
+  display: block !important;
+}
+.forminator-poll .forminator-label--forminator-error::before {
+  content: "Vous avez déjà enregistré votre vote. Merci !" !important;
+  font-size: 0.95rem !important;
+  color: #2d5a3d !important;
+  font-weight: 500 !important;
+  display: block !important;
+}
+
+
+/* ==========================================================================
+   6. ÉLÉMENTS MASQUÉS
+   ========================================================================== */
+.header-widget-1, .header-widget-2 { display: none !important; }
+.forminator-field-postdata,
+.forminator-field-postdata .forminator-button-submit { display: none !important; }
+.forminator-poll-edit-link,
+.edit-link,
+a[href*="action=edit"] { display: none !important; }
+#menu-item-1885 { display: none !important; }  /* entrée de menu « Événements » */
+
+/* Bannière PWA (mode application) */
+@media all and (display-mode: standalone) {
+  .hdsb-stickybanner { display: none !important; }
+}
+
+/* Titre de la page d'accueil */
+.home .page-hero h1,
+.home .entry-header h1,
+.home .generate-page-header h1 { font-size: 1.8rem !important; }
+
+
+/* ==========================================================================
+   7. ÉVÉNEMENTS — TIMELINE VERTICALE
+   (Bloc autonome : pour passer à la grille 4 colonnes, on remplace
+    uniquement cette section.)
+   ========================================================================== */
+.jc-timeline {
+  position: relative;
+  border-left: 2px solid #c8dfc8;       /* ligne verticale sauge */
+  margin: 20px 0 20px 12px;
+  padding-left: 24px;
+  list-style: none !important;
+  font-family: 'Nunito', sans-serif;
+}
+
+.jc-timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+  list-style: none !important;
+  list-style-type: none !important;      /* enlève le « 1. » forcé par le thème */
+}
+.jc-timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.jc-timeline-content {
+  width: 100% !important;
+  max-width: 480px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+.jc-timeline-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #2d5a3d;
+  border: 2px solid #faf6f0;
+  border-radius: 50%;
+  left: -31px;
+  top: 6px;
+  z-index: 2;
+}
+
+.jc-timeline-time {
+  display: block !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: #2d5a3d !important;
+  margin-bottom: 6px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.jc-timeline-title {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #1e3d2a !important;
+  margin: 0 0 4px 0 !important;
+  line-height: 1.3 !important;
+  max-width: 100% !important;
+}
+
+.jc-timeline-img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  height: 250px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: 8px !important;
+  border: 1px solid #c8dfc8 !important;
+  margin: 12px 0 !important;
+}
+
+.jc-timeline-desc {
+  font-size: 0.95rem !important;
+  color: #1e3d2a !important;
+  line-height: 1.5 !important;
+  margin: 0 0 14px 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  word-wrap: break-word !important;
+}
+
+.jc-timeline-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  background-color: #2d5a3d !important;
+  color: #faf6f0 !important;
+  padding: 8px 16px !important;
+  border-radius: 6px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: background-color 0.2s ease !important;
+}
+.jc-timeline-btn:hover {
+  background-color: #1e3d2a !important;
+  color: #faf6f0 !important;
+}
+.jc-timeline-btn svg {
+  margin-left: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+
+/* ==========================================================================
+   8. RÈGLES MOBILES (≤ 768 px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Navigation principale masquée (hamburger géré par le thème) */
+  .main-navigation { display: none !important; }
+
+  /* En-tête empilé et centré */
+  .inside-header {
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 16px !important;
+  }
+  .site-branding-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  img.header-image.is-logo-image {
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+  }
+  .site-branding { align-items: center !important; }
+  p.site-description { text-align: center !important; }
+
+  /* Masquer les résultats du sondage sur mobile */
+  .forminator-poll .forminator-radio.forminator-disabled,
+  .forminator-poll .forminator-poll-body,
+  .forminator-poll .forminator-poll-footer {
+    display: none !important;
+  }
+}
