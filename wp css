@@ -157,7 +157,56 @@ a.jc-retour-btn:hover {
   color: #faf6f0 !important;
 }
 
+/* Rangée des boutons d'action (au-dessus de la grille) */
+.jc-events-header {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  justify-content: center !important;
+  margin-bottom: 24px !important;
+}
 
+/* Les 3 boutons en vert forêt */
+a.gb-text-169aeb6e,
+a.gb-text-d96ad459,
+#jc-load-more-btn {
+  background-color: #2d5a3d !important;
+  color: #faf6f0 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 10px 18px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+}
+a.gb-text-169aeb6e,
+a.gb-text-d96ad459 { display: inline-block !important; }
+
+a.gb-text-169aeb6e:hover,
+a.gb-text-d96ad459:hover,
+#jc-load-more-btn:hover {
+  background-color: #1e3d2a !important;
+  color: #faf6f0 !important;
+}
+
+/* "Voir plus" + masquage : MOBILE seulement (sous 1024px).
+   Sur ordinateur, les 8 événements (4x2) sont tous visibles. */
+#jc-load-more-btn { display: none !important; }
+
+@media (max-width: 1023px) {
+  .jc-events-grid-layout .jc-timeline .jc-timeline-item:nth-child(n+5) {
+    display: none !important;
+  }
+  .jc-events-grid-layout.jc-expanded .jc-timeline .jc-timeline-item {
+    display: flex !important;
+  }
+  #jc-load-more-btn {
+    display: block !important;
+    margin: 16px auto 0 !important;
+  }
+}
 /* ==========================================================================
    5. SONDAGE FORMINATOR
    ========================================================================== */
