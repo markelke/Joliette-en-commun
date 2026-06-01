@@ -490,6 +490,11 @@ a[href*="action=edit"] { display: none !important; }
 /* wpForo coupe le titre du dernier sujet côté serveur ; le titre complet
    n'existe que dans l'attribut "title". On masque le texte tronqué et on
    affiche le titre complet depuis cet attribut. */
+.wpforo-forum-title {
+  padding: 6px 0 4px 0 !important;
+  margin: 0 0 4px 0 !important;
+}
+
 .wpforo-last-topic-title a {
   font-size: 0 !important;          /* masque le texte tronqué "...cou..." */
   white-space: normal !important;

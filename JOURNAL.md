@@ -23,6 +23,21 @@ Chaque entrée résume ce qui a changé et pourquoi, suivi du code exact ajouté
 
 ---
 
+## 2026-06-01 — Titres du forum trop collés
+
+**Problème :** Les liens des titres de forums wpForo ("Le Babillard", "Bâtir des projets ensemble") manquaient d'espace au-dessus et en dessous.
+
+**Solution :** Ajouter du padding vertical sur `.wpforo-forum-title`.
+
+```css
+.wpforo-forum-title {
+  padding: 6px 0 4px 0 !important;
+  margin: 0 0 4px 0 !important;
+}
+```
+
+---
+
 ## 2026-05-xx — Grille d'événements : débordement corrigé
 
 **Problème :** Les cartes d'événements débordaient hors de leur colonne sur certaines tailles d'écran.
