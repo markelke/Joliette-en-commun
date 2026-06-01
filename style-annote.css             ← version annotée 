@@ -1,0 +1,901 @@
+/* ==========================================================================
+   JOLIETTE EN COMMUN — CSS ANNOTÉ (version d'apprentissage)
+   --------------------------------------------------------------------------
+   Ce fichier est identique à style.css, mais chaque règle est expliquée
+   en français simple. Les commentaires n'affectent pas le rendu — le
+   navigateur les ignore complètement.
+
+   COMMENT LIRE CE FICHIER :
+   • Un sélecteur (.nom-de-classe, #identifiant) désigne QUEL élément cibler.
+   • Les propriétés (background-color, font-size...) désignent QUOI changer.
+   • La valeur (après le :) désigne COMMENT le changer.
+   • !important force la règle à gagner même si d'autres règles existent.
+   • Pour tester : change une valeur, sauvegarde, et regarde le résultat
+     dans le Customizer (aperçu en direct) ou sur ton site local.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. EN-TÊTE — VERT FORÊT
+   --------------------------------------------------------------------------
+   Cette section change l'apparence de la barre du haut du site.
+   On cible 5 sélecteurs différents parce que WordPress et GeneratePress
+   peuvent utiliser différents noms de classe selon la page ou la version.
+   Mettre les mêmes règles sur tous garantit que ça s'applique partout.
+   ========================================================================== */
+
+/* Cible la barre d'en-tête complète */
+.site-header,
+header#masthead,
+.inside-header,
+.inside-header.grid-container,
+div.inside-header.grid-container {
+
+  /* La couleur de fond de l'en-tête.
+     #2d5a3d = vert forêt (notation hexadécimale : #RRGGBB).
+     Pour changer : remplace #2d5a3d par n'importe quelle couleur hex.
+     Exemple : #003366 = bleu marine, #8B0000 = rouge foncé. */
+  background-color: #2d5a3d !important;
+
+  /* Supprime toute bordure/cadre autour de l'en-tête.
+     Sans cette règle, certains thèmes ajoutent une ligne. */
+  border: none !important;
+
+  /* Supprime l'ombre portée sous l'en-tête.
+     box-shadow crée un effet d'ombre — ici on la désactive. */
+  box-shadow: none !important;
+
+  /* Espace intérieur en HAUT de l'en-tête.
+     max() choisit la PLUS GRANDE des deux valeurs :
+     - 20px : minimum garanti
+     - env(safe-area-inset-top) : espace réservé par l'iPhone pour l'encoche
+     Sans ça, le contenu passerait sous l'encoche sur iPhone. */
+  padding-top: max(20px, env(safe-area-inset-top)) !important;
+
+  /* Espace intérieur en BAS de l'en-tête (20px de respiration). */
+  padding-bottom: 20px !important;
+
+  /* Supprime tout espace extérieur en bas (évite un espace blanc entre
+     l'en-tête et le contenu). */
+  margin-bottom: 0 !important;
+}
+
+/* Cible la zone intérieure de l'en-tête (logo + titre + slogan).
+   display: flex organise les éléments en RANGÉE ou COLONNE
+   au lieu de les empiler en blocs. */
+.inside-header {
+  /* Active le mode flex : les enfants directs deviennent flexibles. */
+  display: flex !important;
+
+  /* Les éléments s'organisent en RANGÉE (côte à côte). */
+  flex-direction: row !important;
+
+  /* Centre les éléments verticalement dans la rangée. */
+  align-items: center !important;
+
+  /* Centre les éléments horizontalement dans l'en-tête. */
+  justify-content: center !important;
+
+  /* Espace intérieur gauche/droite (40px = respiration sur les côtés). */
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+
+  /* L'en-tête prend toute la largeur disponible. */
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Conteneur qui regroupe le logo + le texte (titre et slogan).
+   Ils s'affichent côte à côte avec 16px d'espace entre eux. */
+.site-branding-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  /* gap : espace entre les enfants directs (ici entre logo et texte). */
+  gap: 16px !important;
+}
+
+/* Le bloc texte (titre + slogan) s'empile en COLONNE. */
+.site-branding {
+  display: flex !important;
+  /* Les éléments s'empilent verticalement (un dessous l'autre). */
+  flex-direction: column !important;
+  /* Alignement à gauche. */
+  align-items: flex-start !important;
+}
+
+/* Le logo circulaire en haut à gauche.
+   img.header-image.is-logo-image cible précisément l'image du logo. */
+img.header-image.is-logo-image {
+  /* Largeur du logo : 72px. Change les deux pour garder un cercle parfait. */
+  width: 72px !important;
+  height: 72px !important;
+
+  /* border-radius: 50% = rend l'image PARFAITEMENT RONDE.
+     0% = carré, 10px = légèrement arrondi, 50% = cercle. */
+  border-radius: 50% !important;
+
+  /* object-fit: cover = remplit le cercle sans déformer l'image
+     (coupe les bords si besoin, comme un recadrage). */
+  object-fit: cover !important;
+
+  /* Empêche le logo de rétrécir si l'espace manque. */
+  flex-shrink: 0 !important;
+}
+
+/* Le titre du site (ex: "JOLIETTE EN COMMUN").
+   p.main-title a = le lien <a> à l'intérieur du paragraphe .main-title */
+p.main-title a {
+  /* Police de caractères. Nunito est chargée depuis Google Fonts.
+     sans-serif = police de secours si Nunito ne charge pas. */
+  font-family: 'Nunito', sans-serif !important;
+
+  /* Taille du texte. rem = taille relative au navigateur.
+     2rem ≈ 32px par défaut. Plus grand = chiffre plus haut. */
+  font-size: 2rem !important;
+
+  /* Épaisseur du texte : 800 = très gras (va de 100 à 900). */
+  font-weight: 800 !important;
+
+  /* Couleur du texte : blanc pur. */
+  color: #ffffff !important;
+
+  /* Transforme en MAJUSCULES automatiquement (sans changer le HTML). */
+  text-transform: uppercase !important;
+
+  /* Espace entre les lettres. 0.02em = légèrement plus espacées. */
+  letter-spacing: 0.02em !important;
+
+  /* Hauteur de ligne (interligne). 1.1 = très compact. */
+  line-height: 1.1 !important;
+
+  /* Affiche le lien comme un bloc (prend toute la largeur disponible). */
+  display: block !important;
+}
+
+/* Le slogan sous le titre (ex: "Ensemble pour notre quartier"). */
+p.site-description {
+  font-family: 'Nunito', sans-serif !important;
+
+  /* 0.9rem ≈ 14-15px. Plus petit que le titre. */
+  font-size: 0.9rem !important;
+
+  /* Vert sauge clair (contraste doux sur fond vert forêt). */
+  color: #c8dfc8 !important;
+
+  /* Poids normal (pas gras). */
+  font-weight: 500 !important;
+
+  /* Désactive les majuscules automatiques (en cas d'héritage). */
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+
+  /* Petit espace au-dessus du slogan pour le séparer du titre. */
+  margin-top: 4px !important;
+  display: block !important;
+}
+
+
+/* ==========================================================================
+   2. FOND CRÈME GLOBAL
+   --------------------------------------------------------------------------
+   Cette section impose la couleur de fond crème (#faf6f0) sur tout le site.
+   Il faut cibler BEAUCOUP de sélecteurs parce que WordPress et les plugins
+   peuvent appliquer des fonds blancs sur des éléments intermédiaires.
+   En les listant tous, on s'assure qu'aucun fond blanc ne "perce" à travers.
+
+   RÈGLE D'OR : ne JAMAIS remettre background-color: #1e3d2a (vert foncé)
+   sur body — c'est ce qui avait rendu tout le site sombre par accident.
+   ========================================================================== */
+
+/* Liste de TOUS les éléments qui pourraient afficher un fond blanc indésirable.
+   html = la page entière, body = le corps, .site-content = zone principale, etc. */
+html, body,
+.site-content, .grid-container, .entry-content, .entry-content > *,
+.inside-article, .inside-article > *, #primary, .site-main,
+.wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
+  /* #faf6f0 = crème chaude légèrement ivoire.
+     Pour changer la couleur du site entier : modifie CETTE valeur.
+     Astuce : utilise Rechercher/Remplacer dans VS Code pour changer
+     toutes les occurrences de #faf6f0 en même temps. */
+  background-color: #faf6f0 !important;
+}
+
+/* Supprime tout espace en haut de ces zones structurelles.
+   Sans ça, certains éléments ajoutent des marges qui créent des espaces vides. */
+.grid-container, #primary, .site-main,
+.wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Ajoute 30px d'espace en haut DU CONTENU seulement.
+   C'est la "respiration" visible entre l'en-tête vert et le contenu crème.
+   Augmente ce chiffre pour plus d'espace, diminue-le pour moins. */
+.site-content, .inside-article, .entry-content {
+  margin-top: 0 !important;
+  padding-top: 30px !important;
+}
+
+
+/* ==========================================================================
+   3. MISE EN PAGE — COLONNES ÉGALES (forum + sondage côte à côte)
+   --------------------------------------------------------------------------
+   Cette section fait en sorte que le forum et le sondage soient
+   de la même hauteur quand ils sont côte à côte sur ordinateur.
+   ========================================================================== */
+
+/* .wp-block-columns = le conteneur Gutenberg "colonnes".
+   display: flex organise les colonnes côte à côte.
+   align-items: stretch = toutes les colonnes ont LA MÊME hauteur. */
+.wp-block-columns {
+  display: flex !important;
+  /* stretch = étire chaque colonne pour qu'elles aient toutes la même hauteur.
+     Autres options : flex-start (haut), center (milieu), flex-end (bas). */
+  align-items: stretch !important;
+}
+
+/* Chaque colonne individuelle devient aussi un flex container
+   pour que son contenu (forum ou sondage) puisse s'étirer. */
+.wp-block-column {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Le forum (#wpforo-wrap) et le sondage (.forminator-poll) :
+   flex: 1 = occupent TOUT l'espace disponible dans leur colonne.
+   height: 100% = prennent toute la hauteur.
+   Ensemble, ça aligne le bas du forum avec le bas du sondage. */
+#wpforo-wrap, .forminator-poll {
+  flex: 1 !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Espace entre le bloc forum/sondage et les événements au-dessus.
+   gb-element-56de59ba = identifiant unique d'un bloc GenerateBlocks. */
+.gb-element-56de59ba {
+  margin-top: 40px !important;
+  padding-top: 20px !important;
+}
+
+
+/* ==========================================================================
+   4. BOUTONS — CALENDRIER, RETOUR, ÉVÉNEMENTS
+   ========================================================================== */
+
+/* Bouton "Retour" — texte crème sur fond vert (le fond vient du thème). */
+a.jc-retour-btn,
+a.jc-retour-btn:hover {
+  color: #faf6f0 !important;
+}
+
+/* La rangée de boutons AU-DESSUS de la grille d'événements.
+   flex + justify-content: center = les boutons sont centrés horizontalement.
+   flex-wrap: wrap = si l'écran est trop étroit, les boutons passent à la ligne. */
+.jc-events-header {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  /* 12px d'espace entre chaque bouton. */
+  gap: 12px !important;
+  justify-content: center !important;
+  /* 24px d'espace sous la rangée avant la grille. */
+  margin-bottom: 24px !important;
+}
+
+/* Style commun pour les 3 boutons verts :
+   - a.gb-text-169aeb6e = bouton "Aller au calendrier"
+   - a.gb-text-d96ad459 = bouton "Ajouter une activité"
+   - #jc-load-more-btn = bouton "Voir plus" (mobile)
+   Les identifiants gb-text-XXXXXXXX sont générés automatiquement par GenerateBlocks. */
+a.gb-text-169aeb6e,
+a.gb-text-d96ad459,
+#jc-load-more-btn {
+  /* Fond vert forêt. Même valeur que l'en-tête pour la cohérence. */
+  background-color: #2d5a3d !important;
+
+  /* Texte crème (lisible sur fond vert). */
+  color: #faf6f0 !important;
+
+  /* Pas de bordure visible. */
+  border: none !important;
+
+  /* Coins arrondis. 6px = légèrement arrondi.
+     0 = carré, 50px = pilule arrondie. */
+  border-radius: 6px !important;
+
+  /* Espace intérieur : 10px haut/bas, 18px gauche/droite.
+     Augmente pour un bouton plus grand. */
+  padding: 10px 18px !important;
+
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+
+  /* Supprime le soulignement des liens. */
+  text-decoration: none !important;
+
+  /* Curseur "main" quand on survole (indique que c'est cliquable). */
+  cursor: pointer !important;
+
+  /* transition = ANIMATION DOUCE sur la propriété background-color.
+     0.2s = durée de l'animation (0.2 seconde).
+     ease = commence lentement, accélère, finit lentement. */
+  transition: background-color 0.2s ease !important;
+}
+
+/* Les liens (boutons "Aller au calendrier" et "Ajouter") s'affichent
+   en ligne (côte à côte), pas en blocs l'un sous l'autre. */
+a.gb-text-169aeb6e,
+a.gb-text-d96ad459 { display: inline-block !important; }
+
+/* Au survol (hover), le fond devient vert PLUS FONCÉ.
+   C'est l'effet "bouton enfoncé" qui confirme l'interaction. */
+a.gb-text-169aeb6e:hover,
+a.gb-text-d96ad459:hover,
+#jc-load-more-btn:hover {
+  background-color: #1e3d2a !important;
+  color: #faf6f0 !important;
+}
+
+/* Le bouton "Voir plus" est CACHÉ par défaut (sur ordinateur,
+   les 8 événements sont déjà tous visibles en 4×2). */
+#jc-load-more-btn { display: none !important; }
+
+/* @media = règle qui s'applique SEULEMENT si la condition est vraie.
+   max-width: 1023px = "si l'écran fait moins de 1024px de large" (mobile + tablette). */
+@media (max-width: 1023px) {
+
+  /* Sur mobile/tablette : cache les événements à partir du 5e.
+     nth-child(n+5) signifie "le 5e enfant et tous ceux qui suivent". */
+  .jc-events-grid-layout .jc-timeline .jc-timeline-item:nth-child(n+5) {
+    display: none !important;
+  }
+
+  /* Quand le bouton "Voir plus" est cliqué, le JS ajoute la classe
+     "jc-expanded" sur le conteneur. Cette règle révèle alors les
+     événements cachés en les repassant à display: flex. */
+  .jc-events-grid-layout.jc-expanded .jc-timeline .jc-timeline-item {
+    display: flex !important;
+  }
+
+  /* Affiche le bouton "Voir plus" sur mobile/tablette.
+     margin: 16px auto 0 = espace au-dessus + centré horizontalement. */
+  #jc-load-more-btn {
+    display: block !important;
+    margin: 16px auto 0 !important;
+  }
+}
+
+
+/* ==========================================================================
+   5. SONDAGE FORMINATOR
+   --------------------------------------------------------------------------
+   Style de la boîte du sondage (vote communautaire).
+   ========================================================================== */
+
+/* Le conteneur principal du sondage. */
+.forminator-poll {
+  /* Fond blanc (contraste avec le fond crème de la page). */
+  background: #ffffff !important;
+
+  /* Coins arrondis (16px = bien arrondi). */
+  border-radius: 16px !important;
+
+  /* Espace intérieur sur les 4 côtés. */
+  padding: 26px !important;
+
+  /* box-shadow = ombre portée (donne du relief, effet "carte").
+     Format : décalage-X décalage-Y flou couleur.
+     rgba(0,0,0,0.06) = noir avec 6% d'opacité = ombre très légère. */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+
+  /* Fine bordure grise autour de la boîte. */
+  border: 1px solid #eaeaea !important;
+}
+
+/* Le titre du sondage. */
+.forminator-poll .forminator-poll-title {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  /* Quasi-noir pour un bon contraste. */
+  color: #111827 !important;
+  margin-bottom: 20px !important;
+  line-height: 1.4 !important;
+}
+
+/* Chaque option de vote (les boutons radio). */
+.forminator-poll .forminator-radio {
+  /* Fond gris très clair. */
+  background: #f9fafb !important;
+  border: 1px solid #f3f4f6 !important;
+  border-radius: 10px !important;
+  padding: 12px 14px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Au survol d'une option, légèrement plus foncé (retour visuel). */
+.forminator-poll .forminator-radio:hover {
+  background: #f3f4f6 !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Le bouton "Voter". */
+.forminator-poll .forminator-button-submit {
+  /* Prend toute la largeur disponible. */
+  width: 100% !important;
+  background: #2d5a3d !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 14px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin-top: 8px !important;
+  cursor: pointer !important;
+}
+
+.forminator-poll .forminator-button-submit:hover {
+  background: #1e3d2a !important;
+}
+
+/* Zone du message après le vote. */
+.forminator-poll .forminator-response-message {
+  background-color: #e8f4ec !important;
+  border: 1px solid #a8d4b4 !important;
+  /* Barre épaisse verte à gauche (style "alerte positive"). */
+  border-left: 4px solid #2d5a3d !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
+}
+
+/* Quand quelqu'un a déjà voté, Forminator affiche un message d'erreur
+   générique en anglais. On le cache (font-size: 0 = invisible)
+   et on le REMPLACE par notre propre texte en français. */
+.forminator-poll .forminator-label--forminator-error {
+  /* Rend le texte original invisible (taille 0 = aucun espace). */
+  font-size: 0 !important;
+  color: transparent !important;
+  display: block !important;
+}
+
+/* ::before = ajoute du contenu AVANT l'élément sans modifier le HTML.
+   On s'en sert pour injecter notre message français personnalisé. */
+.forminator-poll .forminator-label--forminator-error::before {
+  content: "Vous avez déjà enregistré votre vote. Merci !" !important;
+  font-size: 0.95rem !important;
+  color: #2d5a3d !important;
+  font-weight: 500 !important;
+  display: block !important;
+}
+
+
+/* ==========================================================================
+   6. ÉLÉMENTS MASQUÉS
+   --------------------------------------------------------------------------
+   display: none = l'élément est complètement invisible ET n'occupe
+   aucun espace (comme s'il n'existait pas dans la page).
+   Différent de visibility: hidden qui cache mais garde l'espace.
+   ========================================================================== */
+
+/* Masque les widgets de l'en-tête (zones prévues par le thème
+   mais qu'on n'utilise pas). */
+.header-widget-1, .header-widget-2 { display: none !important; }
+
+/* Masque un champ caché de Forminator qui n'est pas nécessaire. */
+.forminator-field-postdata,
+.forminator-field-postdata .forminator-button-submit { display: none !important; }
+
+/* Masque les liens "Modifier" visibles aux admins connectés
+   (on ne veut pas les voir sur la page). */
+.forminator-poll-edit-link,
+.edit-link,
+a[href*="action=edit"] { display: none !important; }
+
+/* Masque l'entrée "Événements" dans le menu principal.
+   #menu-item-1885 = l'identifiant unique de ce bouton dans le menu.
+   (On a un nouveau calendrier, l'ancien est masqué.) */
+#menu-item-1885 { display: none !important; }
+
+/* @media (display-mode: standalone) = s'applique seulement quand le site
+   est ouvert comme une application installée sur l'écran d'accueil (PWA).
+   Dans ce mode, on cache la bannière d'installation. */
+@media all and (display-mode: standalone) {
+  .hdsb-stickybanner { display: none !important; }
+}
+
+/* Réduit le titre H1 de la page d'accueil (sinon il est trop grand). */
+.home .page-hero h1,
+.home .entry-header h1,
+.home .generate-page-header h1 { font-size: 1.8rem !important; }
+
+
+/* ==========================================================================
+   7. ÉVÉNEMENTS — GRILLE D'ÉVÉNEMENTS
+   --------------------------------------------------------------------------
+   Cette section style les tuiles d'événements générées par le script
+   Google Sheets. Le HTML utilise des classes "jc-" (JC = Joliette en
+   Commun) pour éviter tout conflit avec les classes du thème ou des plugins.
+   ========================================================================== */
+
+/* .jc-events-grid-layout = le conteneur principal des événements.
+   .jc-timeline = la liste <ol> qui contient toutes les tuiles.
+
+   display: grid = active la GRILLE CSS (le moyen le plus moderne
+   d'organiser des éléments en lignes et colonnes).
+   C'est différent de flexbox : grid gère les 2 dimensions à la fois. */
+.jc-events-grid-layout .jc-timeline {
+  display: grid !important;
+
+  /* 1fr = "1 fraction" de l'espace disponible = 1 colonne.
+     Sur mobile : 1 seule colonne (les tuiles s'empilent). */
+  grid-template-columns: 1fr !important;
+
+  /* Espace entre chaque tuile. */
+  gap: 24px !important;
+
+  /* Supprime les puces de liste (on utilise <ol> mais c'est une grille). */
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 40px 0 !important;
+}
+
+/* Sur tablette (écran ≥ 640px) : passe à 2 colonnes. */
+@media (min-width: 640px) {
+  .jc-events-grid-layout .jc-timeline {
+    /* repeat(2, 1fr) = "répète 2 fois 1fr" = 2 colonnes égales. */
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Sur ordinateur (écran ≥ 1024px) : passe à 4 colonnes (4×2 = 8 tuiles). */
+@media (min-width: 1024px) {
+  .jc-events-grid-layout .jc-timeline {
+    /* repeat(4, 1fr) = 4 colonnes égales. */
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* Chaque tuile d'événement individuelle.
+   display: flex + flex-direction: column = le contenu de la tuile
+   s'empile verticalement (image, titre, description, bouton).
+   justify-content: space-between = le bouton est POUSSÉ vers le bas. */
+.jc-events-grid-layout .jc-timeline-item {
+  /* Fond crème légèrement plus chaud que la page (#fcfbf7 vs #faf6f0). */
+  background-color: #fcfbf7 !important;
+
+  /* Fine bordure beige autour de la tuile. */
+  border: 1px solid #e2ded2 !important;
+
+  /* Coins arrondis (12px = bien arrondis). */
+  border-radius: 12px !important;
+
+  /* Espace intérieur dans la tuile. */
+  padding: 20px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  /* Pousse le bouton "S'inscrire" vers le bas de la tuile,
+     même si la description est courte. */
+  justify-content: space-between !important;
+
+  /* Nécessaire pour le positionnement absolu de la case à cocher. */
+  position: relative !important;
+
+  /* Ombre très légère sous la tuile. */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.04) !important;
+}
+
+/* Cache les "points" de l'ancienne timeline verticale
+   (le HTML en génère encore mais on ne les veut plus dans la grille). */
+.jc-events-grid-layout .jc-timeline-dot {
+  display: none !important;
+}
+
+/* La date et l'heure en haut de chaque tuile. */
+.jc-events-grid-layout .jc-timeline-time {
+  display: block !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  /* Couleur dorée/bronze. Change cette valeur pour une autre couleur de date. */
+  color: #c8963e !important;
+  /* Majuscules automatiques pour la date. */
+  text-transform: uppercase !important;
+  margin-bottom: 8px !important;
+}
+
+/* Le titre de l'événement. */
+.jc-events-grid-layout .jc-timeline-title {
+  font-size: 1.2rem !important;
+  /* Vert très foncé, presque noir. */
+  color: #1e3d2a !important;
+  margin: 0 0 12px 0 !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+}
+
+/* La photo de l'événement.
+   height: 160px = hauteur fixe identique pour toutes les photos.
+   object-fit: cover = la photo remplit l'espace SANS se déformer
+   (comme un recadrage automatique centré). */
+.jc-events-grid-layout .jc-timeline-img {
+  width: 100% !important;
+  height: 160px !important;     /* Modifie ce chiffre pour changer la hauteur des photos. */
+  object-fit: cover !important;
+  border-radius: 6px !important;
+  margin-bottom: 12px !important;
+}
+
+/* La case à cocher qui contrôle "Voir plus / Voir moins".
+   Elle est CACHÉE visuellement mais reste accessible au clavier
+   (position: absolute + opacity: 0 = invisible mais focusable).
+   DIFFÉRENT de display: none qui la rendrait inaccessible. */
+.jc-events-grid-layout .jc-toggle-input {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  pointer-events: none !important;
+}
+
+/* La description de l'événement.
+   display: -webkit-box + -webkit-line-clamp: 3 = technique pour
+   COUPER le texte après 3 lignes et ajouter "..." automatiquement.
+   C'est une technique spéciale qui nécessite ces 3 propriétés ensemble. */
+.jc-events-grid-layout .jc-timeline-desc {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3;       /* Nombre de lignes visibles avant coupure. */
+  line-clamp: 3;               /* Version standard (compatibilité future). */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.95rem !important;
+  color: #1e3d2a !important;
+  line-height: 1.5 !important;
+  margin: 0 0 6px 0 !important;
+}
+
+/* Quand la case à cocher est COCHÉE (après clic sur "Voir plus"),
+   le sélecteur :checked s'active et supprime la limite de lignes.
+   C'est de la magie CSS pure : pas de JavaScript nécessaire pour
+   la description individuelle (seulement pour le "Voir plus" global). */
+.jc-events-grid-layout .jc-toggle-input:checked + .jc-timeline-desc {
+  /* unset = annule la coupure (toute la description s'affiche). */
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+  display: block !important;
+  margin-bottom: 14px !important;
+}
+
+/* L'étiquette cliquable "Voir plus ➔" / "Voir moins ↩".
+   C'est le label associé à la case à cocher cachée.
+   Cliquer sur le label = cocher/décocher la case. */
+.jc-events-grid-layout .jc-toggle-label {
+  display: inline-block !important;
+  color: #2d5a3d !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  margin-bottom: 14px !important;
+  /* user-select: none = empêche la sélection accidentelle du texte au clic. */
+  user-select: none !important;
+}
+
+/* Quand on navigue au CLAVIER (tab), un contour apparaît sur le label
+   pour indiquer où est le focus. :focus-visible = seulement au clavier,
+   pas à la souris (évite le contour disgracieux au clic normal). */
+.jc-events-grid-layout .jc-toggle-input:focus-visible ~ .jc-toggle-label {
+  outline: 2px solid #2d5a3d !important;
+  outline-offset: 2px !important;
+  border-radius: 3px !important;
+}
+
+/* Le ~ est le sélecteur "frère général" (sibling).
+   :not(:checked) ~ .jc-toggle-label = quand la case N'EST PAS cochée.
+   ::before = ajoute le texte AVANT le label sans modifier le HTML.
+   content = le texte affiché. */
+.jc-events-grid-layout .jc-toggle-input:not(:checked) ~ .jc-toggle-label::before {
+  content: "Voir plus ➔" !important;
+}
+/* Quand cochée : affiche "Voir moins". */
+.jc-events-grid-layout .jc-toggle-input:checked ~ .jc-toggle-label::before {
+  content: "Voir moins ↩" !important;
+}
+
+/* La zone LIEU / COÛT / PRODUCTION — toujours visible,
+   séparée de la description coupée à 3 lignes.
+   Le script la génère dans un <div class="jc-timeline-meta">. */
+.jc-events-grid-layout .jc-timeline-meta {
+  font-size: 0.85rem !important;
+  /* Vert forêt pour les icônes 📍💰👥 et le texte. */
+  color: #2d5a3d !important;
+  /* Interligne (1.6 = aéré, facile à lire). */
+  line-height: 1.6 !important;
+  margin: 6px 0 10px 0 !important;
+}
+
+/* Le bouton "S'inscrire ou participer" en bas de chaque tuile.
+   display: flex + align-items: center = l'icône SVG et le texte
+   sont alignés verticalement.
+   margin-top: auto = pousse le bouton tout en bas de la tuile
+   (fonctionne grâce au justify-content: space-between du parent). */
+.jc-events-grid-layout .jc-timeline-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background-color: #2d5a3d !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  padding: 10px 16px !important;
+  border-radius: 6px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  /* auto = "prends tout l'espace disponible au-dessus de toi". */
+  margin-top: auto !important;
+  transition: background-color 0.2s ease !important;
+}
+.jc-events-grid-layout .jc-timeline-btn:hover {
+  background-color: #1e3d2a !important;
+}
+/* Contour au clavier sur le bouton "S'inscrire". */
+.jc-events-grid-layout .jc-timeline-btn:focus-visible {
+  outline: 2px solid #1e3d2a !important;
+  outline-offset: 2px !important;
+}
+/* ==========================================================================
+   7B. CALENDRIER COMPLET — liste de tous les événements par mois
+   ========================================================================== */
+
+.jc-calendrier-complet {
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+}
+
+/* Lien retour */
+.jc-cal-header { margin-bottom: 28px !important; }
+.jc-retour-btn {
+  color: #2d5a3d !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+.jc-retour-btn:hover { text-decoration: underline !important; color: #1e3d2a !important; }
+
+/* En-tête de mois */
+.jc-cal-mois-groupe { margin-bottom: 36px !important; }
+.jc-cal-mois-titre {
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  color: #2d5a3d !important;
+  border-bottom: 2px solid #c8dfc8 !important;
+  padding-bottom: 8px !important;
+  margin: 0 0 16px 0 !important;
+  text-transform: capitalize !important;
+}
+
+/* Ligne d'événement */
+.jc-cal-evenement {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 14px 0 !important;
+  border-bottom: 1px solid #e2ded2 !important;
+}
+.jc-cal-evenement:last-child { border-bottom: none !important; }
+
+/* Miniature */
+.jc-cal-img {
+  width: 80px !important;
+  height: 80px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Contenu */
+.jc-cal-contenu { flex: 1 !important; min-width: 0 !important; }
+.jc-cal-date {
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  color: #c8963e !important;
+  text-transform: uppercase !important;
+  margin-bottom: 3px !important;
+}
+.jc-cal-titre {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: #1e3d2a !important;
+  margin: 0 0 4px 0 !important;
+  line-height: 1.3 !important;
+}
+.jc-cal-meta {
+  font-size: 0.82rem !important;
+  color: #2d5a3d !important;
+  line-height: 1.5 !important;
+}
+
+/* Bouton */
+.jc-cal-btn {
+  flex-shrink: 0 !important;
+  background-color: #2d5a3d !important;
+  color: #faf6f0 !important;
+  padding: 8px 14px !important;
+  border-radius: 6px !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  transition: background-color 0.2s ease !important;
+}
+.jc-cal-btn:hover { background-color: #1e3d2a !important; }
+
+/* Message si vide */
+.jc-cal-vide {
+  color: #2d5a3d !important;
+  font-style: italic !important;
+  text-align: center !important;
+  padding: 40px 0 !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .jc-cal-evenement { flex-wrap: wrap !important; }
+  .jc-cal-img { width: 56px !important; height: 56px !important; }
+  .jc-cal-btn {
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 8px !important;
+    display: block !important;
+  }
+}
+
+/* ==========================================================================
+   8. RÈGLES MOBILES (≤ 768 px)
+   --------------------------------------------------------------------------
+   Tout ce qui se trouve ici s'applique SEULEMENT sur les petits écrans.
+   C'est ici qu'on empile l'en-tête, centre le logo, etc.
+   ========================================================================== */
+
+/* max-width: 768px = "si l'écran fait moins de 769px de large". */
+@media (max-width: 768px) {
+
+  /* Cache la navigation principale (hamburger géré par le thème). */
+  .main-navigation { display: none !important; }
+
+  /* Sur mobile, l'en-tête s'empile EN COLONNE (logo au-dessus, texte en-dessous)
+     au lieu d'être côte à côte. */
+  .inside-header {
+    flex-direction: column !important;
+    justify-content: center !important;
+    /* Moins de padding sur les côtés sur mobile. */
+    padding: 16px !important;
+  }
+
+  /* Logo + texte centrés sur mobile. */
+  .site-branding-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  /* Sur mobile le logo n'a pas besoin de marge droite,
+     mais on ajoute un peu d'espace en-dessous. */
+  img.header-image.is-logo-image {
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* Centre le texte du branding et la description. */
+  .site-branding { align-items: center !important; }
+  p.site-description { text-align: center !important; }
+
+  /* Masque les résultats du sondage sur mobile (trop chargé).
+     L'utilisateur voit les options et peut voter, sans voir les stats. */
+  .forminator-poll .forminator-radio.forminator-disabled,
+  .forminator-poll .forminator-poll-body,
+  .forminator-poll .forminator-poll-footer {
+    display: none !important;
+  }
+}
