@@ -289,13 +289,13 @@ a[href*="action=edit"] { display: none !important; }
 
 @media (min-width: 640px) {
   .jc-events-grid-layout .jc-timeline {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
 @media (min-width: 1024px) {
   .jc-events-grid-layout .jc-timeline {
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   }
 }
 
@@ -306,9 +306,10 @@ a[href*="action=edit"] { display: none !important; }
   padding: 20px !important;
   display: flex !important;
   flex-direction: column !important;
-  justify-content: space-between !important;
+  justify-content: flex-start !important;
   position: relative !important;
   box-shadow: 0 4px 6px rgba(0,0,0,0.04) !important;
+  min-width: 0 !important;
 }
 
 .jc-events-grid-layout .jc-timeline-dot { display: none !important; }
