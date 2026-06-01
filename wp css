@@ -488,7 +488,52 @@ a[href*="action=edit"] { display: none !important; }
 
 
 /* ==========================================================================
-   7C. FORUM wpForo — titres complets
+   7C. EXPOSITIONS — liste compacte (calendrier complet)
+   ========================================================================== */
+
+.jc-expo-compacte {
+  background-color: #eaf4ea !important;
+  border: 1px solid #c8dfc8 !important;
+  border-left: 4px solid #2d5a3d !important;
+  border-radius: 12px !important;
+  padding: 20px 24px !important;
+  margin-bottom: 36px !important;
+}
+
+.jc-expo-titre {
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  color: #2d5a3d !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.jc-expo-liste {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.jc-expo-item {
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #c8dfc8 !important;
+  font-size: 0.95rem !important;
+  color: #1e3d2a !important;
+}
+
+.jc-expo-item:last-child {
+  border-bottom: none !important;
+}
+
+.jc-expo-date {
+  color: #c8963e !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  margin-left: 6px !important;
+}
+
+
+/* ==========================================================================
+   7D. FORUM wpForo — titres complets
    ========================================================================== */
 
 /* wpForo coupe le titre du dernier sujet côté serveur ; le titre complet
