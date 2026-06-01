@@ -4,6 +4,42 @@ Chaque entrée : problème → solution → code exact → **comment ajuster**.
 
 ---
 
+## 2026-06-01 — Forum : titre du dernier sujet coupé en cours de ligne
+
+**Problème :** Le titre du dernier sujet (`.wpforo-last-topic-title`) se coupait aux deux tiers de la ligne sans passer à la suivante. Le div est dans un flex row sans `min-width: 0`, donc il ne rétrécit pas et le texte déborde ou se tronque.
+
+**Solution :** Forcer le retour à la ligne sur le conteneur, le lien et le pseudo-élément `::after` qui affiche le vrai titre.
+
+```css
+.wpforo-last-topic-title {
+  white-space: normal !important;
+  overflow: visible !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+  word-break: break-word !important;
+}
+.wpforo-last-topic-title a {
+  font-size: 0 !important;
+  white-space: normal !important;
+  line-height: 1.4 !important;
+  display: block !important;
+}
+.wpforo-last-topic-title a::after {
+  content: attr(title);
+  font-size: 0.95rem !important;
+  font-weight: inherit !important;
+  white-space: normal !important;
+  display: inline !important;
+}
+```
+
+**Pour ajuster :**
+- `line-height: 1.4` sur le lien → espacement entre les lignes quand le titre passe à la ligne. Augmenter pour plus d'air (ex. `1.6`).
+- `font-size: 0.95rem` sur `::after` → taille du texte du titre. Augmenter ou diminuer selon le rendu.
+- `word-break: break-word` → permet de couper un mot très long au milieu. Changer en `word-break: normal` si on préfère que les mots ne soient jamais coupés.
+
+---
+
 ## 2026-06-01 — Forum : titres longs coupés
 
 **Problème :** Les titres de forums comme "Le Babillard (Annonces & Entraide)" étaient tronqués. La colonne info (`.wpforo-forum-info`) est dans un flex row et sans `min-width: 0`, elle ne rétrécit pas correctement, forçant le titre à déborder ou se couper.

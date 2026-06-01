@@ -522,15 +522,25 @@ a[href*="action=edit"] { display: none !important; }
   padding: 4px 8px !important;
 }
 
+.wpforo-last-topic-title {
+  white-space: normal !important;
+  overflow: visible !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+  word-break: break-word !important;
+}
 .wpforo-last-topic-title a {
   font-size: 0 !important;          /* masque le texte tronqué "...cou..." */
   white-space: normal !important;
   line-height: 1.4 !important;
+  display: block !important;
 }
 .wpforo-last-topic-title a::after {
   content: attr(title);             /* affiche le titre complet du tooltip */
   font-size: 0.95rem !important;    /* rétablit une taille lisible */
   font-weight: inherit !important;
+  white-space: normal !important;
+  display: inline !important;
 }
 
 
