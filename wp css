@@ -263,6 +263,8 @@ a.gb-text-d96ad459:hover,
 .forminator-field-postdata,
 .forminator-field-postdata .forminator-button-submit { display: none !important; }
 .forminator-poll-edit-link,
+.forminator-module-edit-link,
+.forminator-edit-module,
 .edit-link,
 a[href*="action=edit"] { display: none !important; }
 #menu-item-1885 { display: none !important; }
