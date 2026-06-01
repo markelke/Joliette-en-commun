@@ -491,8 +491,23 @@ a[href*="action=edit"] { display: none !important; }
    n'existe que dans l'attribut "title". On masque le texte tronqué et on
    affiche le titre complet depuis cet attribut. */
 .wpforo-forum-title {
-  padding: 6px 0 4px 0 !important;
+  padding: 5px 3px 4px 3px !important;
   margin: 0 0 4px 0 !important;
+}
+
+/* Supprimer l'espace vide généré par <li>&nbsp;</li> dans la description */
+.wpforo-forum-description ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+.wpforo-forum-description li {
+  display: none !important;
+}
+
+/* Étiquette "Sujets récents" */
+.wpfcl-5 {
+  padding: 4px 8px !important;
 }
 
 .wpforo-last-topic-title a {

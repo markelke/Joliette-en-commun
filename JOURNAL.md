@@ -23,6 +23,35 @@ Chaque entrée résume ce qui a changé et pourquoi, suivi du code exact ajouté
 
 ---
 
+## 2026-06-01 — Forum : espace vide &nbsp; et padding "Sujets récents"
+
+**Problème 1 :** wpForo injecte `<li>&nbsp;</li>` dans la description de certains forums, créant un espace blanc inutile.
+
+**Solution :** Masquer tous les `<li>` dans `.wpforo-forum-description` et supprimer les marges de la liste.
+
+```css
+.wpforo-forum-description ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+.wpforo-forum-description li {
+  display: none !important;
+}
+```
+
+**Problème 2 :** L'étiquette "Sujets récents" (`.wpfcl-5`) était trop collée à son contexte.
+
+**Solution :** Ajouter du padding autour.
+
+```css
+.wpfcl-5 {
+  padding: 4px 8px !important;
+}
+```
+
+---
+
 ## 2026-06-01 — Titres du forum trop collés
 
 **Problème :** Les liens des titres de forums wpForo ("Le Babillard", "Bâtir des projets ensemble") manquaient d'espace au-dessus et en dessous.
