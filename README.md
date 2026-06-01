@@ -1,77 +1,167 @@
-# Joliette-en-commun
-community website
-# CSS personnalisé — Joliette en commun
+# 📅 JEC Apps Script — Synchronisation des événements
 
-Feuille de style du site **jolietteencommun.org**
-(WordPress + GeneratePress · wpForo · The Events Calendar · Forminator).
+Script Google Apps Script qui lit les événements depuis Google Sheets
+et met à jour automatiquement les pages événements de **jolietteencommun.org**
+via l'API REST WordPress.
 
-Le code complet est dans **`style.css`**.
-
----
-
-## Où va ce code
-
-Copier **tout** le contenu de `style.css` et le coller dans :
-**Apparence → Personnaliser → CSS additionnel**, puis cliquer sur **Publier**.
+Travaille en tandem avec le repo **JOLIETTE-EN-COMMUN** (CSS) — le script
+génère le HTML, le CSS le met en forme.
 
 ---
 
-## Workflow
+## Comment ça fonctionne
 
-1. Modifier `style.css` ici (dans VS Code).
-2. Enregistrer, puis « commit » sur GitHub → historique + sauvegarde.
-3. Tester sur le site local (LocalWP).
-4. Coller la version finale dans le Customizer du site en ligne.
+### Page de prévisualisation (8 événements)
+1. Lit les événements dans deux onglets Google Sheets : `Mformulaire`
+   (saisie manuelle) et `formulaire` (réponses Google Forms).
+2. Filtre : garde uniquement les événements dont le statut est **« publié »**
+   et dont la date de fin (ou de début) est aujourd'hui ou dans le futur.
+3. Trie par date de début, ordre croissant.
+4. Génère du HTML pour les **8 prochains événements** (grille `.jc-events-grid-layout`).
+5. Ajoute les boutons d'action, le bouton mobile « Voir plus », le forum et le sondage.
+6. Envoie à la page `PAGE_ID` via l'API REST WordPress.
 
----
-
-## Modifier une partie (sans tout refaire)
-
-| Pour changer… | Aller à la section… | Valeur à modifier |
-|---|---|---|
-| Couleur de l'en-tête | 1. En-tête | `#2d5a3d` |
-| Taille du logo | 1. En-tête | `width` / `height: 72px` |
-| Couleur de fond du site | 2. Fond crème | `#faf6f0` |
-| Espace sous l'en-tête | 2. Fond crème | `padding-top: 30px` |
-| Couleur de survol des boutons | 4. Boutons | `#1e3d2a` |
-| Rangée des boutons d'action (calendrier / formulaire) | 4. Boutons | `.jc-events-header` |
-| Bouton « Voir plus » mobile | 4. Boutons | `#jc-load-more-btn` |
-| Apparence du sondage | 5. Sondage Forminator | `.forminator-poll` |
-| Apparence des événements (grille) | 7. Événements | `.jc-timeline…` |
-| Hauteur des photos d'événements | 7. Événements | `height: 250px` |
-| Nombre d'événements visibles sur mobile | 7. Événements | `:nth-child(n+5)` |
-| Seuil d'affichage mobile | 8. Règles mobiles | `768px` |
-
-**Astuce couleur :** pour changer une couleur **partout** d'un seul coup,
-utilise Rechercher/Remplacer dans VS Code (Cmd+H) — ex. remplacer toutes
-les occurrences de `#2d5a3d` par ta nouvelle couleur.
+### Page calendrier complet (tous les événements)
+1. Même collecte et filtre que ci-dessus, mais **sans limite** de nombre.
+2. Groupe les événements par mois.
+3. Génère une liste compacte avec miniature, date, titre, méta et bouton.
+4. Envoie à la page `PAGE_ID_COMPLET` via l'API REST WordPress.
 
 ---
 
-## À savoir (les pièges)
+## Structure des colonnes Google Sheets
 
-- **Fond crème `#faf6f0` partout.** Ne jamais remettre de vert foncé
-  (`#1e3d2a`) sur `body` / `.site-content` : c'est ce qui assombrissait
-  tout le site.
-- **Page IDs :** accueil = `1807`, communauté = `1855`.
-- **Tester sans toucher au site en ligne :** créer une page de test (en
-  *Brouillon* ou *Privé*), noter son ID, et préfixer les règles d'essai
-  avec `.page-id-XXXX`. Seule cette page sera affectée.
-- **En local :** LiteSpeed Cache et Redis ne tournent pas — c'est normal,
-  on les ignore.
-- **La section 7 (Événements) dépend du script Google Sheets.** Le CSS
-  habille le HTML que le script génère — les deux repos travaillent ensemble.
-  Voir le repo `jec-apps-script` pour la logique d'alimentation.
+Les deux onglets (`Mformulaire` et `formulaire`) respectent cette structure :
+
+| Colonne | Index | Contenu |
+|---------|-------|---------|
+| A | 0 | *(non utilisée)* |
+| B | 1 | Titre de l'événement |
+| C | 2 | Description |
+| D | 3 | Date de début |
+| E | 4 | Heure de début |
+| F | 5 | Date de fin |
+| G | 6 | Heure de fin |
+| H | 7 | Adresse |
+| I | 8 | Ville |
+| J | 9 | Coût |
+| K | 10 | Lien bouton (URL vers inscription ou info) |
+| L | 11 | Production / Présenté par |
+| M | 12 | URL de l'image (doit commencer par `http`) |
+| N | 13 | *(non utilisée)* |
+| O | 14 | Statut — doit être exactement `publié` pour apparaître |
+| P | 15 | État d'envoi (mis à jour automatiquement : `✓ Envoyé`) |
 
 ---
 
-## Sections de `style.css`
+## Configuration — Script Properties
 
-1. En-tête (vert forêt, logo, titre, slogan)
-2. Fond crème global
-3. Mise en page (colonnes forum + sondage)
-4. Boutons (calendrier, retour, header événements, voir plus mobile)
-5. Sondage Forminator
-6. Éléments masqués
-7. Événements (grille 4 colonnes — alimentée par le script Google Sheets)
-8. Règles mobiles
+Les identifiants ne sont **jamais** dans le code.
+Ils sont stockés dans **⚙️ Paramètres du projet → Propriétés de script**.
+
+Voir `SCRIPT_PROPERTIES.example` pour les valeurs à saisir.
+
+| Clé | Description |
+|-----|-------------|
+| `WP_URL` | URL publique du site WordPress (sans barre oblique finale) |
+| `WP_USER` | Nom d'utilisateur WordPress administrateur |
+| `WP_PASSWORD` | Mot de passe d'application WordPress (WP Admin → Utilisateurs → profil) |
+| `PAGE_ID` | ID de la page prévisualisation (8 événements en grille) |
+| `PAGE_ID_COMPLET` | ID de la page calendrier complet (tous les événements par mois) |
+
+**Comment y accéder :**
+1. Ouvre l'éditeur Apps Script
+2. Clique sur ⚙️ **Paramètres du projet** (colonne de gauche)
+3. Section **Propriétés de script → Ajouter une propriété**
+4. Ajoute chaque clé du tableau avec sa vraie valeur
+
+---
+
+## Utilisation
+
+**Page prévisualisation (8 événements) :**
+Sheets → menu du haut → **📅 Événements → 🚀 Envoyer vers le site web**
+
+**Page calendrier complet :**
+Sheets → menu du haut → **📅 Événements → 📋 Mettre à jour le calendrier complet**
+
+Le script marque les nouvelles lignes `✓ Envoyé` dans la colonne P.
+
+---
+
+## Fonctions
+
+| Fonction | Rôle |
+|----------|------|
+| `synchroniserTimelineCitoyenne()` | Page prévisualisation — 8 événements en grille |
+| `synchroniserCalendrierComplet()` | Page calendrier complet — tous les événements par mois |
+| `genererBlocHTML(...)` | Génère le HTML d'une tuile (grille prévisualisation) |
+| `genererLigneCalendrier(...)` | Génère le HTML d'une ligne (liste calendrier complet) |
+| `onOpen()` | Ajoute le menu 📅 Événements dans Google Sheets |
+
+---
+
+## Structure HTML générée
+
+### Page prévisualisation
+```html
+<div class="jc-events-header">
+  <a class="gb-text gb-text-169aeb6e" ...>Aller au calendrier →</a>
+  <a class="gb-text gb-text-d96ad459" ...>Ajouter une activité →</a>
+</div>
+<div class="jc-events-grid-layout">
+  <ol class="jc-timeline">
+    <li class="jc-timeline-item">...</li>
+    <!-- jusqu'à 8 items -->
+  </ol>
+  <button id="jc-load-more-btn">Voir plus d'événements ▾</button>
+</div>
+<!-- Forum + Sondage -->
+<div class="wp-block-columns">
+  [wpforo]  |  [forminator_poll id="3623"]
+</div>
+```
+
+### Page calendrier complet
+```html
+<div class="jc-calendrier-complet">
+  <a class="jc-retour-btn">← Retour aux événements à venir</a>
+  <div class="jc-cal-mois-groupe">
+    <h2 class="jc-cal-mois-titre">Juin 2026</h2>
+    <div class="jc-cal-evenement">
+      <img class="jc-cal-img" ...>
+      <div class="jc-cal-contenu">
+        <div class="jc-cal-date">15 juin 2026 • 14h00</div>
+        <h3 class="jc-cal-titre">Titre de l'événement</h3>
+        <div class="jc-cal-meta">📍 Lieu | 💰 Coût</div>
+      </div>
+      <a class="jc-cal-btn">S'inscrire</a>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Sécurité
+
+- Les identifiants WordPress sont dans **Script Properties**, jamais dans le code.
+- Le repo est **privé** : même sans identifiants, il révèle la structure
+  du site et du tableur.
+- Si le code a été partagé avec les identifiants visibles : révoquer
+  immédiatement le mot de passe dans WP Admin → Utilisateurs →
+  Mots de passe d'application.
+- **Lien du formulaire :** utiliser le vrai lien de partage
+  (bouton **Envoyer → icône 🔗** dans Google Forms), pas `?usp=preview`.
+
+---
+
+## À faire / évolutions prévues
+
+- [x] ~~Corriger le bug des images (`imageUrL` non transmis)~~ ✓
+- [x] ~~Ajouter un bouton « Voir plus » sur mobile~~ ✓
+- [x] ~~Construire la page calendrier complet groupée par mois~~ ✓
+- [ ] Créer la page WordPress du calendrier complet et configurer `PAGE_ID_COMPLET`
+- [ ] Vérifier et remplacer le lien Google Forms par le vrai lien de partage
+- [ ] Mettre à jour `PAGE_ID` vers la vraie page événements (remplace la page de test 3793)
+- [ ] Mettre à jour le lien « Aller au calendrier » dans le script vers la nouvelle URL
