@@ -102,18 +102,63 @@ Chaque entrée résume ce qui a changé et pourquoi, suivi du code exact ajouté
 
 ## 2026-05-xx — Toggle "Voir plus" : simplification
 
-**Problème :** Le bouton S'inscrire apparaissait dans la version condensée des cartes, et la description débordait.
+**Problème :** La description des cartes d'événements débordait, et deux versions de la méta (courte et complète) devaient s'alterner selon que la carte est ouverte ou fermée.
 
-**Solution :** Limiter la description à 2 lignes avec `line-clamp`, afficher seulement la méta courte (heure + lieu), retirer le bouton S'inscrire de la vue réduite.
+**Solution :** Une checkbox cachée (`.jc-toggle-input`) sert d'interrupteur CSS pur. Quand elle est cochée, le sélecteur `~ ` active les états "étendu". La description est limitée à 2 lignes par défaut via `line-clamp`, la méta complète est cachée par défaut, et le label affiche "Voir plus →" ou "Voir moins ↑" automatiquement.
 
 ```css
-.jc-timeline-item:not(.jc-expanded) .jc-desc {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* Checkbox invisible — sert d'interrupteur */
+.jc-toggle-input {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
-.jc-timeline-item:not(.jc-expanded) .jc-btn-inscrire {
-  display: none !important;
+
+/* Description : 2 lignes par défaut, complète quand étendu */
+.jc-timeline-desc {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;       /* ← ajuster pour plus/moins de lignes */
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  margin: 4px 0 8px 0 !important;
+  font-size: 0.9rem !important;
+  color: #333 !important;
 }
+.jc-toggle-input:checked ~ .jc-timeline-desc {
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+}
+
+/* Méta courte : visible par défaut, cachée quand étendu */
+.jc-meta-court {
+  font-size: 0.85rem !important;
+  color: #2d5a3d !important;
+  margin-bottom: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.jc-toggle-input:checked ~ .jc-meta-court { display: none !important; }
+
+/* Méta complète : cachée par défaut, visible quand étendu */
+.jc-meta-complet { display: none !important; }
+.jc-toggle-input:checked ~ .jc-meta-complet {
+  display: block !important;
+  font-size: 0.85rem !important;
+  color: #2d5a3d !important;
+  line-height: 1.6 !important;
+  margin-bottom: 8px !important;
+}
+
+/* Label Voir plus / Voir moins — texte généré en CSS */
+.jc-toggle-label {
+  display: inline-block !important;
+  cursor: pointer !important;
+  color: #2d5a3d !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;  /* ← taille du lien Voir plus */
+  margin-top: 4px !important;
+}
+.jc-toggle-label::before { content: "Voir plus \2192"; }
+.jc-toggle-input:checked ~ .jc-toggle-label::before { content: "Voir moins \2191"; }
 ```
