@@ -23,6 +23,31 @@ Chaque entrée résume ce qui a changé et pourquoi, suivi du code exact ajouté
 
 ---
 
+## 2026-06-01 — Forum : titres longs coupés
+
+**Problème :** Les titres de forums comme "Le Babillard (Annonces & Entraide)" étaient tronqués. La colonne info (`.wpforo-forum-info`) est dans un flex row et sans `min-width: 0`, elle ne rétrécit pas correctement, forçant le titre à déborder ou se couper.
+
+**Solution :** Donner à la colonne info `min-width: 0` pour qu'elle puisse rétrécir, et autoriser le retour à la ligne sur le titre et son lien.
+
+```css
+.wpforo-forum-info {
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+.wpforo-forum-title {
+  white-space: normal !important;
+  overflow: visible !important;
+  word-break: break-word !important;   /* ← le titre passe à la ligne si trop long */
+}
+.wpforo-forum-title a {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+}
+```
+
+---
+
 ## 2026-06-01 — Forum : espace vide &nbsp; et padding "Sujets récents"
 
 **Problème 1 :** wpForo injecte `<li>&nbsp;</li>` dans la description de certains forums, créant un espace blanc inutile.
