@@ -1,18 +1,12 @@
 /* ==========================================================================
-   JOLIETTE EN COMMUN — Feuille de style personnalisée (corrigée)
+   JOLIETTE EN COMMUN — Feuille de style personnalisée
    --------------------------------------------------------------------------
    Palette :
      Crème (fond) .......... #faf6f0
      Vert forêt (en-tête) .. #2d5a3d
      Vert foncé (survol) ... #1e3d2a
-     Sauge (slogan/lignes) . #c8dfc8
-
-   Corrections appliquées :
-     - Fond crème restauré comme source UNIQUE (plus d'override vert foncé
-       #1e3d2a sur le <body> — c'était la cause du fond sombre non désiré).
-     - Règles de fond redondantes regroupées en un seul bloc.
-     - Une seule "timeline" (verticale) — plus de conflit entre les deux versions.
-     - Commentaire cassé "//*" corrigé en "/*".
+     Sauge (accents) ....... #c8dfc8
+     Bronze (dates) ........ #c8963e
    ========================================================================== */
 
 
@@ -64,7 +58,6 @@ img.header-image.is-logo-image {
   flex-shrink: 0 !important;
 }
 
-/* Titre du site */
 p.main-title a {
   font-family: 'Nunito', sans-serif !important;
   font-size: 2rem !important;
@@ -76,7 +69,6 @@ p.main-title a {
   display: block !important;
 }
 
-/* Slogan */
 p.site-description {
   font-family: 'Nunito', sans-serif !important;
   font-size: 0.9rem !important;
@@ -90,7 +82,7 @@ p.site-description {
 
 
 /* ==========================================================================
-   2. FOND CRÈME GLOBAL — source unique de la couleur de fond
+   2. FOND CRÈME GLOBAL
    ========================================================================== */
 html, body,
 .site-content, .grid-container, .entry-content, .entry-content > *,
@@ -99,14 +91,12 @@ html, body,
   background-color: #faf6f0 !important;
 }
 
-/* Espacements verticaux : pas de marge en haut */
 .grid-container, #primary, .site-main,
 .wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
 
-/* Respiration crème entre l'en-tête et le contenu */
 .site-content, .inside-article, .entry-content {
   margin-top: 0 !important;
   padding-top: 30px !important;
@@ -130,7 +120,6 @@ html, body,
   box-sizing: border-box !important;
 }
 
-/* Espace entre le bloc forum/sondage et les événements */
 .gb-element-56de59ba {
   margin-top: 40px !important;
   padding-top: 20px !important;
@@ -152,12 +141,6 @@ a.gb-text-d96ad459:hover {
   border-color: #1e3d2a !important;
 }
 
-a.jc-retour-btn,
-a.jc-retour-btn:hover {
-  color: #faf6f0 !important;
-}
-
-/* Rangée des boutons d'action (au-dessus de la grille) */
 .jc-events-header {
   display: flex !important;
   flex-wrap: wrap !important;
@@ -166,7 +149,6 @@ a.jc-retour-btn:hover {
   margin-bottom: 24px !important;
 }
 
-/* Les 3 boutons en vert forêt */
 a.gb-text-169aeb6e,
 a.gb-text-d96ad459,
 #jc-load-more-btn {
@@ -191,8 +173,6 @@ a.gb-text-d96ad459:hover,
   color: #faf6f0 !important;
 }
 
-/* "Voir plus" + masquage : MOBILE seulement (sous 1024px).
-   Sur ordinateur, les 8 événements (4x2) sont tous visibles. */
 #jc-load-more-btn { display: none !important; }
 
 @media (max-width: 1023px) {
@@ -207,6 +187,8 @@ a.gb-text-d96ad459:hover,
     margin: 16px auto 0 !important;
   }
 }
+
+
 /* ==========================================================================
    5. SONDAGE FORMINATOR
    ========================================================================== */
@@ -251,7 +233,6 @@ a.gb-text-d96ad459:hover,
   background: #1e3d2a !important;
 }
 
-/* Message « déjà voté » */
 .forminator-poll .forminator-response-message {
   background-color: #e8f4ec !important;
   border: 1px solid #a8d4b4 !important;
@@ -282,25 +263,21 @@ a.gb-text-d96ad459:hover,
 .forminator-poll-edit-link,
 .edit-link,
 a[href*="action=edit"] { display: none !important; }
-#menu-item-1885 { display: none !important; }  /* entrée de menu « Événements » */
+#menu-item-1885 { display: none !important; }
 
-/* Bannière PWA (mode application) */
 @media all and (display-mode: standalone) {
   .hdsb-stickybanner { display: none !important; }
 }
 
-/* Titre de la page d'accueil */
 .home .page-hero h1,
 .home .entry-header h1,
 .home .generate-page-header h1 { font-size: 1.8rem !important; }
 
 
 /* ==========================================================================
-  /* ==========================================================================
-   📦 GRILLE D'ÉVÉNEMENTS — version améliorée
+   7. GRILLE D'ÉVÉNEMENTS (page principale — aperçu 8 événements)
    ========================================================================== */
 
-/* Grille : 1 colonne (mobile) par défaut */
 .jc-events-grid-layout .jc-timeline {
   display: grid !important;
   grid-template-columns: 1fr !important;
@@ -310,21 +287,18 @@ a[href*="action=edit"] { display: none !important; }
   margin: 0 0 40px 0 !important;
 }
 
-/* Tablette : 2 colonnes (NOUVEAU — comble le trou mobile→ordi ; ajustable) */
 @media (min-width: 640px) {
   .jc-events-grid-layout .jc-timeline {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
-/* Ordinateur : 4 colonnes */
 @media (min-width: 1024px) {
   .jc-events-grid-layout .jc-timeline {
     grid-template-columns: repeat(4, 1fr) !important;
   }
 }
 
-/* Tuiles d'événements */
 .jc-events-grid-layout .jc-timeline-item {
   background-color: #fcfbf7 !important;
   border: 1px solid #e2ded2 !important;
@@ -337,12 +311,8 @@ a[href*="action=edit"] { display: none !important; }
   box-shadow: 0 4px 6px rgba(0,0,0,0.04) !important;
 }
 
-/* Masquage des anciens points de la frise verticale */
-.jc-events-grid-layout .jc-timeline-dot {
-  display: none !important;
-}
+.jc-events-grid-layout .jc-timeline-dot { display: none !important; }
 
-/* Date et heure (doré/bronze) */
 .jc-events-grid-layout .jc-timeline-time {
   display: block !important;
   font-size: 0.85rem !important;
@@ -352,7 +322,6 @@ a[href*="action=edit"] { display: none !important; }
   margin-bottom: 8px !important;
 }
 
-/* Titre (vert forêt) */
 .jc-events-grid-layout .jc-timeline-title {
   font-size: 1.2rem !important;
   color: #1e3d2a !important;
@@ -361,7 +330,6 @@ a[href*="action=edit"] { display: none !important; }
   line-height: 1.3 !important;
 }
 
-/* Affiche de l'activité */
 .jc-events-grid-layout .jc-timeline-img {
   width: 100% !important;
   height: 160px !important;
@@ -370,10 +338,8 @@ a[href*="action=edit"] { display: none !important; }
   margin-bottom: 12px !important;
 }
 
-/* ==========================================================================
-   🔍 VOIR PLUS / VOIR MOINS  (avec accès clavier)
-   ========================================================================== */
-/* Checkbox caché qui contrôle l'expansion */
+/* --- Voir plus / Voir moins (partagé grille + calendrier) -------------- */
+
 .jc-toggle-input {
   position: absolute !important;
   opacity: 0 !important;
@@ -387,13 +353,15 @@ a[href*="action=edit"] { display: none !important; }
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
   margin: 4px 0 8px 0 !important;
+  font-size: 0.9rem !important;
+  color: #333 !important;
 }
 .jc-toggle-input:checked ~ .jc-timeline-desc {
   -webkit-line-clamp: unset !important;
   overflow: visible !important;
 }
 
-/* Méta courte : coût + adresse sur une ligne (réduite) */
+/* Méta courte : coût + adresse (vue réduite) */
 .jc-meta-court {
   font-size: 0.85rem !important;
   color: #2d5a3d !important;
@@ -421,42 +389,18 @@ a[href*="action=edit"] { display: none !important; }
   color: #2d5a3d !important;
   font-weight: 600 !important;
   font-size: 0.85rem !important;
+  margin-top: 4px !important;
 }
 .jc-toggle-label::before { content: "Voir plus \2192"; }
 .jc-toggle-input:checked ~ .jc-toggle-label::before { content: "Voir moins \2191"; }
 
-
-/* Bouton Participer */
-.jc-events-grid-layout .jc-timeline-btn {
-  display: flex !important;
-  align-items: flex-start !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  background-color: #2d5a3d !important;
-  color: #ffffff !important;
-  text-decoration: none !important;
-  padding: 10px 16px !important;
-  border-radius: 6px !important;
-  font-size: 0.9rem !important;
-  font-weight: 600 !important;
-  text-align: center !important;
-  margin-top: auto !important;
-  transition: background-color 0.2s ease !important;
-}
-
-.jc-events-grid-layout .jc-timeline-btn:hover {
-  background-color: #1e3d2a !important;
-}
-
-/* Contour clavier sur le bouton (NOUVEAU) */
-.jc-events-grid-layout .jc-timeline-btn:focus-visible {
-  outline: 2px solid #1e3d2a !important;
+/* Focus clavier */
+.jc-toggle-label:focus-visible {
+  outline: 2px solid #2d5a3d !important;
   outline-offset: 2px !important;
 }
 
-/* ==========================================================================
-   🏛️ FORUM + SONDAGE CÔTE À CÔTE
-   ========================================================================== */
+/* --- Forum + sondage côte à côte ---------------------------------------- */
 
 .jc-native-footer-row {
   display: flex !important;
@@ -472,8 +416,6 @@ a[href*="action=edit"] { display: none !important; }
     flex-direction: row !important;
     align-items: flex-start !important;
   }
-  /* flex: 1 1 + min-width:0 = ne déborde plus, et un contenu large
-     (tableaux du forum) peut rétrécir au lieu de pousser la page */
   .jc-native-forum-col {
     flex: 1 1 62% !important;
     min-width: 0 !important;
@@ -488,7 +430,9 @@ a[href*="action=edit"] { display: none !important; }
     box-shadow: 0 4px 6px rgba(0,0,0,0.06) !important;
   }
 }
-* ==========================================================================
+
+
+/* ==========================================================================
    7B. CALENDRIER COMPLET — liste de tous les événements par mois
    ========================================================================== */
 
@@ -523,7 +467,7 @@ a[href*="action=edit"] { display: none !important; }
 /* Ligne d'événement */
 .jc-cal-evenement {
   display: flex !important;
-  align-items: center !important;
+  align-items: flex-start !important;
   gap: 16px !important;
   padding: 14px 0 !important;
   border-bottom: 1px solid #e2ded2 !important;
@@ -541,6 +485,7 @@ a[href*="action=edit"] { display: none !important; }
 
 /* Contenu */
 .jc-cal-contenu { flex: 1 !important; min-width: 0 !important; }
+
 .jc-cal-date {
   font-size: 0.8rem !important;
   font-weight: 700 !important;
@@ -548,6 +493,7 @@ a[href*="action=edit"] { display: none !important; }
   text-transform: uppercase !important;
   margin-bottom: 3px !important;
 }
+
 .jc-cal-titre {
   font-size: 1.05rem !important;
   font-weight: 700 !important;
@@ -555,14 +501,8 @@ a[href*="action=edit"] { display: none !important; }
   margin: 0 0 4px 0 !important;
   line-height: 1.3 !important;
 }
-.jc-cal-meta {
-  font-size: 0.82rem !important;
-  color: #2d5a3d !important;
-  line-height: 1.5 !important;
-}
 
-
-/* Message si vide */
+/* Message si aucun événement */
 .jc-cal-vide {
   color: #2d5a3d !important;
   font-style: italic !important;
@@ -574,21 +514,15 @@ a[href*="action=edit"] { display: none !important; }
 @media (max-width: 600px) {
   .jc-cal-evenement { flex-wrap: wrap !important; }
   .jc-cal-img { width: 56px !important; height: 56px !important; }
-  .jc-cal-btn {
-    width: 100% !important;
-    text-align: center !important;
-    margin-top: 8px !important;
-    display: block !important;
-  }
 }
+
+
 /* ==========================================================================
    8. RÈGLES MOBILES (≤ 768 px)
    ========================================================================== */
 @media (max-width: 768px) {
-  /* Navigation principale masquée (hamburger géré par le thème) */
   .main-navigation { display: none !important; }
 
-  /* En-tête empilé et centré */
   .inside-header {
     flex-direction: column !important;
     justify-content: center !important;
@@ -606,7 +540,6 @@ a[href*="action=edit"] { display: none !important; }
   .site-branding { align-items: center !important; }
   p.site-description { text-align: center !important; }
 
-  /* Masquer les résultats du sondage sur mobile */
   .forminator-poll .forminator-radio.forminator-disabled,
   .forminator-poll .forminator-poll-body,
   .forminator-poll .forminator-poll-footer {
