@@ -522,6 +522,11 @@ a[href*="action=edit"] { display: none !important; }
   padding: 4px 8px !important;
 }
 
+/* Icônes (épinglé, répondu, non-répondu) avant chaque titre de sujet */
+.wpforo-last-topic-title i {
+  display: none !important;
+}
+
 .wpforo-last-topic-title {
   white-space: normal !important;
   overflow: visible !important;

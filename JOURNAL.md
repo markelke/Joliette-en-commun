@@ -4,6 +4,23 @@ Chaque entrée : problème → solution → code exact → **comment ajuster**.
 
 ---
 
+## 2026-06-01 — Forum : supprimer les icônes avant les titres de sujets
+
+**Problème :** Chaque sujet récent affichait une icône Font Awesome avant son titre (punaise pour épinglé, feuille pour répondu/non-répondu). Ces icônes ajoutaient du bruit visuel inutile.
+
+**Solution :** Masquer tous les `<i>` à l'intérieur de `.wpforo-last-topic-title`.
+
+```css
+.wpforo-last-topic-title i {
+  display: none !important;
+}
+```
+
+**Pour ajuster :**
+- Pour remettre une icône spécifique visible, remplacer `display: none` par `display: inline` et cibler sa classe précise. Ex : `.wpforo-last-topic-title i.fa-thumbtack { display: inline !important; }` pour garder seulement la punaise "épinglé".
+
+---
+
 ## 2026-06-01 — Forum : titre du dernier sujet coupé en cours de ligne
 
 **Problème :** Le titre du dernier sujet (`.wpforo-last-topic-title`) se coupait aux deux tiers de la ligne sans passer à la suivante. Le div est dans un flex row sans `min-width: 0`, donc il ne rétrécit pas et le texte déborde ou se tronque.
