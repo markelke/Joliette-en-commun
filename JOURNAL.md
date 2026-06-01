@@ -4,6 +4,97 @@ Chaque entrée : problème → solution → code exact → **comment ajuster**.
 
 ---
 
+## 2026-06-01 — Calendrier complet : expositions en bloc compact
+
+**Problème :** Les expositions s'entassaient dans le groupement par mois avec tous les autres événements, prenant trop de place et noyant les activités régulières.
+
+**Solution (JS — synchroniserCalendrierComplet) :** Après le tri, les événements sont séparés en deux groupes via `estExposition()`. Les expositions apparaissent d'abord dans un bloc compact, puis les autres événements sont groupés par mois normalement.
+
+```js
+let expositions = listeEvenements.filter(function(ev) { return estExposition(ev.titre); });
+let autres = listeEvenements.filter(function(ev) { return !estExposition(ev.titre); });
+
+if (expositions.length > 0) {
+  html += genererListeExpositionsCompacte(expositions, 'https://jolietteencommun.org/expositions/');
+}
+if (autres.length > 0) {
+  // groupement par mois sur `autres` seulement
+}
+```
+
+**Nouvelle fonction `genererListeExpositionsCompacte(expositions, url)` :**
+
+```js
+function genererListeExpositionsCompacte(expositions, url) {
+  let html = '<div class="jc-expo-compacte">\n';
+  html += '<h2 class="jc-expo-titre">🎨 Expositions en cours</h2>\n';
+  html += '<ul class="jc-expo-liste">\n';
+  expositions.forEach(function(ev) {
+    let lien = (ev.lienBouton && ev.lienBouton.toString().startsWith('http'))
+      ? '<a href="' + ev.lienBouton + '" target="_blank" rel="noopener">' + ev.titre + '</a>'
+      : ev.titre;
+    let dateFin = ev.dateFin ? formaterDateFr(ev.dateFin) : '';
+    html += '  <li class="jc-expo-item">🎨 ' + lien;
+    if (dateFin) html += ' <span class="jc-expo-date">jusqu\'au ' + dateFin + '</span>';
+    html += '</li>\n';
+  });
+  html += '</ul>\n';
+  html += '<a href="' + url + '" class="jc-expo-btn">Voir toutes les expositions →</a>\n';
+  html += '</div>\n';
+  return html;
+}
+```
+
+**Solution (CSS — section 7C) :**
+
+```css
+.jc-expo-compacte {
+  background-color: #eaf4ea !important;     /* ← fond sauge clair */
+  border: 1px solid #c8dfc8 !important;
+  border-left: 4px solid #2d5a3d !important; /* ← barre verte à gauche */
+  border-radius: 12px !important;
+  padding: 20px 24px !important;             /* ← espace intérieur */
+  margin-bottom: 36px !important;            /* ← espace sous le bloc */
+}
+.jc-expo-titre {
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  color: #2d5a3d !important;
+  margin: 0 0 16px 0 !important;
+}
+.jc-expo-liste {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 16px 0 !important;
+}
+.jc-expo-item {
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #c8dfc8 !important;
+  font-size: 0.95rem !important;
+  color: #1e3d2a !important;
+}
+.jc-expo-item:last-child {
+  border-bottom: none !important;
+}
+.jc-expo-date {
+  color: #c8963e !important;         /* ← bronze pour la date de fin */
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  margin-left: 6px !important;
+}
+```
+
+**Pour ajuster :**
+- `background-color: #eaf4ea` sur `.jc-expo-compacte` → couleur de fond du bloc. Remplacer par une autre teinte de la palette.
+- `border-left: 4px solid #2d5a3d` → épaisseur et couleur de la barre verticale gauche.
+- `margin-bottom: 36px` → espace entre le bloc expositions et le premier groupe de mois. Augmenter pour plus d'air.
+- `padding: 10px 0` sur `.jc-expo-item` → espace entre chaque ligne d'exposition.
+- `color: #c8963e` sur `.jc-expo-date` → couleur de la date "jusqu'au X". Bronze par défaut.
+- Le lien "Voir toutes les expositions →" utilise `.jc-expo-btn` — ses styles sont dans la section boutons du CSS.
+- L'URL du lien est codée dans `synchroniserCalendrierComplet()` : `'https://jolietteencommun.org/expositions/'`.
+
+---
+
 ## 2026-06-01 — Sondage Forminator : deux messages superposés
 
 **Problème :** Le message original anglais "You have already voted for this poll." et le remplacement CSS français apparaissaient en même temps. Le `font-size: 0` seul ne suffisait pas — le CSS de Forminator surchargeait la règle avec une spécificité plus élevée.
