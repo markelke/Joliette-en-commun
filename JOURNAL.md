@@ -4,6 +4,37 @@ Chaque entrée : problème → solution → code exact → **comment ajuster**.
 
 ---
 
+## 2026-06-01 — Sondage Forminator : deux messages superposés
+
+**Problème :** Le message original anglais "You have already voted for this poll." et le remplacement CSS français apparaissaient en même temps. Le `font-size: 0` seul ne suffisait pas — le CSS de Forminator surchargeait la règle avec une spécificité plus élevée.
+
+**Solution :** Augmenter la spécificité du sélecteur en ajoutant `.forminator-response-message` dans la chaîne (3 classes au lieu de 2), et ajouter `line-height: 0` pour vraiment écraser la hauteur de ligne du texte original.
+
+```css
+.forminator-poll .forminator-response-message .forminator-label--forminator-error {
+  font-size: 0 !important;
+  line-height: 0 !important;       /* ← clé : réduit aussi la hauteur de ligne à 0 */
+  color: transparent !important;
+  display: block !important;
+}
+.forminator-poll .forminator-response-message .forminator-label--forminator-error::before {
+  content: "Vous avez déjà enregistré votre vote. Merci !" !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;     /* ← rétablit une hauteur de ligne normale */
+  color: #2d5a3d !important;
+  font-weight: 500 !important;
+  display: block !important;
+}
+```
+
+**Pour ajuster :**
+- Changer le texte entre les guillemets du `content:` pour modifier le message affiché.
+- `font-size: 0.95rem` sur `::before` → taille du message de remplacement.
+- `line-height: 1.5` sur `::before` → interligne du message. Augmenter pour plus d'espace.
+- `color: #2d5a3d` → couleur du texte (vert forêt). Remplacer par n'importe quelle couleur hex.
+
+---
+
 ## 2026-06-01 — Forum : supprimer les icônes avant les titres de sujets
 
 **Problème :** Chaque sujet récent affichait une icône Font Awesome avant son titre (punaise pour épinglé, feuille pour répondu/non-répondu). Ces icônes ajoutaient du bruit visuel inutile.
