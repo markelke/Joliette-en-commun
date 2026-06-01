@@ -484,10 +484,51 @@ a[href*="action=edit"] { display: none !important; }
 
 
 /* ==========================================================================
+   7C. FORUM wpForo — titres complets
+   ========================================================================== */
+
+/* wpForo coupe le titre du dernier sujet côté serveur ; le titre complet
+   n'existe que dans l'attribut "title". On masque le texte tronqué et on
+   affiche le titre complet depuis cet attribut. */
+.wpforo-last-topic-title a {
+  font-size: 0 !important;          /* masque le texte tronqué "...cou..." */
+  white-space: normal !important;
+  line-height: 1.4 !important;
+}
+.wpforo-last-topic-title a::after {
+  content: attr(title);             /* affiche le titre complet du tooltip */
+  font-size: 0.95rem !important;    /* rétablit une taille lisible */
+  font-weight: inherit !important;
+}
+
+
+/* ==========================================================================
    8. RÈGLES MOBILES (≤ 768 px)
    ========================================================================== */
 @media (max-width: 768px) {
   .main-navigation { display: none !important; }
+
+  /* Forum : récupérer l'espace perdu sur les côtés */
+  #wpforo-wrap, #wpforo, .wpforo-wrap {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .wp-block-column {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Supprimer les marges/paddings latéraux du conteneur article pour que le forum
+     wpForo occupe toute la largeur sans débordement sur mobile */
+  .inside-article,
+  .entry-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 
   .inside-header {
     flex-direction: column !important;
