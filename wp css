@@ -513,6 +513,13 @@ a[href*="action=edit"] { display: none !important; }
   margin: 0 0 16px 0 !important;
 }
 
+@media (min-width: 768px) {
+  .jc-expo-liste {
+    column-count: 2 !important;
+    column-gap: 40px !important;
+  }
+}
+
 .jc-expo-item {
   display: flex !important;
   align-items: center !important;
@@ -521,6 +528,8 @@ a[href*="action=edit"] { display: none !important; }
   border-bottom: 1px solid #c8dfc8 !important;
   font-size: 0.95rem !important;
   color: #1e3d2a !important;
+  break-inside: avoid !important;
+  -webkit-column-break-inside: avoid !important;
 }
 
 .jc-expo-item:last-child {
