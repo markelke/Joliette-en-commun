@@ -4,6 +4,113 @@ Chaque entrée : problème → solution → code exact → **comment ajuster**.
 
 ---
 
+## 2026-06-02 — Bouton "Ajouter au calendrier" sur chaque carte
+
+**Problème :** Les visiteurs ne pouvaient pas ajouter un événement directement à leur calendrier (Google, Apple, Outlook, etc.) depuis la page.
+
+**Solution :** Utilisation du web component `add-to-calendar-button` (chargé via CDN). Chaque carte reçoit un bouton dans un nouveau pied de carte `.jc-card-footer` qui aligne le lien "Voir plus" à gauche et le bouton calendrier à droite.
+
+```js
+// Script chargé une fois dans le premier bloc <!-- wp:html --> des 3 fonctions :
+'<script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button" async defer></script>'
+
+// Nouvelle fonction — construit le web component
+function genererBoutonCalendrier(ev) {
+  let startDate = formaterDateISO(ev.dateDebut);
+  if (!startDate) return '';
+  // ... attributs name, startDate, endDate, startTime, endTime, timeZone, location, description
+  html += " options=\"'Google','Apple','Outlook.com','Microsoft365','Yahoo','iCal'\"";
+  html += ' label="Ajouter au calendrier" buttonStyle="text" size="3" lightMode="bodyScheme"';
+}
+
+// Formate une date en yyyy-MM-dd
+function formaterDateISO(valeur) {
+  let d = valeur instanceof Date ? valeur : new Date(valeur);
+  return Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+}
+
+// Formate une heure en HH:mm (gère Date et chaînes "14h30")
+function formaterHeureISO(valeur) {
+  if (valeur instanceof Date) return Utilities.formatDate(valeur, Session.getScriptTimeZone(), 'HH:mm');
+  let h = valeur.toString().trim().replace('h', ':');
+  // → normalise en "14:30"
+}
+
+// Dans genererBlocHTML — remplace le <label> seul par un pied de carte
+html += '      <div class="jc-card-footer">\n';
+html += '        <label for="jc-toggle-' + idUnique + '" class="jc-toggle-label"></label>\n';
+html += '        ' + genererBoutonCalendrier({...}) + '\n';
+html += '      </div>\n';
+```
+
+```css
+/* Pied de carte : Voir plus à gauche, bouton calendrier à droite */
+.jc-card-footer {
+  display: flex !important;
+  justify-content: space-between !important;   /* ← espace entre les deux éléments */
+  align-items: center !important;
+  gap: 8px !important;                         /* ← espace minimum entre eux */
+  margin-top: auto !important;                 /* ← colle au bas de la carte */
+  padding-top: 8px !important;                 /* ← espace au-dessus du pied */
+}
+
+/* Sélecteur mis à jour : le label est maintenant imbriqué dans .jc-card-footer */
+.jc-toggle-input:checked ~ .jc-card-footer .jc-toggle-label::before { content: "Voir moins \2191"; }
+```
+
+**Pour ajuster :**
+- `label="Ajouter au calendrier"` dans `genererBoutonCalendrier` → texte du bouton.
+- `size="3"` → taille du bouton (1 = petit, 5 = grand).
+- `buttonStyle="text"` → style du bouton. Autres options : `"round"`, `"flat"`, `"neumorphism"`.
+- `options=` → liste des calendriers proposés. Retirer une option pour la supprimer du menu.
+- `padding-top: 8px` sur `.jc-card-footer` → espace entre le contenu de la carte et le pied.
+- `gap: 8px` → espace entre "Voir plus" et le bouton calendrier si ils se touchent.
+
+---
+
+## 2026-06-02 — Page accueil : forum + sondage en haut, événements en dessous
+
+**Problème :** La grille d'événements s'affichait avant le forum et le sondage. On voulait l'inverse.
+
+**Solution :** Séparation du HTML en deux variables distinctes dans `synchroniserTimelineCitoyenne`, puis assemblage dans le bon ordre.
+
+```js
+let htmlForum = '...'; // bloc forum + sondage
+let htmlEvenements = '...'; // boutons + grille + script
+let htmlContenu = htmlForum + htmlEvenements; // ← forum d'abord
+```
+
+**Pour ajuster :**
+- Inverser l'ordre → `let htmlContenu = htmlEvenements + htmlForum`.
+
+---
+
+## 2026-06-02 — Liste expositions : 2 colonnes sur ordinateur
+
+**Problème :** Avec plusieurs expositions, la liste prenait trop de hauteur sur grand écran.
+
+**Solution :** CSS `column-count: 2` sur `.jc-expo-liste` à partir de 768 px. `break-inside: avoid` sur chaque item pour qu'aucune vignette ne soit coupée entre deux colonnes.
+
+```css
+@media (min-width: 768px) {
+  .jc-expo-liste {
+    column-count: 2 !important;     /* ← nombre de colonnes */
+    column-gap: 40px !important;    /* ← espace entre les colonnes */
+  }
+}
+.jc-expo-item {
+  break-inside: avoid !important;
+  -webkit-column-break-inside: avoid !important;
+}
+```
+
+**Pour ajuster :**
+- `column-count: 2` → changer en `3` pour 3 colonnes sur très grand écran.
+- `column-gap: 40px` → espace entre les colonnes. Réduire si les items sont trop serrés.
+- `min-width: 768px` → seuil d'activation. Augmenter pour activer seulement sur plus grand écran.
+
+---
+
 ## 2026-06-01 — Calendrier complet : expositions en bloc compact
 
 **Problème :** Les expositions s'entassaient dans le groupement par mois avec tous les autres événements, prenant trop de place et noyant les activités régulières.
