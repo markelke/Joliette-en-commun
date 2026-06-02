@@ -416,6 +416,16 @@ a[href*="action=edit"] { display: none !important; }
   padding-top: 8px !important;
 }
 
+/* Bouton add-to-calendar : remplace le bleu par défaut par la palette du site */
+add-to-calendar-button {
+  --btn-background: transparent;
+  --btn-hover-background: #eaf4ea;
+  --btn-text: #2d5a3d;
+  --btn-hover-text: #1e3d2a;
+  --btn-border: none;
+  --btn-shadow: none;
+}
+
 /* --- Forum + sondage côte à côte ---------------------------------------- */
 
 .jc-native-footer-row {
