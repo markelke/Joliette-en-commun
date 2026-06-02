@@ -4,6 +4,31 @@ Chaque entrée : problème → solution → code exact → **comment ajuster**.
 
 ---
 
+## 2026-06-02 — Bouton calendrier : couleur hover bleue remplacée
+
+**Problème :** Le composant `add-to-calendar-button` utilise sa propre couleur bleue au survol, qui ne correspond pas à la palette du site.
+
+**Solution :** Le composant expose des variables CSS personnalisées. On les surcharge directement sur le sélecteur `add-to-calendar-button` dans notre CSS.
+
+```css
+add-to-calendar-button {
+  --btn-background: transparent;          /* ← fond au repos */
+  --btn-hover-background: #eaf4ea;        /* ← fond au survol (sauge clair) */
+  --btn-text: #2d5a3d;                    /* ← couleur du texte au repos */
+  --btn-hover-text: #1e3d2a;             /* ← couleur du texte au survol */
+  --btn-border: none;                     /* ← supprime la bordure */
+  --btn-shadow: none;                     /* ← supprime l'ombre */
+}
+```
+
+**Pour ajuster :**
+- `--btn-text` → couleur du libellé "Ajouter au calendrier" au repos.
+- `--btn-hover-background` → fond coloré au survol. `transparent` pour aucun fond.
+- `--btn-hover-text` → couleur du texte au survol.
+- Ces variables viennent du composant CDN — si une variable ne fonctionne pas, c'est que le composant a changé de nom dans une mise à jour.
+
+---
+
 ## 2026-06-02 — Bouton "Ajouter au calendrier" sur chaque carte
 
 **Problème :** Les visiteurs ne pouvaient pas ajouter un événement directement à leur calendrier (Google, Apple, Outlook, etc.) depuis la page.
