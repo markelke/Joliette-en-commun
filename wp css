@@ -514,6 +514,9 @@ a[href*="action=edit"] { display: none !important; }
 }
 
 .jc-expo-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
   padding: 10px 0 !important;
   border-bottom: 1px solid #c8dfc8 !important;
   font-size: 0.95rem !important;
@@ -524,11 +527,36 @@ a[href*="action=edit"] { display: none !important; }
   border-bottom: none !important;
 }
 
+.jc-expo-vignette {
+  width: 60px !important;
+  height: 60px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.jc-expo-vignette-vide {
+  width: 60px !important;
+  height: 60px !important;
+  flex-shrink: 0 !important;
+  background-color: #c8dfc8 !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.4rem !important;
+}
+
+.jc-expo-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
 .jc-expo-date {
   color: #c8963e !important;
   font-size: 0.85rem !important;
   font-weight: 500 !important;
-  margin-left: 6px !important;
 }
 
 

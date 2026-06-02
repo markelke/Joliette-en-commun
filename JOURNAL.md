@@ -84,14 +84,57 @@ function genererListeExpositionsCompacte(expositions, url) {
 }
 ```
 
+**Mise à jour — vignette image par exposition :**
+
+Chaque `<li>` contient maintenant une vignette (image ou repli emoji) + un bloc info :
+
+```js
+let vignette = (ev.imageUrL && ev.imageUrL.toString().startsWith('http'))
+  ? '<img src="' + ev.imageUrL + '" class="jc-expo-vignette" alt="' + ev.titre + '">'
+  : '<span class="jc-expo-vignette-vide">🎨</span>';
+// → <li class="jc-expo-item">[vignette]<div class="jc-expo-info">[titre][date]</div></li>
+```
+
+```css
+.jc-expo-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;              /* ← espace entre vignette et texte */
+}
+.jc-expo-vignette {
+  width: 60px !important;            /* ← taille de la vignette */
+  height: 60px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  flex-shrink: 0 !important;
+}
+.jc-expo-vignette-vide {
+  width: 60px !important;
+  height: 60px !important;
+  background-color: #c8dfc8 !important; /* ← fond sauge si pas d'image */
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.4rem !important;         /* ← taille de l'emoji repli */
+}
+.jc-expo-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;               /* ← espace entre titre et date */
+}
+```
+
 **Pour ajuster :**
-- `background-color: #eaf4ea` sur `.jc-expo-compacte` → couleur de fond du bloc. Remplacer par une autre teinte de la palette.
+- `background-color: #eaf4ea` sur `.jc-expo-compacte` → couleur de fond du bloc.
 - `border-left: 4px solid #2d5a3d` → épaisseur et couleur de la barre verticale gauche.
-- `margin-bottom: 36px` → espace entre le bloc expositions et le premier groupe de mois. Augmenter pour plus d'air.
-- `padding: 10px 0` sur `.jc-expo-item` → espace entre chaque ligne d'exposition.
-- `color: #c8963e` sur `.jc-expo-date` → couleur de la date "jusqu'au X". Bronze par défaut.
-- Le lien "Voir toutes les expositions →" utilise `.jc-expo-btn` — ses styles sont dans la section boutons du CSS.
-- L'URL du lien est codée dans `synchroniserCalendrierComplet()` : `'https://jolietteencommun.org/expositions/'`.
+- `margin-bottom: 36px` → espace entre le bloc expositions et le premier groupe de mois.
+- `width/height: 60px` sur `.jc-expo-vignette` et `.jc-expo-vignette-vide` → taille des vignettes. Changer les deux en même temps.
+- `gap: 12px` sur `.jc-expo-item` → espace entre la vignette et le texte.
+- `gap: 4px` sur `.jc-expo-info` → espace entre le titre et la date "jusqu'au X".
+- `color: #c8963e` sur `.jc-expo-date` → couleur de la date. Bronze par défaut.
+- Le lien "Voir toutes les expositions →" utilise `.jc-expo-btn`.
+- L'URL du lien : `'https://jolietteencommun.org/expositions/'` dans `synchroniserCalendrierComplet()`.
 
 ---
 
