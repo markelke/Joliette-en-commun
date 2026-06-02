@@ -7,6 +7,7 @@
      Vert foncé (survol) ... #1e3d2a
      Sauge (accents) ....... #c8dfc8
      Bronze (dates) ........ #c8963e
+
    ========================================================================== */
 
 
@@ -397,12 +398,22 @@ a[href*="action=edit"] { display: none !important; }
   margin-top: 4px !important;
 }
 .jc-toggle-label::before { content: "Voir plus \2192"; }
-.jc-toggle-input:checked ~ .jc-toggle-label::before { content: "Voir moins \2191"; }
+.jc-toggle-input:checked ~ .jc-card-footer .jc-toggle-label::before { content: "Voir moins \2191"; }
 
 /* Focus clavier */
 .jc-toggle-label:focus-visible {
   outline: 2px solid #2d5a3d !important;
   outline-offset: 2px !important;
+}
+
+/* Pied de carte : label Voir plus + bouton calendrier côte à côte */
+.jc-card-footer {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-top: auto !important;
+  padding-top: 8px !important;
 }
 
 /* --- Forum + sondage côte à côte ---------------------------------------- */
@@ -492,7 +503,7 @@ a[href*="action=edit"] { display: none !important; }
    ========================================================================== */
 
 .jc-expo-compacte {
-  background-color: #eaf4ea !important;
+  background-color: #d6e6d6 !important;
   border: 1px solid #c8dfc8 !important;
   border-left: 4px solid #2d5a3d !important;
   border-radius: 12px !important;

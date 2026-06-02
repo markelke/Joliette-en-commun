@@ -49,7 +49,7 @@ function genererListeExpositionsCompacte(expositions, url) {
 
 ```css
 .jc-expo-compacte {
-  background-color: #eaf4ea !important;     /* ← fond sauge clair */
+  background-color: #d6e6d6 !important;     /* ← fond sauge clair */
   border: 1px solid #c8dfc8 !important;
   border-left: 4px solid #2d5a3d !important; /* ← barre verte à gauche */
   border-radius: 12px !important;
