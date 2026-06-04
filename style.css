@@ -1,0 +1,940 @@
+/* ==========================================================================
+   JOLIETTE EN COMMUN — Feuille de style personnalisée
+   --------------------------------------------------------------------------
+   À coller dans : Apparence › Personnaliser › CSS additionnel (Customizer).
+   Ce fichier EST le CSS de production — les commentaires n'affectent pas
+   le rendu, le navigateur les ignore.
+
+   Palette :
+     Crème (fond) .......... #faf6f0
+     Vert forêt (en-tête) .. #2d5a3d
+     Vert foncé (survol) ... #1e3d2a
+     Sauge (accents) ....... #c8dfc8
+     Bronze (dates) ........ #c8963e
+
+   Pour changer la couleur de fond du site entier : remplacer #faf6f0.
+   Pour changer la couleur principale : remplacer #2d5a3d (et #1e3d2a hover).
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. EN-TÊTE — VERT FORÊT
+   --------------------------------------------------------------------------
+   On cible 5 sélecteurs différents car WordPress / GeneratePress peut
+   utiliser n'importe lequel selon la page ou la version du thème.
+   En les listant tous on garantit que le vert s'applique partout.
+   ========================================================================== */
+.site-header,
+header#masthead,
+.inside-header,
+.inside-header.grid-container,
+div.inside-header.grid-container {
+  background-color: #2d5a3d !important;
+  border: none !important;
+  box-shadow: none !important;
+  /* max() choisit la plus grande des deux valeurs :
+     env(safe-area-inset-top) = espace réservé par l'iPhone pour son encoche.
+     Sans ça, le contenu passerait derrière l'encoche sur iPhone. */
+  padding-top: max(20px, env(safe-area-inset-top)) !important;
+  padding-bottom: 20px !important;
+  margin-bottom: 0 !important;
+}
+
+.inside-header {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.site-branding-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+.site-branding {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+img.header-image.is-logo-image {
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 50% !important;   /* 50% = cercle parfait */
+  object-fit: cover !important;    /* recadrage automatique sans déformation */
+  flex-shrink: 0 !important;
+}
+
+p.main-title a {
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.02em !important;
+  line-height: 1.1 !important;
+  display: block !important;
+}
+
+p.site-description {
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 0.9rem !important;
+  color: #c8dfc8 !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  margin-top: 4px !important;
+  display: block !important;
+}
+
+
+/* ==========================================================================
+   2. FOND CRÈME GLOBAL
+   --------------------------------------------------------------------------
+   On cible beaucoup de sélecteurs car WordPress et les plugins appliquent
+   des fonds blancs sur des éléments intermédiaires. En les listant tous,
+   aucun fond blanc ne "perce" à travers.
+
+   RÈGLE D'OR : ne JAMAIS mettre background-color vert (#1e3d2a ou autre)
+   sur body — c'est ce qui avait rendu tout le site sombre par accident.
+   ========================================================================== */
+html, body,
+.site-content, .grid-container, .entry-content, .entry-content > *,
+.inside-article, .inside-article > *, #primary, .site-main,
+.wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
+  background-color: #faf6f0 !important;
+}
+
+.grid-container, #primary, .site-main,
+.wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.site-content, .inside-article, .entry-content {
+  margin-top: 0 !important;
+  padding-top: 30px !important;
+}
+
+/* Titre d'accueil centré sur mobile (page d'accueil seulement) */
+@media (max-width: 767px) {
+  .page-id-1807 .entry-title { text-align: center !important; }
+}
+
+
+/* ==========================================================================
+   3. MISE EN PAGE — COLONNES DE HAUTEUR ÉGALE (forum + sondage)
+   --------------------------------------------------------------------------
+   align-items: stretch = toutes les colonnes atteignent la même hauteur.
+   flex: 1 sur les enfants = chacun occupe toute la hauteur de sa colonne.
+   ========================================================================== */
+.wp-block-columns {
+  display: flex !important;
+  align-items: stretch !important;
+}
+.wp-block-column {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#wpforo-wrap, .forminator-poll {
+  flex: 1 !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.gb-element-56de59ba {
+  margin-top: 40px !important;
+  padding-top: 20px !important;
+}
+
+
+/* ==========================================================================
+   4. BOUTONS — CALENDRIER & RETOUR
+   --------------------------------------------------------------------------
+   gb-text-169aeb6e et gb-text-d96ad459 = identifiants générés par
+   GenerateBlocks. Ils ne changent pas, on peut s'en servir comme sélecteurs.
+   ========================================================================== */
+a.gb-text-169aeb6e,
+a.gb-text-d96ad459 {
+  background-color: #2d5a3d !important;
+  color: #faf6f0 !important;
+  border-color: #2d5a3d !important;
+}
+a.gb-text-169aeb6e:hover,
+a.gb-text-d96ad459:hover {
+  background-color: #1e3d2a !important;
+  border-color: #1e3d2a !important;
+}
+
+.jc-events-header {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  justify-content: center !important;
+  margin-bottom: 24px !important;
+}
+
+a.gb-text-169aeb6e,
+a.gb-text-d96ad459,
+#jc-load-more-btn {
+  background-color: #2d5a3d !important;
+  color: #faf6f0 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 10px 18px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+}
+a.gb-text-169aeb6e,
+a.gb-text-d96ad459 { display: inline-block !important; }
+
+a.gb-text-169aeb6e:hover,
+a.gb-text-d96ad459:hover,
+#jc-load-more-btn:hover {
+  background-color: #1e3d2a !important;
+  color: #faf6f0 !important;
+}
+
+/* Caché sur desktop (8 tuiles visibles d'emblée) ; affiché sur mobile via @media. */
+#jc-load-more-btn { display: none !important; }
+
+@media (max-width: 1023px) {
+  /* nth-child(n+5) = "le 5e enfant et tous les suivants" → cache au-delà de 4. */
+  .jc-events-grid-layout .jc-timeline .jc-timeline-item:nth-child(n+5) {
+    display: none !important;
+  }
+  /* Le JS ajoute .jc-expanded sur le conteneur au clic du bouton "Voir plus" ;
+     cette règle révèle alors les événements cachés. */
+  .jc-events-grid-layout.jc-expanded .jc-timeline .jc-timeline-item {
+    display: flex !important;
+  }
+  #jc-load-more-btn {
+    display: block !important;
+    margin: 16px auto 0 !important;
+  }
+}
+
+
+/* ==========================================================================
+   5. SONDAGE FORMINATOR
+   ========================================================================== */
+.forminator-poll {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  padding: 26px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+  border: 1px solid #eaeaea !important;
+}
+.forminator-poll .forminator-poll-title {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  margin-bottom: 20px !important;
+  line-height: 1.4 !important;
+}
+.forminator-poll .forminator-radio {
+  background: #f9fafb !important;
+  border: 1px solid #f3f4f6 !important;
+  border-radius: 10px !important;
+  padding: 12px 14px !important;
+  margin-bottom: 10px !important;
+}
+.forminator-poll .forminator-radio:hover {
+  background: #f3f4f6 !important;
+  border-color: #e5e7eb !important;
+}
+.forminator-poll .forminator-button-submit {
+  width: 100% !important;
+  background: #2d5a3d !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 14px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin-top: 8px !important;
+  cursor: pointer !important;
+}
+.forminator-poll .forminator-button-submit:hover {
+  background: #1e3d2a !important;
+}
+
+.forminator-poll .forminator-response-message {
+  background-color: #e8f4ec !important;
+  border: 1px solid #a8d4b4 !important;
+  border-left: 4px solid #2d5a3d !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
+}
+/* Quand quelqu'un a déjà voté, Forminator affiche un message d'erreur en anglais.
+   On rend l'original invisible (font-size: 0) et on le remplace par ::before
+   avec notre propre texte en français — sans toucher au HTML. */
+.forminator-poll .forminator-response-message .forminator-label--forminator-error {
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+  display: block !important;
+}
+.forminator-poll .forminator-response-message .forminator-label--forminator-error::before {
+  content: "Vous avez déjà enregistré votre vote. Merci !" !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  color: #2d5a3d !important;
+  font-weight: 500 !important;
+  display: block !important;
+}
+
+
+/* ==========================================================================
+   6. ÉLÉMENTS MASQUÉS
+   --------------------------------------------------------------------------
+   display: none = invisible ET sans espace (comme si l'élément n'existait pas).
+   Différent de visibility: hidden qui cache mais garde l'espace réservé.
+   ========================================================================== */
+.header-widget-1, .header-widget-2 { display: none !important; }
+.forminator-field-postdata,
+.forminator-field-postdata .forminator-button-submit { display: none !important; }
+.forminator-poll-edit-link,
+.forminator-module-edit-link,
+.forminator-edit-module,
+.edit-link,
+a[href*="action=edit"] { display: none !important; }
+#menu-item-1885 { display: none !important; }
+
+/* display-mode: standalone = le site est ouvert comme une app installée (PWA).
+   Dans ce mode on cache la bannière d'installation. */
+@media all and (display-mode: standalone) {
+  .hdsb-stickybanner { display: none !important; }
+}
+
+.home .page-hero h1,
+.home .entry-header h1,
+.home .generate-page-header h1 { font-size: 1.8rem !important; }
+
+
+/* ==========================================================================
+   7. GRILLE D'ÉVÉNEMENTS (page principale — aperçu 8 événements)
+   --------------------------------------------------------------------------
+   Classes "jc-" (Joliette en Commun) pour éviter tout conflit avec le thème
+   ou les plugins. Le HTML est généré par synchroniser-timeline.js.
+   ========================================================================== */
+
+/* Grille responsive : 1 colonne mobile → 2 tablette → 4 desktop. */
+.jc-events-grid-layout .jc-timeline {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 40px 0 !important;
+}
+
+@media (min-width: 640px) {
+  .jc-events-grid-layout .jc-timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .jc-events-grid-layout .jc-timeline {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+.jc-events-grid-layout .jc-timeline-item {
+  background-color: #fcfbf7 !important;
+  border: 1px solid #e2ded2 !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  position: relative !important;   /* nécessaire pour la case à cocher en position absolute */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.04) !important;
+  min-width: 0 !important;
+}
+
+/* Cache les "points" de l'ancienne timeline verticale (le HTML en génère encore). */
+.jc-events-grid-layout .jc-timeline-dot { display: none !important; }
+
+.jc-events-grid-layout .jc-timeline-time {
+  display: block !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: #c8963e !important;
+  text-transform: uppercase !important;
+  margin-bottom: 8px !important;
+}
+
+.jc-events-grid-layout .jc-timeline-title {
+  font-size: 1.2rem !important;
+  color: #1e3d2a !important;
+  margin: 0 0 12px 0 !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+}
+
+/* height: 160px fixe = toutes les photos ont la même hauteur.
+   object-fit: cover = recadrage automatique centré sans déformation. */
+.jc-events-grid-layout .jc-timeline-img {
+  width: 100% !important;
+  height: 160px !important;
+  object-fit: cover !important;
+  border-radius: 6px !important;
+  margin-bottom: 12px !important;
+}
+
+/* --- Voir plus / Voir moins (partagé grille + calendrier) -------------- */
+/* Mécanisme : une <input type="checkbox"> cachée + un <label> cliquable.
+   Cliquer le label coche/décoche la case → :checked active les règles ci-dessous.
+   position: absolute + opacity: 0 = invisible mais accessible au clavier
+   (contrairement à display: none qui bloquerait la navigation clavier). */
+.jc-toggle-input {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* -webkit-line-clamp : technique pour couper le texte après N lignes et ajouter "…".
+   Ces 3 propriétés ensemble sont obligatoires — aucune ne fonctionne seule. */
+.jc-timeline-desc {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  margin: 4px 0 8px 0 !important;
+  font-size: 0.9rem !important;
+  color: #333 !important;
+}
+/* ~ = sélecteur "frère général" : s'applique aux éléments qui SUIVENT .jc-toggle-input.
+   :checked = quand la case est cochée. unset annule la coupure → tout s'affiche. */
+.jc-toggle-input:checked ~ .jc-timeline-desc {
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+}
+
+/* Méta courte : coût + adresse (vue réduite) */
+.jc-meta-court {
+  font-size: 0.85rem !important;
+  color: #2d5a3d !important;
+  margin-bottom: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.jc-toggle-input:checked ~ .jc-meta-court { display: none !important; }
+
+/* Méta complète : cachée par défaut, visible quand étendu */
+.jc-meta-complet { display: none !important; }
+.jc-toggle-input:checked ~ .jc-meta-complet {
+  display: block !important;
+  font-size: 0.85rem !important;
+  color: #2d5a3d !important;
+  line-height: 1.6 !important;
+  margin-bottom: 8px !important;
+}
+
+/* Le texte "Voir plus ➔" / "Voir moins ↑" est injecté par ::before
+   (pas dans le HTML) pour rester facile à changer ici. */
+.jc-toggle-label {
+  display: inline-block !important;
+  cursor: pointer !important;
+  color: #2d5a3d !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  margin-top: 4px !important;
+}
+.jc-toggle-label::before { content: "Voir plus \2192"; }
+.jc-toggle-input:checked ~ .jc-card-footer .jc-toggle-label::before { content: "Voir moins \2191"; }
+
+/* :focus-visible = contour uniquement à la navigation clavier, pas à la souris. */
+.jc-toggle-label:focus-visible {
+  outline: 2px solid #2d5a3d !important;
+  outline-offset: 2px !important;
+}
+
+/* Pied de carte : label Voir plus + bouton calendrier côte à côte */
+.jc-card-footer {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-top: auto !important;
+  padding-top: 8px !important;
+}
+
+/* Bouton add-to-calendar — variables CSS du shadow DOM (web component).
+   Ces propriétés personnalisées sont lues par le composant <add-to-calendar-button>. */
+add-to-calendar-button {
+  --list-background: #ffffff;
+  --list-hover-background: #eaf4ea;
+  --list-text: #1e3d2a;
+  --list-hover-text: #1e3d2a;
+  --list-border: #c8dfc8;
+}
+
+/* --- Forum + sondage côte à côte ---------------------------------------- */
+
+.jc-native-footer-row {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 32px !important;
+  margin-top: 50px !important;
+  border-top: 1px solid #e2ded2 !important;
+  padding-top: 40px !important;
+}
+
+@media (min-width: 1024px) {
+  .jc-native-footer-row {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+  }
+  .jc-native-forum-col {
+    flex: 1 1 62% !important;
+    min-width: 0 !important;
+  }
+  .jc-native-poll-col {
+    flex: 1 1 34% !important;
+    min-width: 0 !important;
+    background-color: #ffffff !important;
+    padding: 24px !important;
+    border: 1px solid #e2ded2 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.06) !important;
+  }
+}
+
+
+/* ==========================================================================
+   7B. CALENDRIER COMPLET — mêmes cartes que la page principale, par mois
+   ========================================================================== */
+
+.jc-calendrier-complet {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+}
+
+/* Lien retour */
+.jc-cal-header { margin-bottom: 28px !important; }
+.jc-retour-btn {
+  color: #2d5a3d !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+.jc-retour-btn:hover { text-decoration: underline !important; color: #1e3d2a !important; }
+
+/* En-tête de mois */
+.jc-cal-mois-groupe { margin-bottom: 44px !important; }
+.jc-cal-mois-titre {
+  font-size: 1.4rem !important;
+  font-weight: 800 !important;
+  color: #2d5a3d !important;
+  border-bottom: 2px solid #c8dfc8 !important;
+  padding-bottom: 8px !important;
+  margin: 0 0 20px 0 !important;
+  text-transform: capitalize !important;
+}
+
+/* Message si aucun événement */
+.jc-cal-vide {
+  color: #2d5a3d !important;
+  font-style: italic !important;
+  text-align: center !important;
+  padding: 40px 0 !important;
+}
+
+/* IMPORTANT : sur le calendrier complet, NE PAS masquer les événements
+   après le 4e sur mobile (ce masquage est réservé à l'aperçu de la page
+   principale qui a un bouton "Voir plus"). */
+@media (max-width: 1023px) {
+  .jc-calendrier-complet .jc-events-grid-layout .jc-timeline .jc-timeline-item:nth-child(n+5) {
+    display: flex !important;
+  }
+}
+
+
+/* ==========================================================================
+   7C. EXPOSITIONS — liste compacte (calendrier complet)
+   ========================================================================== */
+
+.jc-expo-compacte {
+  background-color: #d6e6d6 !important;
+  border: 1px solid #c8dfc8 !important;
+  border-left: 4px solid #2d5a3d !important;
+  border-radius: 12px !important;
+  padding: 20px 24px !important;
+  margin-bottom: 36px !important;
+}
+
+.jc-expo-titre {
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  color: #2d5a3d !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.jc-expo-liste {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 16px 0 !important;
+}
+
+@media (min-width: 768px) {
+  .jc-expo-liste {
+    column-count: 2 !important;
+    column-gap: 40px !important;
+  }
+}
+
+.jc-expo-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #c8dfc8 !important;
+  font-size: 0.95rem !important;
+  color: #1e3d2a !important;
+  break-inside: avoid !important;
+  -webkit-column-break-inside: avoid !important;
+}
+
+.jc-expo-item:last-child {
+  border-bottom: none !important;
+}
+
+.jc-expo-vignette {
+  width: 60px !important;
+  height: 60px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.jc-expo-vignette-vide {
+  width: 60px !important;
+  height: 60px !important;
+  flex-shrink: 0 !important;
+  background-color: #c8dfc8 !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.4rem !important;
+}
+
+.jc-expo-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+.jc-expo-date {
+  color: #c8963e !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+}
+
+
+/* ==========================================================================
+   7D. FORUM wpForo — titres complets
+   --------------------------------------------------------------------------
+   Astuce CSS : wpForo tronque le titre du dernier sujet côté serveur.
+   Le titre COMPLET est disponible dans l'attribut HTML "title" du lien.
+   On masque le texte tronqué (font-size: 0) et on affiche le titre complet
+   via ::after { content: attr(title) } — sans JavaScript, sans modifier le HTML.
+   ========================================================================== */
+.wpforo-forum-info {
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+.wpforo-forum-title {
+  padding: 5px 5px 4px 5px !important;
+  margin: 0 0 4px 0 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  word-break: break-word !important;
+}
+.wpforo-forum-title a {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+}
+
+/* Supprimer l'espace vide généré par <li>&nbsp;</li> dans la description */
+.wpforo-forum-description ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+.wpforo-forum-description li {
+  display: none !important;
+}
+
+/* Étiquette "Sujets récents" */
+.wpfcl-5 {
+  padding: 4px 8px !important;
+}
+
+/* Icônes (épinglé, répondu, non-répondu) avant chaque titre de sujet */
+.wpforo-last-topic-title i {
+  display: none !important;
+}
+
+.wpforo-last-topic-title {
+  white-space: normal !important;
+  overflow: visible !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+  word-break: break-word !important;
+}
+.wpforo-last-topic-title a {
+  font-size: 0 !important;          /* masque le texte tronqué "...cou..." */
+  white-space: normal !important;
+  line-height: 1.4 !important;
+  display: block !important;
+}
+.wpforo-last-topic-title a::after {
+  content: attr(title);             /* lit l'attribut title= et l'affiche comme texte */
+  font-size: 0.95rem !important;
+  font-weight: inherit !important;
+  white-space: normal !important;
+  display: inline !important;
+}
+
+
+/* ==========================================================================
+   8. RÈGLES MOBILES (≤ 768 px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .main-navigation { display: none !important; }
+
+  /* Forum : récupérer l'espace perdu sur les côtés */
+  #wpforo-wrap, #wpforo, .wpforo-wrap {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .wp-block-column {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Supprimer les marges/paddings latéraux du conteneur article pour que le forum
+     wpForo occupe toute la largeur sans débordement sur mobile */
+  .inside-article,
+  .entry-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* En-tête empilé verticalement sur mobile (logo au-dessus, titre en-dessous). */
+  .inside-header {
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 16px !important;
+  }
+  .site-branding-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  img.header-image.is-logo-image {
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+  }
+  .site-branding { align-items: center !important; }
+  p.site-description { text-align: center !important; }
+
+  /* Cache les résultats du sondage sur mobile (trop chargé).
+     L'utilisateur voit les options et peut voter sans voir les stats. */
+  .forminator-poll .forminator-radio.forminator-disabled,
+  .forminator-poll .forminator-poll-body,
+  .forminator-poll .forminator-poll-footer {
+    display: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   9. BABILLARD COMMUNAUTAIRE
+   --------------------------------------------------------------------------
+   Classes générées par synchroniserBabillard() et genererCarteBabillard().
+   ========================================================================== */
+
+/* Bouton publier — même style que les boutons du site */
+.jc-bab-header {
+  margin-bottom: 20px !important;
+}
+.jc-bab-publier {
+  background-color: #2d5a3d !important;
+  color: #faf6f0 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 10px 18px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+}
+.jc-bab-publier:hover {
+  background-color: #1e3d2a !important;
+  color: #faf6f0 !important;
+}
+
+/* Grille responsive */
+.jc-bab-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+@media (min-width: 640px) {
+  .jc-bab-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (min-width: 1024px) {
+  .jc-bab-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Carte */
+.jc-bab-card {
+  background-color: #fcfbf7 !important;
+  border: 1px solid #e2ded2 !important;
+  border-radius: 12px !important;
+  padding: 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+/* Badge — couleur par type */
+.jc-bab-badge {
+  display: inline-block !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  padding: 3px 10px !important;
+  border-radius: 20px !important;
+  align-self: flex-start !important;
+}
+.jc-bab-annonce .jc-bab-badge {
+  background-color: #f5e6cc !important;
+  color: #8a5a14 !important;
+}
+.jc-bab-cherche .jc-bab-badge {
+  background-color: #f0dcd4 !important;
+  color: #8a3d28 !important;
+}
+.jc-bab-offre .jc-bab-badge {
+  background-color: #d6e6d6 !important;
+  color: #1e3d2a !important;
+}
+
+/* Titre */
+.jc-bab-titre {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: #1e3d2a !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+}
+
+/* Message */
+.jc-bab-message {
+  font-size: 0.9rem !important;
+  color: #444 !important;
+  margin: 0 !important;
+  flex-grow: 1 !important;
+}
+
+/* Pied de carte */
+.jc-bab-footer {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding-top: 10px !important;
+  border-top: 1px solid #e2ded2 !important;
+  margin-top: auto !important;
+}
+
+/* Méta */
+.jc-bab-meta {
+  font-size: 0.8rem !important;
+  color: #888 !important;
+}
+
+/* Lien répondre */
+.jc-bab-repondre {
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: #2d5a3d !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+.jc-bab-repondre:hover {
+  text-decoration: underline !important;
+  color: #1e3d2a !important;
+}
+
+/* --- 9b. Babillard : aperçu sur la page d'accueil --- */
+
+/* Mobile : carousel swipe (scroll horizontal, accrochage de carte) */
+.jc-home-annonces {
+  display: flex !important;
+  gap: 16px !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 0 16px 8px !important;
+  scroll-padding-left: 16px !important;
+  scrollbar-width: none !important;
+}
+.jc-home-annonces::-webkit-scrollbar { display: none !important; }
+.jc-home-annonces .jc-bab-card {
+  flex: 0 0 78% !important;        /* 78% = une carte + un aperçu de la suivante */
+  scroll-snap-align: start !important;
+}
+
+/* Tablette + desktop : cartes de largeur fixe, alignées à gauche (pas d'étirement) */
+@media (min-width: 768px) {
+  .jc-home-annonces {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+  .jc-home-annonces .jc-bab-card {
+    flex: 0 1 260px !important;
+    max-width: 300px !important;
+  }
+}
+
+/* Desktop : max 4 annonces visibles */
+@media (min-width: 1024px) {
+  .jc-home-annonces .jc-bab-card:nth-child(n+5) { display: none !important; }
+}
+
+/* Pied : bouton vers le babillard */
+.jc-home-footer {
+  text-align: center !important;
+  margin-top: 20px !important;
+}

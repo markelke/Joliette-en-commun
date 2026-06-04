@@ -103,7 +103,10 @@ html, body,
   padding-top: 30px !important;
 }
 
-
+/* Titre d'accueil centré sur mobile (page d'accueil seulement) */
+@media (max-width: 767px) {
+  .page-id-1807 .entry-title { text-align: center !important; }
+}
 /* ==========================================================================
    3. MISE EN PAGE — COLONNES DE HAUTEUR ÉGALE (forum + sondage)
    ========================================================================== */
@@ -829,4 +832,47 @@ add-to-calendar-button {
 .jc-bab-repondre:hover {
   text-decoration: underline !important;
   color: #1e3d2a !important;
+}
+/* --- 9b. Babillard : aperçu sur la page d'accueil --- */
+
+/* Mobile : carousel swipe */
+.jc-home-annonces {
+  display: flex !important;
+  gap: 16px !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 0 16px 8px !important;
+  scroll-padding-left: 16px !important;
+  scrollbar-width: none !important;
+}
+.jc-home-annonces::-webkit-scrollbar { display: none !important; }
+.jc-home-annonces .jc-bab-card {
+  flex: 0 0 78% !important;
+  scroll-snap-align: start !important;
+}
+
+/* Tablette + desktop : cartes de largeur fixe, alignées à gauche (pas d'étirement) */
+@media (min-width: 768px) {
+  .jc-home-annonces {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+  .jc-home-annonces .jc-bab-card {
+    flex: 0 1 260px !important;
+    max-width: 300px !important;
+  }
+}
+
+/* Desktop : max 4 annonces visibles */
+@media (min-width: 1024px) {
+  .jc-home-annonces .jc-bab-card:nth-child(n+5) { display: none !important; }
+}
+
+/* Pied : bouton vers le babillard */
+.jc-home-footer {
+  text-align: center !important;
+  margin-top: 20px !important;
 }
