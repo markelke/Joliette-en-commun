@@ -1,95 +1,129 @@
 /* ==========================================================================
-   JOLIETTE EN COMMUN — Feuille de style personnalisée
+   STYLE.CSS — Joliette en commun · jolietteencommun.org
    --------------------------------------------------------------------------
-   À coller dans : Apparence › Personnaliser › CSS additionnel (Customizer).
-   Ce fichier EST le CSS de production — les commentaires n'affectent pas
-   le rendu, le navigateur les ignore.
+   CE QUE FAIT CE FICHIER
+     Toutes les personnalisations visuelles du site WordPress :
+     en-tête vert, fond crème, grille d'événements, sondage, babillard,
+     calendrier, expositions, forum wpForo, et règles mobiles.
+     Ce fichier EST le CSS de production — les commentaires sont ignorés
+     par le navigateur et n'affectent pas le rendu.
 
-   Palette :
-     Crème (fond) .......... #faf6f0
-     Vert forêt (en-tête) .. #2d5a3d
-     Vert foncé (survol) ... #1e3d2a
-     Sauge (accents) ....... #c8dfc8
-     Bronze (dates) ........ #c8963e
+   DÉPLOIEMENT
+     1. Ouvre WordPress → Apparence › Personnaliser › CSS additionnel.
+     2. Sélectionne tout (Ctrl+A / Cmd+A) et colle ce fichier.
+     3. Clique sur « Publier » en haut à gauche.
+     C'est tout — le site se met à jour immédiatement.
 
-   Pour changer la couleur de fond du site entier : remplacer #faf6f0.
-   Pour changer la couleur principale : remplacer #2d5a3d (et #1e3d2a hover).
+   TANDEM JS
+     Le HTML que ce CSS met en forme est généré par le script Apps Script
+     du repo jec-apps-script (Code.js → synchroniserTimelineCitoyenne, etc.).
+     Modifier une classe ici = vérifier qu'elle existe bien dans Code.js.
+
+   PALETTE DE COULEURS
+     Pour changer une couleur sur tout le site, utilise Rechercher/Remplacer
+     dans VS Code (Cmd+H) — toutes les occurrences seront mises à jour.
+     👉 MODIFIABLE : #faf6f0 → couleur de fond (crème chaude)
+     👉 MODIFIABLE : #2d5a3d → couleur principale (vert forêt, en-tête + boutons)
+     👉 MODIFIABLE : #1e3d2a → couleur survol (vert foncé)
+     👉 MODIFIABLE : #c8dfc8 → couleur accent (vert sauge, bordures + slogan)
+     👉 MODIFIABLE : #c8963e → couleur dates/badges (bronze doré)
    ========================================================================== */
 
 
 /* ==========================================================================
    1. EN-TÊTE — VERT FORÊT
    --------------------------------------------------------------------------
-   On cible 5 sélecteurs différents car WordPress / GeneratePress peut
-   utiliser n'importe lequel selon la page ou la version du thème.
-   En les listant tous on garantit que le vert s'applique partout.
+   WordPress et GeneratePress peuvent utiliser n'importe lequel de ces
+   5 sélecteurs selon la page ou la version du thème. On les cible tous
+   pour garantir que le vert s'applique partout sans exception.
    ========================================================================== */
+
+/* Fond et espacement de toute la barre d'en-tête. */
 .site-header,
 header#masthead,
 .inside-header,
 .inside-header.grid-container,
 div.inside-header.grid-container {
+  /* 👉 MODIFIABLE : remplacer #2d5a3d par une autre couleur pour changer l'en-tête. */
   background-color: #2d5a3d !important;
-  border: none !important;
-  box-shadow: none !important;
-  /* max() choisit la plus grande des deux valeurs :
-     env(safe-area-inset-top) = espace réservé par l'iPhone pour son encoche.
-     Sans ça, le contenu passerait derrière l'encoche sur iPhone. */
+  border: none !important;           /* (rien à régler) supprime la bordure du thème */
+  box-shadow: none !important;       /* (rien à régler) supprime l'ombre du thème */
+  /* max() choisit la plus grande valeur : 20px standard ou l'encoche iPhone.
+     Sans env(safe-area-inset-top), le logo passerait derrière l'encoche. */
+  /* 👉 MODIFIABLE : 20px = espace minimum en haut de l'en-tête. Monte pour plus d'air. */
   padding-top: max(20px, env(safe-area-inset-top)) !important;
+  /* 👉 MODIFIABLE : 20px = espace en bas de l'en-tête. */
   padding-bottom: 20px !important;
-  margin-bottom: 0 !important;
+  margin-bottom: 0 !important;       /* (rien à régler) colle l'en-tête au contenu */
 }
 
+/* Disposition interne : logo + texte centrés côte à côte. (rien à régler) */
 .inside-header {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
   justify-content: center !important;
+  /* 👉 MODIFIABLE : 40px = marges gauche/droite de l'en-tête sur desktop. */
   padding-left: 40px !important;
   padding-right: 40px !important;
   width: 100% !important;
   max-width: 100% !important;
 }
 
+/* Conteneur logo + texte, côte à côte avec un espace entre eux. (rien à régler) */
 .site-branding-container {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
+  /* 👉 MODIFIABLE : 16px = espace entre le logo et le titre/slogan. */
   gap: 16px !important;
 }
 
+/* Le bloc texte (titre + slogan) s'empile verticalement. (rien à régler) */
 .site-branding {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
 }
 
+/* Le logo circulaire. */
 img.header-image.is-logo-image {
+  /* 👉 MODIFIABLE : 72px = taille du logo. Changer les deux valeurs ensemble. */
   width: 72px !important;
   height: 72px !important;
-  border-radius: 50% !important;   /* 50% = cercle parfait */
-  object-fit: cover !important;    /* recadrage automatique sans déformation */
-  flex-shrink: 0 !important;
+  /* 👉 MODIFIABLE : 50% = cercle parfait. 0% = carré, 10px = légèrement arrondi. */
+  border-radius: 50% !important;
+  object-fit: cover !important;   /* (rien à régler) recadre sans déformer */
+  flex-shrink: 0 !important;      /* (rien à régler) empêche le logo de rétrécir */
 }
 
+/* Le titre du site (ex : "JOLIETTE EN COMMUN"). */
 p.main-title a {
+  /* 👉 MODIFIABLE : 'Nunito' = police du titre. Doit être chargée dans WordPress. */
   font-family: 'Nunito', sans-serif !important;
+  /* 👉 MODIFIABLE : 2rem ≈ 32px. Monte pour un titre plus grand. */
   font-size: 2rem !important;
+  /* 👉 MODIFIABLE : 800 = très gras (100 à 900). */
   font-weight: 800 !important;
-  color: #ffffff !important;
-  text-transform: uppercase !important;
+  color: #ffffff !important;             /* (rien à régler) blanc sur fond vert */
+  text-transform: uppercase !important;  /* (rien à régler) majuscules automatiques */
+  /* 👉 MODIFIABLE : 0.02em = léger espacement des lettres. 0 = normal. */
   letter-spacing: 0.02em !important;
-  line-height: 1.1 !important;
+  line-height: 1.1 !important;           /* (rien à régler) interligne compact */
   display: block !important;
 }
 
+/* Le slogan sous le titre (ex : "Ensemble pour notre quartier"). */
 p.site-description {
   font-family: 'Nunito', sans-serif !important;
+  /* 👉 MODIFIABLE : 0.9rem ≈ 14px. */
   font-size: 0.9rem !important;
+  /* 👉 MODIFIABLE : #c8dfc8 = vert sauge (contraste doux sur vert forêt). */
   color: #c8dfc8 !important;
   font-weight: 500 !important;
   text-transform: none !important;
   letter-spacing: 0 !important;
+  /* 👉 MODIFIABLE : 4px = espace entre le titre et le slogan. */
   margin-top: 4px !important;
   display: block !important;
 }
@@ -100,31 +134,38 @@ p.site-description {
    --------------------------------------------------------------------------
    On cible beaucoup de sélecteurs car WordPress et les plugins appliquent
    des fonds blancs sur des éléments intermédiaires. En les listant tous,
-   aucun fond blanc ne "perce" à travers.
+   aucun fond blanc ne "perce" à travers le fond crème.
 
-   RÈGLE D'OR : ne JAMAIS mettre background-color vert (#1e3d2a ou autre)
+   ⚠️ RÈGLE D'OR : ne JAMAIS mettre background-color vert (#1e3d2a ou autre)
    sur body — c'est ce qui avait rendu tout le site sombre par accident.
    ========================================================================== */
+
+/* Impose le fond crème sur tous les conteneurs qui pourraient être blancs. */
 html, body,
 .site-content, .grid-container, .entry-content, .entry-content > *,
 .inside-article, .inside-article > *, #primary, .site-main,
 .wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
+  /* 👉 MODIFIABLE : #faf6f0 = crème chaude. Changer ici change le fond de tout le site. */
   background-color: #faf6f0 !important;
 }
 
+/* Supprime les espaces parasites en haut des zones structurelles. (rien à régler) */
 .grid-container, #primary, .site-main,
 .wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
 
+/* Ajoute une respiration entre l'en-tête et le contenu. */
 .site-content, .inside-article, .entry-content {
   margin-top: 0 !important;
+  /* 👉 MODIFIABLE : 30px = espace entre l'en-tête vert et le contenu. */
   padding-top: 30px !important;
 }
 
-/* Titre d'accueil centré sur mobile (page d'accueil seulement) */
+/* Centre le titre H1 sur la page d'accueil en version mobile uniquement. */
 @media (max-width: 767px) {
+  /* 👉 MODIFIABLE : 1807 = ID WordPress de la page d'accueil. Changer si la page est recrée. */
   .page-id-1807 .entry-title { text-align: center !important; }
 }
 
@@ -132,24 +173,32 @@ html, body,
 /* ==========================================================================
    3. MISE EN PAGE — COLONNES DE HAUTEUR ÉGALE (forum + sondage)
    --------------------------------------------------------------------------
-   align-items: stretch = toutes les colonnes atteignent la même hauteur.
-   flex: 1 sur les enfants = chacun occupe toute la hauteur de sa colonne.
+   align-items: stretch force toutes les colonnes à la même hauteur.
+   flex: 1 sur les enfants = chaque plugin remplit toute sa colonne.
    ========================================================================== */
+
+/* Conteneur Gutenberg "Colonnes" — aligne les colonnes en hauteur. (rien à régler) */
 .wp-block-columns {
   display: flex !important;
   align-items: stretch !important;
 }
+
+/* Chaque colonne devient flex pour que son contenu puisse s'étirer. (rien à régler) */
 .wp-block-column {
   display: flex !important;
   flex-direction: column !important;
 }
+
+/* Le forum et le sondage prennent toute la hauteur de leur colonne. (rien à régler) */
 #wpforo-wrap, .forminator-poll {
   flex: 1 !important;
   height: 100% !important;
   box-sizing: border-box !important;
 }
 
+/* Espace au-dessus du bloc GenerateBlocks qui contient forum + sondage. */
 .gb-element-56de59ba {
+  /* 👉 MODIFIABLE : 40px/20px = espace au-dessus du forum/sondage. */
   margin-top: 40px !important;
   padding-top: 20px !important;
 }
@@ -158,68 +207,89 @@ html, body,
 /* ==========================================================================
    4. BOUTONS — CALENDRIER & RETOUR
    --------------------------------------------------------------------------
-   gb-text-169aeb6e et gb-text-d96ad459 = identifiants générés par
-   GenerateBlocks. Ils ne changent pas, on peut s'en servir comme sélecteurs.
+   gb-text-169aeb6e et gb-text-d96ad459 sont des IDs générés par GenerateBlocks.
+   Ils sont stables — on peut les utiliser comme sélecteurs CSS.
+   #jc-load-more-btn est le bouton "Voir plus" injecté par Code.js.
    ========================================================================== */
+
+/* Couleur de fond des boutons "Aller au calendrier" et "Ajouter une activité". */
 a.gb-text-169aeb6e,
 a.gb-text-d96ad459 {
+  /* 👉 MODIFIABLE : #2d5a3d = vert forêt. */
   background-color: #2d5a3d !important;
   color: #faf6f0 !important;
   border-color: #2d5a3d !important;
 }
+/* Couleur au survol. */
 a.gb-text-169aeb6e:hover,
 a.gb-text-d96ad459:hover {
+  /* 👉 MODIFIABLE : #1e3d2a = vert plus foncé pour le survol. */
   background-color: #1e3d2a !important;
   border-color: #1e3d2a !important;
 }
 
+/* Rangée de boutons au-dessus de la grille — centrés avec espace entre eux. */
 .jc-events-header {
   display: flex !important;
-  flex-wrap: wrap !important;
+  flex-wrap: wrap !important;       /* (rien à régler) passe à la ligne si l'écran est étroit */
+  /* 👉 MODIFIABLE : 12px = espace entre les boutons de la rangée. */
   gap: 12px !important;
   justify-content: center !important;
+  /* 👉 MODIFIABLE : 24px = espace sous la rangée de boutons avant la grille. */
   margin-bottom: 24px !important;
 }
 
+/* Style commun à tous les boutons verts (calendrier, ajouter, voir plus). */
 a.gb-text-169aeb6e,
 a.gb-text-d96ad459,
 #jc-load-more-btn {
+  /* 👉 MODIFIABLE : #2d5a3d = couleur de fond des boutons. */
   background-color: #2d5a3d !important;
+  /* 👉 MODIFIABLE : #faf6f0 = couleur du texte des boutons. */
   color: #faf6f0 !important;
   border: none !important;
+  /* 👉 MODIFIABLE : 6px = arrondi des coins. 0 = carré, 50px = pilule. */
   border-radius: 6px !important;
+  /* 👉 MODIFIABLE : 10px haut/bas, 18px gauche/droite = taille du bouton. */
   padding: 10px 18px !important;
+  /* 👉 MODIFIABLE : 0.9rem ≈ 14px = taille du texte du bouton. */
   font-size: 0.9rem !important;
   font-weight: 600 !important;
   text-decoration: none !important;
   cursor: pointer !important;
-  transition: background-color 0.2s ease !important;
+  transition: background-color 0.2s ease !important;  /* (rien à régler) animation douce */
 }
+/* (rien à régler) inline-block pour que les liens gardent leur flux normal */
 a.gb-text-169aeb6e,
 a.gb-text-d96ad459 { display: inline-block !important; }
 
+/* Survol : fond plus foncé. */
 a.gb-text-169aeb6e:hover,
 a.gb-text-d96ad459:hover,
 #jc-load-more-btn:hover {
+  /* 👉 MODIFIABLE : #1e3d2a = couleur de survol des boutons. */
   background-color: #1e3d2a !important;
   color: #faf6f0 !important;
 }
 
-/* Caché sur desktop (8 tuiles visibles d'emblée) ; affiché sur mobile via @media. */
+/* Caché sur desktop (8 tuiles visibles d'emblée) ; réapparu sur mobile via @media. */
 #jc-load-more-btn { display: none !important; }
 
+/* Sur mobile/tablette (< 1024px) : masque après la 4e tuile, affiche le bouton. */
 @media (max-width: 1023px) {
-  /* nth-child(n+5) = "le 5e enfant et tous les suivants" → cache au-delà de 4. */
+  /* nth-child(n+5) = "5e enfant et tous les suivants" → cache tout au-delà de 4. */
   .jc-events-grid-layout .jc-timeline .jc-timeline-item:nth-child(n+5) {
     display: none !important;
   }
-  /* Le JS ajoute .jc-expanded sur le conteneur au clic du bouton "Voir plus" ;
-     cette règle révèle alors les événements cachés. */
+  /* Code.js ajoute la classe .jc-expanded au clic sur "Voir plus" ;
+     cette règle révèle les tuiles cachées. (rien à régler) */
   .jc-events-grid-layout.jc-expanded .jc-timeline .jc-timeline-item {
     display: flex !important;
   }
+  /* Affiche le bouton "Voir plus" centré sous la grille. */
   #jc-load-more-btn {
     display: block !important;
+    /* 👉 MODIFIABLE : 16px = espace au-dessus du bouton "Voir plus". */
     margin: 16px auto 0 !important;
   }
 }
@@ -227,38 +297,60 @@ a.gb-text-d96ad459:hover,
 
 /* ==========================================================================
    5. SONDAGE FORMINATOR
+   --------------------------------------------------------------------------
+   Style de la boîte de sondage (vote communautaire).
    ========================================================================== */
+
+/* Boîte principale du sondage — carte blanche arrondie avec ombre légère. */
 .forminator-poll {
   background: #ffffff !important;
+  /* 👉 MODIFIABLE : 16px = arrondi des coins de la boîte. */
   border-radius: 16px !important;
+  /* 👉 MODIFIABLE : 26px = espace intérieur de la boîte. */
   padding: 26px !important;
+  /* 👉 MODIFIABLE : 0.06 = opacité de l'ombre (0 = pas d'ombre, 0.2 = très visible). */
   box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
   border: 1px solid #eaeaea !important;
 }
+
+/* Titre de la question du sondage. */
 .forminator-poll .forminator-poll-title {
+  /* 👉 MODIFIABLE : 1.15rem = taille du titre de la question. */
   font-size: 1.15rem !important;
   font-weight: 700 !important;
   color: #111827 !important;
+  /* 👉 MODIFIABLE : 20px = espace sous le titre avant les options. */
   margin-bottom: 20px !important;
   line-height: 1.4 !important;
 }
+
+/* Chaque option de réponse (bouton radio). */
 .forminator-poll .forminator-radio {
   background: #f9fafb !important;
   border: 1px solid #f3f4f6 !important;
+  /* 👉 MODIFIABLE : 10px = arrondi des options. */
   border-radius: 10px !important;
+  /* 👉 MODIFIABLE : 12px/14px = espace intérieur des options. */
   padding: 12px 14px !important;
+  /* 👉 MODIFIABLE : 10px = espace entre deux options. */
   margin-bottom: 10px !important;
 }
+/* Survol d'une option — légèrement plus foncé. (rien à régler) */
 .forminator-poll .forminator-radio:hover {
   background: #f3f4f6 !important;
   border-color: #e5e7eb !important;
 }
+
+/* Bouton "Voter". */
 .forminator-poll .forminator-button-submit {
-  width: 100% !important;
+  width: 100% !important;                /* (rien à régler) pleine largeur */
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du bouton Voter. */
   background: #2d5a3d !important;
   color: #ffffff !important;
   border: none !important;
+  /* 👉 MODIFIABLE : 8px = arrondi du bouton Voter. */
   border-radius: 8px !important;
+  /* 👉 MODIFIABLE : 14px = hauteur du bouton Voter. */
   padding: 14px !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
@@ -266,29 +358,37 @@ a.gb-text-d96ad459:hover,
   cursor: pointer !important;
 }
 .forminator-poll .forminator-button-submit:hover {
+  /* 👉 MODIFIABLE : #1e3d2a = couleur survol du bouton Voter. */
   background: #1e3d2a !important;
 }
 
+/* Zone de confirmation après le vote. */
 .forminator-poll .forminator-response-message {
+  /* 👉 MODIFIABLE : #e8f4ec = fond vert très clair du message de confirmation. */
   background-color: #e8f4ec !important;
   border: 1px solid #a8d4b4 !important;
+  /* 👉 MODIFIABLE : 4px = épaisseur de la barre verte à gauche du message. */
   border-left: 4px solid #2d5a3d !important;
   border-radius: 10px !important;
   padding: 12px 16px !important;
 }
-/* Quand quelqu'un a déjà voté, Forminator affiche un message d'erreur en anglais.
-   On rend l'original invisible (font-size: 0) et on le remplace par ::before
-   avec notre propre texte en français — sans toucher au HTML. */
+
+/* Forminator affiche un message d'erreur en anglais quand on a déjà voté.
+   Astuce : on rend l'original invisible (font-size: 0) et on injecte notre
+   propre texte en français via ::before — sans modifier le HTML WordPress. */
 .forminator-poll .forminator-response-message .forminator-label--forminator-error {
-  font-size: 0 !important;
+  font-size: 0 !important;          /* (rien à régler) masque le texte anglais */
   line-height: 0 !important;
   color: transparent !important;
   display: block !important;
 }
+/* Texte français injecté à la place du message d'erreur anglais. */
 .forminator-poll .forminator-response-message .forminator-label--forminator-error::before {
+  /* 👉 MODIFIABLE : changer ce texte pour personnaliser le message "déjà voté". */
   content: "Vous avez déjà enregistré votre vote. Merci !" !important;
   font-size: 0.95rem !important;
   line-height: 1.5 !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du texte du message de confirmation. */
   color: #2d5a3d !important;
   font-weight: 500 !important;
   display: block !important;
@@ -299,214 +399,273 @@ a.gb-text-d96ad459:hover,
    6. ÉLÉMENTS MASQUÉS
    --------------------------------------------------------------------------
    display: none = invisible ET sans espace (comme si l'élément n'existait pas).
-   Différent de visibility: hidden qui cache mais garde l'espace réservé.
+   Différent de visibility: hidden qui cache mais conserve l'espace réservé.
    ========================================================================== */
+
+/* Widgets inutilisés de l'en-tête du thème. (rien à régler) */
 .header-widget-1, .header-widget-2 { display: none !important; }
+
+/* Champ caché de Forminator superflu. (rien à régler) */
 .forminator-field-postdata,
 .forminator-field-postdata .forminator-button-submit { display: none !important; }
+
+/* Liens "Modifier" visibles aux administrateurs connectés — cachés sur le site public. (rien à régler) */
 .forminator-poll-edit-link,
 .forminator-module-edit-link,
 .forminator-edit-module,
 .edit-link,
 a[href*="action=edit"] { display: none !important; }
+
+/* Ancienne entrée "Événements" du menu principal, remplacée par le nouveau calendrier. */
+/* 👉 MODIFIABLE : 1885 = ID WordPress de l'entrée de menu à masquer. */
 #menu-item-1885 { display: none !important; }
 
-/* display-mode: standalone = le site est ouvert comme une app installée (PWA).
-   Dans ce mode on cache la bannière d'installation. */
+/* Quand le site est ouvert comme appli installée (PWA), cache la bannière d'installation. */
 @media all and (display-mode: standalone) {
-  .hdsb-stickybanner { display: none !important; }
+  .hdsb-stickybanner { display: none !important; }  /* (rien à régler) */
 }
 
+/* Réduit le H1 de la page d'accueil (autrement trop grand avec certains thèmes). */
 .home .page-hero h1,
 .home .entry-header h1,
-.home .generate-page-header h1 { font-size: 1.8rem !important; }
+.home .generate-page-header h1 {
+  /* 👉 MODIFIABLE : 1.8rem = taille du H1 de la page d'accueil. */
+  font-size: 1.8rem !important;
+}
 
 
 /* ==========================================================================
-   7. GRILLE D'ÉVÉNEMENTS (page principale — aperçu 8 événements)
+   7. GRILLE D'ÉVÉNEMENTS (page principale — aperçu des prochains événements)
    --------------------------------------------------------------------------
-   Classes "jc-" (Joliette en Commun) pour éviter tout conflit avec le thème
-   ou les plugins. Le HTML est généré par synchroniser-timeline.js.
+   Classes préfixées "jc-" (Joliette en Commun) pour éviter tout conflit
+   avec le thème ou les plugins. Le HTML est généré par Code.js
+   (synchroniserTimelineCitoyenne). Modifier une classe ici = vérifier
+   qu'elle est bien générée dans Code.js.
    ========================================================================== */
 
-/* Grille responsive : 1 colonne mobile → 2 tablette → 4 desktop. */
+/* Liste des tuiles — grille CSS responsive : 1 colonne → 2 → 4. */
 .jc-events-grid-layout .jc-timeline {
   display: grid !important;
-  grid-template-columns: 1fr !important;
+  grid-template-columns: 1fr !important;  /* mobile : 1 colonne */
+  /* 👉 MODIFIABLE : 24px = espace entre les tuiles. */
   gap: 24px !important;
-  list-style: none !important;
+  list-style: none !important;            /* (rien à régler) supprime les puces de <ol> */
   padding: 0 !important;
+  /* 👉 MODIFIABLE : 40px = espace sous la grille avant le forum. */
   margin: 0 0 40px 0 !important;
 }
 
+/* Tablette (≥ 640px) : 2 colonnes. */
 @media (min-width: 640px) {
+  /* 👉 MODIFIABLE : 640px = largeur à partir de laquelle on passe à 2 colonnes. */
   .jc-events-grid-layout .jc-timeline {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
+/* Desktop (≥ 1024px) : 4 colonnes. */
 @media (min-width: 1024px) {
+  /* 👉 MODIFIABLE : 1024px = largeur à partir de laquelle on passe à 4 colonnes. */
   .jc-events-grid-layout .jc-timeline {
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   }
 }
 
+/* Chaque tuile d'événement. */
 .jc-events-grid-layout .jc-timeline-item {
+  /* 👉 MODIFIABLE : #fcfbf7 = fond légèrement crème des tuiles. */
   background-color: #fcfbf7 !important;
   border: 1px solid #e2ded2 !important;
+  /* 👉 MODIFIABLE : 12px = arrondi des tuiles. */
   border-radius: 12px !important;
+  /* 👉 MODIFIABLE : 20px = espace intérieur des tuiles. */
   padding: 20px !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-start !important;
-  position: relative !important;   /* nécessaire pour la case à cocher en position absolute */
+  position: relative !important;  /* (rien à régler) requis pour la case à cocher cachée */
+  /* 👉 MODIFIABLE : 0.04 = opacité de l'ombre sous les tuiles (0 = pas d'ombre). */
   box-shadow: 0 4px 6px rgba(0,0,0,0.04) !important;
-  min-width: 0 !important;
+  min-width: 0 !important;        /* (rien à régler) empêche le débordement en grille */
 }
 
-/* Cache les "points" de l'ancienne timeline verticale (le HTML en génère encore). */
+/* Cache les points de l'ancienne timeline verticale (encore générés par le HTML). (rien à régler) */
 .jc-events-grid-layout .jc-timeline-dot { display: none !important; }
 
+/* Date et heure en haut de chaque tuile. */
 .jc-events-grid-layout .jc-timeline-time {
   display: block !important;
+  /* 👉 MODIFIABLE : 0.85rem = taille de la date. */
   font-size: 0.85rem !important;
   font-weight: 700 !important;
+  /* 👉 MODIFIABLE : #c8963e = couleur bronze des dates. */
   color: #c8963e !important;
-  text-transform: uppercase !important;
+  text-transform: uppercase !important;  /* (rien à régler) majuscules automatiques */
+  /* 👉 MODIFIABLE : 8px = espace sous la date avant le titre. */
   margin-bottom: 8px !important;
 }
 
+/* Titre de l'événement. */
 .jc-events-grid-layout .jc-timeline-title {
+  /* 👉 MODIFIABLE : 1.2rem = taille du titre d'événement. */
   font-size: 1.2rem !important;
+  /* 👉 MODIFIABLE : #1e3d2a = couleur du titre (vert très foncé). */
   color: #1e3d2a !important;
   margin: 0 0 12px 0 !important;
   font-weight: 700 !important;
   line-height: 1.3 !important;
 }
 
-/* height: 160px fixe = toutes les photos ont la même hauteur.
-   object-fit: cover = recadrage automatique centré sans déformation. */
+/* Photo de l'événement — hauteur fixe identique pour toutes les photos. */
 .jc-events-grid-layout .jc-timeline-img {
   width: 100% !important;
+  /* 👉 MODIFIABLE : 160px = hauteur des photos. Même valeur pour toutes les tuiles. */
   height: 160px !important;
-  object-fit: cover !important;
+  object-fit: cover !important;   /* (rien à régler) recadrage centré sans déformation */
+  /* 👉 MODIFIABLE : 6px = arrondi des photos. */
   border-radius: 6px !important;
   margin-bottom: 12px !important;
 }
 
-/* --- Voir plus / Voir moins (partagé grille + calendrier) -------------- */
-/* Mécanisme : une <input type="checkbox"> cachée + un <label> cliquable.
-   Cliquer le label coche/décoche la case → :checked active les règles ci-dessous.
-   position: absolute + opacity: 0 = invisible mais accessible au clavier
-   (contrairement à display: none qui bloquerait la navigation clavier). */
+/* ----- Mécanisme "Voir plus / Voir moins" (partagé grille + calendrier) -----
+   Une <input type="checkbox"> cachée est associée à un <label> cliquable.
+   Cliquer le label coche/décoche la case → le sélecteur CSS :checked réagit.
+   position: absolute + opacity: 0 = invisible MAIS accessible au clavier
+   (display: none bloquerait la navigation clavier — à éviter). */
 .jc-toggle-input {
-  position: absolute !important;
+  position: absolute !important;   /* (rien à régler) sorti du flux mais focusable */
   opacity: 0 !important;
   pointer-events: none !important;
 }
 
-/* -webkit-line-clamp : technique pour couper le texte après N lignes et ajouter "…".
+/* Description : coupée à 2 lignes par défaut.
+   -webkit-line-clamp : technique pour couper après N lignes avec "…".
    Ces 3 propriétés ensemble sont obligatoires — aucune ne fonctionne seule. */
 .jc-timeline-desc {
   display: -webkit-box !important;
+  /* 👉 MODIFIABLE : 2 = nombre de lignes visibles avant coupure. */
   -webkit-line-clamp: 2 !important;
-  -webkit-box-orient: vertical !important;
+  -webkit-box-orient: vertical !important;  /* (rien à régler) direction de coupure */
   overflow: hidden !important;
   margin: 4px 0 8px 0 !important;
+  /* 👉 MODIFIABLE : 0.9rem = taille du texte de description. */
   font-size: 0.9rem !important;
+  /* 👉 MODIFIABLE : #333 = couleur du texte de description. */
   color: #333 !important;
 }
-/* ~ = sélecteur "frère général" : s'applique aux éléments qui SUIVENT .jc-toggle-input.
-   :checked = quand la case est cochée. unset annule la coupure → tout s'affiche. */
+/* ~ = sélecteur "frère général" → s'active quand la case est cochée.
+   unset annule la coupure → la description s'affiche en entier. (rien à régler) */
 .jc-toggle-input:checked ~ .jc-timeline-desc {
   -webkit-line-clamp: unset !important;
   overflow: visible !important;
 }
 
-/* Méta courte : coût + adresse (vue réduite) */
+/* Méta courte (coût + adresse) : sur une seule ligne tronquée. */
 .jc-meta-court {
+  /* 👉 MODIFIABLE : 0.85rem = taille de la méta courte. */
   font-size: 0.85rem !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur de la méta courte. */
   color: #2d5a3d !important;
   margin-bottom: 8px !important;
-  white-space: nowrap !important;
+  white-space: nowrap !important;   /* (rien à régler) force sur une seule ligne */
   overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  text-overflow: ellipsis !important;  /* (rien à régler) ajoute "…" si trop long */
 }
+/* Masquée quand étendu (remplacée par la méta complète). (rien à régler) */
 .jc-toggle-input:checked ~ .jc-meta-court { display: none !important; }
 
-/* Méta complète : cachée par défaut, visible quand étendu */
+/* Méta complète (coût + lieu + organisateur) : cachée, affichée après expansion. */
 .jc-meta-complet { display: none !important; }
 .jc-toggle-input:checked ~ .jc-meta-complet {
   display: block !important;
+  /* 👉 MODIFIABLE : 0.85rem = taille de la méta complète. */
   font-size: 0.85rem !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur de la méta complète. */
   color: #2d5a3d !important;
   line-height: 1.6 !important;
   margin-bottom: 8px !important;
 }
 
-/* Le texte "Voir plus ➔" / "Voir moins ↑" est injecté par ::before
-   (pas dans le HTML) pour rester facile à changer ici. */
+/* Lien "Voir plus" / "Voir moins" — texte injecté par ::before (pas dans le HTML). */
 .jc-toggle-label {
   display: inline-block !important;
   cursor: pointer !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du lien "Voir plus". */
   color: #2d5a3d !important;
   font-weight: 600 !important;
+  /* 👉 MODIFIABLE : 0.85rem = taille du lien "Voir plus". */
   font-size: 0.85rem !important;
   margin-top: 4px !important;
 }
+/* 👉 MODIFIABLE : "Voir plus \2192" = texte affiché. \2192 = flèche →. */
 .jc-toggle-label::before { content: "Voir plus \2192"; }
+/* 👉 MODIFIABLE : "Voir moins \2191" = texte quand la tuile est étendue. \2191 = flèche ↑. */
 .jc-toggle-input:checked ~ .jc-card-footer .jc-toggle-label::before { content: "Voir moins \2191"; }
 
-/* :focus-visible = contour uniquement à la navigation clavier, pas à la souris. */
+/* Contour visible uniquement en navigation clavier (pas au clic souris). (rien à régler) */
 .jc-toggle-label:focus-visible {
+  /* 👉 MODIFIABLE : 2px = épaisseur du contour de focus clavier. */
   outline: 2px solid #2d5a3d !important;
   outline-offset: 2px !important;
 }
 
-/* Pied de carte : label Voir plus + bouton calendrier côte à côte */
+/* Pied de carte : "Voir plus" à gauche, bouton calendrier à droite. */
 .jc-card-footer {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
+  /* 👉 MODIFIABLE : 8px = espace entre "Voir plus" et le bouton calendrier. */
   gap: 8px !important;
-  margin-top: auto !important;
+  margin-top: auto !important;  /* (rien à régler) pousse le pied vers le bas de la tuile */
   padding-top: 8px !important;
 }
 
-/* Bouton add-to-calendar — variables CSS du shadow DOM (web component).
-   Ces propriétés personnalisées sont lues par le composant <add-to-calendar-button>. */
+/* Variables CSS du composant web <add-to-calendar-button> (shadow DOM).
+   Ces propriétés personnalisées sont lues par le composant lui-même. */
 add-to-calendar-button {
+  /* 👉 MODIFIABLE : fond de la liste déroulante des services calendrier. */
   --list-background: #ffffff;
+  /* 👉 MODIFIABLE : fond au survol dans la liste déroulante. */
   --list-hover-background: #eaf4ea;
+  /* 👉 MODIFIABLE : couleur du texte dans la liste déroulante. */
   --list-text: #1e3d2a;
   --list-hover-text: #1e3d2a;
+  /* 👉 MODIFIABLE : couleur de la bordure de la liste déroulante. */
   --list-border: #c8dfc8;
 }
 
-/* --- Forum + sondage côte à côte ---------------------------------------- */
+/* ----- Forum + sondage natifs côte à côte (section d'accueil) ----- */
 
+/* Rangée forum/sondage : colonne sur mobile, ligne sur desktop. */
 .jc-native-footer-row {
   display: flex !important;
   flex-direction: column !important;
+  /* 👉 MODIFIABLE : 32px = espace entre forum et sondage sur mobile. */
   gap: 32px !important;
+  /* 👉 MODIFIABLE : 50px = espace au-dessus de la section forum/sondage. */
   margin-top: 50px !important;
   border-top: 1px solid #e2ded2 !important;
+  /* 👉 MODIFIABLE : 40px = espace intérieur au-dessus du séparateur. */
   padding-top: 40px !important;
 }
 
+/* Sur desktop : forum et sondage côte à côte. */
 @media (min-width: 1024px) {
   .jc-native-footer-row {
     flex-direction: row !important;
     align-items: flex-start !important;
   }
   .jc-native-forum-col {
+    /* 👉 MODIFIABLE : 62% = largeur du forum sur desktop. */
     flex: 1 1 62% !important;
     min-width: 0 !important;
   }
   .jc-native-poll-col {
+    /* 👉 MODIFIABLE : 34% = largeur du sondage sur desktop. */
     flex: 1 1 34% !important;
     min-width: 0 !important;
     background-color: #ffffff !important;
+    /* 👉 MODIFIABLE : 24px = espace intérieur du bloc sondage. */
     padding: 24px !important;
     border: 1px solid #e2ded2 !important;
     border-radius: 12px !important;
@@ -516,18 +675,28 @@ add-to-calendar-button {
 
 
 /* ==========================================================================
-   7B. CALENDRIER COMPLET — mêmes cartes que la page principale, par mois
+   7B. CALENDRIER COMPLET — tous les événements groupés par mois
+   --------------------------------------------------------------------------
+   Page dédiée accessible via le bouton "Aller au calendrier".
+   Mêmes tuiles que la page principale, organisées par sections mensuelles.
    ========================================================================== */
 
+/* Conteneur principal du calendrier complet. */
 .jc-calendrier-complet {
+  /* 👉 MODIFIABLE : 1200px = largeur maximale du calendrier. */
   max-width: 1200px !important;
-  margin: 0 auto !important;
+  margin: 0 auto !important;    /* (rien à régler) centré horizontalement */
   padding: 0 16px !important;
 }
 
-/* Lien retour */
-.jc-cal-header { margin-bottom: 28px !important; }
+/* Zone du lien "← Retour" en haut du calendrier. */
+.jc-cal-header {
+  /* 👉 MODIFIABLE : 28px = espace sous le lien retour. */
+  margin-bottom: 28px !important;
+}
+/* Lien "← Retour aux événements". */
 .jc-retour-btn {
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du lien retour. */
   color: #2d5a3d !important;
   text-decoration: none !important;
   font-weight: 600 !important;
@@ -535,112 +704,143 @@ add-to-calendar-button {
 }
 .jc-retour-btn:hover { text-decoration: underline !important; color: #1e3d2a !important; }
 
-/* En-tête de mois */
-.jc-cal-mois-groupe { margin-bottom: 44px !important; }
+/* Groupe mensuel (ex : "Juin 2026" + ses tuiles). */
+.jc-cal-mois-groupe {
+  /* 👉 MODIFIABLE : 44px = espace entre deux mois. */
+  margin-bottom: 44px !important;
+}
+/* Titre du mois (ex : "Juin 2026"). */
 .jc-cal-mois-titre {
+  /* 👉 MODIFIABLE : 1.4rem = taille du titre de mois. */
   font-size: 1.4rem !important;
   font-weight: 800 !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du titre de mois. */
   color: #2d5a3d !important;
+  /* 👉 MODIFIABLE : 2px solid #c8dfc8 = ligne sous le titre de mois. */
   border-bottom: 2px solid #c8dfc8 !important;
   padding-bottom: 8px !important;
   margin: 0 0 20px 0 !important;
-  text-transform: capitalize !important;
+  text-transform: capitalize !important;  /* (rien à régler) 1re lettre en majuscule */
 }
 
-/* Message si aucun événement */
+/* Message affiché si aucun événement n'est à venir. */
 .jc-cal-vide {
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du message "aucun événement". */
   color: #2d5a3d !important;
   font-style: italic !important;
   text-align: center !important;
   padding: 40px 0 !important;
 }
 
-/* IMPORTANT : sur le calendrier complet, NE PAS masquer les événements
-   après le 4e sur mobile (ce masquage est réservé à l'aperçu de la page
-   principale qui a un bouton "Voir plus"). */
+/* Sur le calendrier complet, on affiche TOUS les événements même sur mobile —
+   le masquage nth-child(n+5) est réservé à la page principale (bouton "Voir plus"). */
 @media (max-width: 1023px) {
   .jc-calendrier-complet .jc-events-grid-layout .jc-timeline .jc-timeline-item:nth-child(n+5) {
-    display: flex !important;
+    display: flex !important;   /* (rien à régler) annule le masquage de la section 4 */
   }
 }
 
 
 /* ==========================================================================
-   7C. EXPOSITIONS — liste compacte (calendrier complet)
+   7C. EXPOSITIONS — bloc compact en haut du calendrier
+   --------------------------------------------------------------------------
+   Boîte verte listant toutes les expositions en cours avec vignettes.
+   Affichée avant les événements mensuels sur la page calendrier.
    ========================================================================== */
 
+/* Boîte d'encadré vert des expositions. */
 .jc-expo-compacte {
+  /* 👉 MODIFIABLE : #d6e6d6 = fond vert clair du bloc expositions. */
   background-color: #d6e6d6 !important;
   border: 1px solid #c8dfc8 !important;
+  /* 👉 MODIFIABLE : 4px = épaisseur de la barre verte à gauche du bloc. */
   border-left: 4px solid #2d5a3d !important;
   border-radius: 12px !important;
+  /* 👉 MODIFIABLE : 20px/24px = espace intérieur du bloc (haut/bas, gauche/droite). */
   padding: 20px 24px !important;
+  /* 👉 MODIFIABLE : 36px = espace sous le bloc expositions avant les mois. */
   margin-bottom: 36px !important;
 }
 
+/* Titre "🎨 Expositions en cours". */
 .jc-expo-titre {
+  /* 👉 MODIFIABLE : 1.2rem = taille du titre du bloc expositions. */
   font-size: 1.2rem !important;
   font-weight: 800 !important;
   color: #2d5a3d !important;
   margin: 0 0 16px 0 !important;
 }
 
+/* Liste des expositions. */
 .jc-expo-liste {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 0 16px 0 !important;
 }
 
+/* Sur tablette : 2 colonnes pour la liste des expositions. */
 @media (min-width: 768px) {
   .jc-expo-liste {
+    /* 👉 MODIFIABLE : 2 = nombre de colonnes de la liste. 1 = liste simple. */
     column-count: 2 !important;
+    /* 👉 MODIFIABLE : 40px = espace entre les deux colonnes. */
     column-gap: 40px !important;
   }
 }
 
+/* Un item d'exposition (vignette + info). */
 .jc-expo-item {
   display: flex !important;
   align-items: center !important;
+  /* 👉 MODIFIABLE : 12px = espace entre la vignette et le texte. */
   gap: 12px !important;
   padding: 10px 0 !important;
+  /* 👉 MODIFIABLE : #c8dfc8 = couleur du séparateur entre items. */
   border-bottom: 1px solid #c8dfc8 !important;
   font-size: 0.95rem !important;
   color: #1e3d2a !important;
-  break-inside: avoid !important;
+  break-inside: avoid !important;              /* (rien à régler) évite la coupure en 2 colonnes */
   -webkit-column-break-inside: avoid !important;
 }
+/* Dernier item sans séparateur. (rien à régler) */
+.jc-expo-item:last-child { border-bottom: none !important; }
 
-.jc-expo-item:last-child {
-  border-bottom: none !important;
-}
-
+/* Vignette de l'exposition (si une image est fournie). */
 .jc-expo-vignette {
+  /* 👉 MODIFIABLE : 60px = taille de la vignette. Changer les deux valeurs. */
   width: 60px !important;
   height: 60px !important;
   object-fit: cover !important;
+  /* 👉 MODIFIABLE : 8px = arrondi de la vignette. */
   border-radius: 8px !important;
   flex-shrink: 0 !important;
 }
 
+/* Vignette de remplacement si pas d'image (fond coloré + emoji). */
 .jc-expo-vignette-vide {
   width: 60px !important;
   height: 60px !important;
   flex-shrink: 0 !important;
+  /* 👉 MODIFIABLE : #c8dfc8 = fond de la vignette vide. */
   background-color: #c8dfc8 !important;
   border-radius: 8px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  /* 👉 MODIFIABLE : 1.4rem = taille de l'emoji dans la vignette vide. */
   font-size: 1.4rem !important;
 }
 
+/* Bloc texte (titre + date) à droite de la vignette. (rien à régler) */
 .jc-expo-info {
   display: flex !important;
   flex-direction: column !important;
   gap: 4px !important;
 }
 
+/* Date de fin de l'exposition ("jusqu'au 15 juin 2026"). */
 .jc-expo-date {
+  /* 👉 MODIFIABLE : #c8963e = couleur bronze de la date de fin. */
   color: #c8963e !important;
   font-size: 0.85rem !important;
   font-weight: 500 !important;
@@ -648,17 +848,21 @@ add-to-calendar-button {
 
 
 /* ==========================================================================
-   7D. FORUM wpForo — titres complets
+   7D. FORUM wpForo — titres des sujets complets
    --------------------------------------------------------------------------
-   Astuce CSS : wpForo tronque le titre du dernier sujet côté serveur.
-   Le titre COMPLET est disponible dans l'attribut HTML "title" du lien.
-   On masque le texte tronqué (font-size: 0) et on affiche le titre complet
-   via ::after { content: attr(title) } — sans JavaScript, sans modifier le HTML.
+   Astuce CSS : wpForo tronque le titre du dernier sujet côté serveur, mais
+   le titre COMPLET est dans l'attribut HTML title="" du lien.
+   Solution : masquer le texte tronqué (font-size: 0) et afficher le titre
+   complet via ::after { content: attr(title) } — aucun JavaScript, aucune
+   modification du HTML WordPress.
    ========================================================================== */
+
+/* Conteneur flex du forum — empêche le débordement. (rien à régler) */
 .wpforo-forum-info {
   min-width: 0 !important;
   flex: 1 !important;
 }
+/* Titre du forum — autorise le retour à la ligne. (rien à régler) */
 .wpforo-forum-title {
   padding: 5px 5px 4px 5px !important;
   margin: 0 0 4px 0 !important;
@@ -672,26 +876,24 @@ add-to-calendar-button {
   text-overflow: unset !important;
 }
 
-/* Supprimer l'espace vide généré par <li>&nbsp;</li> dans la description */
+/* Supprime l'espace vide généré par les balises <li>&nbsp;</li> dans la description. (rien à régler) */
 .wpforo-forum-description ul {
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
 }
-.wpforo-forum-description li {
-  display: none !important;
-}
+.wpforo-forum-description li { display: none !important; }
 
-/* Étiquette "Sujets récents" */
+/* Étiquette "Sujets récents" — légère mise en forme. */
 .wpfcl-5 {
+  /* 👉 MODIFIABLE : 4px/8px = espace intérieur de l'étiquette "Sujets récents". */
   padding: 4px 8px !important;
 }
 
-/* Icônes (épinglé, répondu, non-répondu) avant chaque titre de sujet */
-.wpforo-last-topic-title i {
-  display: none !important;
-}
+/* Cache les icônes (épinglé, répondu, etc.) avant les titres. (rien à régler) */
+.wpforo-last-topic-title i { display: none !important; }
 
+/* Conteneur du titre du dernier sujet. (rien à régler) */
 .wpforo-last-topic-title {
   white-space: normal !important;
   overflow: visible !important;
@@ -699,14 +901,17 @@ add-to-calendar-button {
   flex: 1 !important;
   word-break: break-word !important;
 }
+/* Masque le texte tronqué fourni par wpForo (ex : "...cou..."). (rien à régler) */
 .wpforo-last-topic-title a {
-  font-size: 0 !important;          /* masque le texte tronqué "...cou..." */
+  font-size: 0 !important;
   white-space: normal !important;
   line-height: 1.4 !important;
   display: block !important;
 }
+/* Affiche le titre complet depuis l'attribut title="" du lien. (rien à régler) */
 .wpforo-last-topic-title a::after {
-  content: attr(title);             /* lit l'attribut title= et l'affiche comme texte */
+  content: attr(title);          /* lit title="..." et l'affiche comme texte */
+  /* 👉 MODIFIABLE : 0.95rem = taille du titre de sujet dans le forum. */
   font-size: 0.95rem !important;
   font-weight: inherit !important;
   white-space: normal !important;
@@ -716,11 +921,18 @@ add-to-calendar-button {
 
 /* ==========================================================================
    8. RÈGLES MOBILES (≤ 768 px)
+   --------------------------------------------------------------------------
+   Ces règles s'appliquent UNIQUEMENT sur les petits écrans (téléphones).
+   Elles réorganisent l'en-tête en colonne et récupèrent les espaces perdus.
    ========================================================================== */
+
 @media (max-width: 768px) {
+  /* 👉 MODIFIABLE : 768px = largeur en dessous de laquelle les règles mobiles s'activent. */
+
+  /* Cache la navigation principale (gérée par le menu hamburger du thème). (rien à régler) */
   .main-navigation { display: none !important; }
 
-  /* Forum : récupérer l'espace perdu sur les côtés */
+  /* Forum : supprime les marges latérales pour utiliser toute la largeur. (rien à régler) */
   #wpforo-wrap, #wpforo, .wpforo-wrap {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -732,8 +944,7 @@ add-to-calendar-button {
     padding-right: 0 !important;
   }
 
-  /* Supprimer les marges/paddings latéraux du conteneur article pour que le forum
-     wpForo occupe toute la largeur sans débordement sur mobile */
+  /* Supprime les marges du conteneur article pour que wpForo prenne toute la largeur. (rien à régler) */
   .inside-article,
   .entry-content {
     padding-left: 0 !important;
@@ -742,12 +953,14 @@ add-to-calendar-button {
     margin-right: 0 !important;
   }
 
-  /* En-tête empilé verticalement sur mobile (logo au-dessus, titre en-dessous). */
+  /* En-tête : empile logo et texte verticalement. */
   .inside-header {
     flex-direction: column !important;
     justify-content: center !important;
+    /* 👉 MODIFIABLE : 16px = espace intérieur de l'en-tête sur mobile. */
     padding: 16px !important;
   }
+  /* Logo + texte centrés. (rien à régler) */
   .site-branding-container {
     flex-direction: column !important;
     align-items: center !important;
@@ -755,17 +968,18 @@ add-to-calendar-button {
   }
   img.header-image.is-logo-image {
     margin-right: 0 !important;
+    /* 👉 MODIFIABLE : 10px = espace entre le logo et le titre sur mobile. */
     margin-bottom: 10px !important;
   }
   .site-branding { align-items: center !important; }
   p.site-description { text-align: center !important; }
 
-  /* Cache les résultats du sondage sur mobile (trop chargé).
-     L'utilisateur voit les options et peut voter sans voir les stats. */
+  /* Cache les résultats du sondage sur mobile — l'utilisateur peut voter
+     mais ne voit pas les statistiques (trop encombrant sur petit écran). */
   .forminator-poll .forminator-radio.forminator-disabled,
   .forminator-poll .forminator-poll-body,
   .forminator-poll .forminator-poll-footer {
-    display: none !important;
+    display: none !important;   /* (rien à régler) */
   }
 }
 
@@ -773,18 +987,25 @@ add-to-calendar-button {
 /* ==========================================================================
    9. BABILLARD COMMUNAUTAIRE
    --------------------------------------------------------------------------
-   Classes générées par synchroniserBabillard() et genererCarteBabillard().
+   Grille d'annonces des résidents. HTML généré par Code.js
+   (synchroniserBabillard + genererCarteBabillard).
    ========================================================================== */
 
-/* Bouton publier — même style que les boutons du site */
+/* Espace sous l'en-tête du babillard (bouton "Publier une annonce"). */
 .jc-bab-header {
+  /* 👉 MODIFIABLE : 20px = espace sous le bouton "Publier une annonce". */
   margin-bottom: 20px !important;
 }
+
+/* Bouton "Publier une annonce". */
 .jc-bab-publier {
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du bouton "Publier". */
   background-color: #2d5a3d !important;
   color: #faf6f0 !important;
   border: none !important;
+  /* 👉 MODIFIABLE : 6px = arrondi du bouton "Publier". */
   border-radius: 6px !important;
+  /* 👉 MODIFIABLE : 10px/18px = taille du bouton "Publier". */
   padding: 10px 18px !important;
   font-size: 0.9rem !important;
   font-weight: 600 !important;
@@ -794,14 +1015,16 @@ add-to-calendar-button {
   transition: background-color 0.2s ease !important;
 }
 .jc-bab-publier:hover {
+  /* 👉 MODIFIABLE : #1e3d2a = couleur de survol du bouton "Publier". */
   background-color: #1e3d2a !important;
   color: #faf6f0 !important;
 }
 
-/* Grille responsive */
+/* Grille des cartes d'annonces : 1 colonne mobile → 2 tablette → 3 desktop. */
 .jc-bab-grid {
   display: grid !important;
   grid-template-columns: 1fr !important;
+  /* 👉 MODIFIABLE : 16px = espace entre les cartes d'annonces. */
   gap: 16px !important;
 }
 @media (min-width: 640px) {
@@ -811,45 +1034,58 @@ add-to-calendar-button {
 }
 @media (min-width: 1024px) {
   .jc-bab-grid {
+    /* 👉 MODIFIABLE : 3 = nombre de colonnes sur desktop. Mettre 4 pour plus de cartes. */
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 }
 
-/* Carte */
+/* Carte d'annonce individuelle. */
 .jc-bab-card {
+  /* 👉 MODIFIABLE : #fcfbf7 = fond légèrement crème des cartes. */
   background-color: #fcfbf7 !important;
   border: 1px solid #e2ded2 !important;
+  /* 👉 MODIFIABLE : 12px = arrondi des cartes d'annonce. */
   border-radius: 12px !important;
+  /* 👉 MODIFIABLE : 18px = espace intérieur des cartes d'annonce. */
   padding: 18px !important;
   display: flex !important;
   flex-direction: column !important;
+  /* 👉 MODIFIABLE : 10px = espace entre les éléments internes de la carte. */
   gap: 10px !important;
 }
 
-/* Badge — couleur par type */
+/* Badge de type d'annonce (Annonce / Je cherche / J'offre). */
 .jc-bab-badge {
   display: inline-block !important;
   font-size: 0.75rem !important;
   font-weight: 700 !important;
   padding: 3px 10px !important;
+  /* 👉 MODIFIABLE : 20px = arrondi du badge (pilule). */
   border-radius: 20px !important;
   align-self: flex-start !important;
 }
+/* Badge "Annonce" — fond beige/brun. */
 .jc-bab-annonce .jc-bab-badge {
+  /* 👉 MODIFIABLE : couleurs du badge "Annonce" (fond/texte). */
   background-color: #f5e6cc !important;
   color: #8a5a14 !important;
 }
+/* Badge "Je cherche de l'aide" — fond rouge/brique. */
 .jc-bab-cherche .jc-bab-badge {
+  /* 👉 MODIFIABLE : couleurs du badge "Je cherche" (fond/texte). */
   background-color: #f0dcd4 !important;
   color: #8a3d28 !important;
 }
+/* Badge "J'offre de l'aide" — fond vert clair. */
 .jc-bab-offre .jc-bab-badge {
+  /* 👉 MODIFIABLE : couleurs du badge "J'offre" (fond/texte). */
   background-color: #d6e6d6 !important;
   color: #1e3d2a !important;
 }
 
-/* Titre */
+/* Titre de l'annonce. */
 .jc-bab-titre {
+  /* 👉 MODIFIABLE : 1.1rem = taille du titre de l'annonce. */
   font-size: 1.1rem !important;
   font-weight: 700 !important;
   color: #1e3d2a !important;
@@ -857,15 +1093,17 @@ add-to-calendar-button {
   line-height: 1.3 !important;
 }
 
-/* Message */
+/* Corps du message de l'annonce. */
 .jc-bab-message {
+  /* 👉 MODIFIABLE : 0.9rem = taille du texte du message. */
   font-size: 0.9rem !important;
+  /* 👉 MODIFIABLE : #444 = couleur du texte du message. */
   color: #444 !important;
   margin: 0 !important;
-  flex-grow: 1 !important;
+  flex-grow: 1 !important;  /* (rien à régler) occupe l'espace restant */
 }
 
-/* Pied de carte */
+/* Pied de carte : méta à gauche, lien "Répondre" à droite. (rien à régler) */
 .jc-bab-footer {
   display: flex !important;
   justify-content: space-between !important;
@@ -876,16 +1114,19 @@ add-to-calendar-button {
   margin-top: auto !important;
 }
 
-/* Méta */
+/* Méta de la carte (prénom · secteur · date). */
 .jc-bab-meta {
+  /* 👉 MODIFIABLE : 0.8rem = taille de la méta. */
   font-size: 0.8rem !important;
+  /* 👉 MODIFIABLE : #888 = couleur grise de la méta. */
   color: #888 !important;
 }
 
-/* Lien répondre */
+/* Lien "Répondre" (mailto:). */
 .jc-bab-repondre {
   font-size: 0.85rem !important;
   font-weight: 600 !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du lien "Répondre". */
   color: #2d5a3d !important;
   text-decoration: none !important;
   white-space: nowrap !important;
@@ -895,26 +1136,35 @@ add-to-calendar-button {
   color: #1e3d2a !important;
 }
 
-/* --- 9b. Babillard : aperçu sur la page d'accueil --- */
 
-/* Mobile : carousel swipe (scroll horizontal, accrochage de carte) */
+/* --- 9b. Babillard : aperçu sur la page d'accueil ---
+   Carousel horizontal sur mobile, grille wrap sur tablette/desktop. */
+
+/* Mobile : scroll horizontal avec accrochage de carte (snap). */
 .jc-home-annonces {
   display: flex !important;
+  /* 👉 MODIFIABLE : 16px = espace entre les cartes dans le carousel. */
   gap: 16px !important;
-  overflow-x: auto !important;
-  scroll-snap-type: x mandatory !important;
+  overflow-x: auto !important;           /* (rien à régler) active le scroll horizontal */
+  scroll-snap-type: x mandatory !important;  /* (rien à régler) accrochage de carte */
   -webkit-overflow-scrolling: touch !important;
+  /* 👉 MODIFIABLE : 16px = marge gauche/droite du carousel (décolle la 1re carte). */
   padding: 0 16px 8px !important;
-  scroll-padding-left: 16px !important;
-  scrollbar-width: none !important;
+  scroll-padding-left: 16px !important;  /* (rien à régler) conserve la marge au snap */
+  scrollbar-width: none !important;      /* (rien à régler) cache la barre de défilement */
 }
+/* Cache la barre de défilement sur WebKit (Safari/Chrome). (rien à régler) */
 .jc-home-annonces::-webkit-scrollbar { display: none !important; }
+
+/* Chaque carte dans le carousel mobile. */
 .jc-home-annonces .jc-bab-card {
-  flex: 0 0 78% !important;        /* 78% = une carte + un aperçu de la suivante */
-  scroll-snap-align: start !important;
+  /* 👉 MODIFIABLE : 78% = largeur d'une carte en carousel (laisse un aperçu de la suivante).
+     Baisser à 60% pour voir 1,5 carte à la fois. */
+  flex: 0 0 78% !important;
+  scroll-snap-align: start !important;   /* (rien à régler) accrochage au bord gauche */
 }
 
-/* Tablette + desktop : cartes de largeur fixe, alignées à gauche (pas d'étirement) */
+/* Tablette + desktop : grille flex-wrap, cartes de largeur fixe. */
 @media (min-width: 768px) {
   .jc-home-annonces {
     display: flex !important;
@@ -923,18 +1173,22 @@ add-to-calendar-button {
     scroll-snap-type: none !important;
   }
   .jc-home-annonces .jc-bab-card {
+    /* 👉 MODIFIABLE : 260px = largeur idéale d'une carte sur tablette/desktop.
+       300px = largeur maximale. Augmenter pour des cartes plus larges. */
     flex: 0 1 260px !important;
     max-width: 300px !important;
   }
 }
 
-/* Desktop : max 4 annonces visibles */
+/* Desktop : cache les cartes à partir de la 5e (max 4 visibles sur l'accueil). */
 @media (min-width: 1024px) {
+  /* 👉 MODIFIABLE : n+5 = cache à partir du 5e. n+4 = seulement 3 cartes, n+6 = 5 cartes. */
   .jc-home-annonces .jc-bab-card:nth-child(n+5) { display: none !important; }
 }
 
-/* Pied : bouton vers le babillard */
+/* Pied de la section annonces — bouton "Voir toutes les annonces". */
 .jc-home-footer {
   text-align: center !important;
+  /* 👉 MODIFIABLE : 20px = espace au-dessus du bouton "Voir toutes les annonces". */
   margin-top: 20px !important;
 }
