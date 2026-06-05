@@ -1311,43 +1311,49 @@ add-to-calendar-button {
   .jc-home-annonces .jc-bab-card:nth-child(n+5) { display: none !important; }
 }
 
-/* Pied du babillard (accueil) : deux boutons côte à côte, centrés.
-   flex-wrap permet de passer à la ligne si l'écran est trop étroit. */
+/* Boutons du babillard (accueil) : outline, alignés à gauche sous le titre.
+   justify-content: flex-start = bord gauche (align avec .jc-section-titre). */
 .jc-home-footer {
   display: flex !important;
   flex-wrap: wrap !important;
-  justify-content: center !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
   /* 👉 MODIFIABLE : 12px = espace entre les deux boutons. */
   gap: 12px !important;
   /* 👉 MODIFIABLE : 16px = espace sous le titre, 24px = espace avant les cartes. */
   margin: 16px 0 24px !important;
 }
 
-/* Style outline : distingue ces deux boutons des 3 boutons pleins déjà présents
-   (2 événements + 1 sondage). Scopé à .jc-home-footer pour ne PAS affecter
-   .jc-bab-publier plein sur la page /babillard/. */
+/* Style outline : scopé à .jc-home-footer pour ne PAS affecter .jc-bab-publier plein
+   sur la page /babillard/. box-sizing: border-box garantit que la bordure 2px est incluse
+   dans le padding sans faire varier la hauteur selon les navigateurs. (rien à régler) */
 .jc-home-footer .jc-bab-publier,
 .jc-home-footer .jc-bab-voir-tout {
   display: inline-block !important;
+  box-sizing: border-box !important;
   background: transparent !important;
   /* 👉 MODIFIABLE : #2d5a3d = couleur du contour et du texte. */
   color: #2d5a3d !important;
   border: 2px solid #2d5a3d !important;
   /* 👉 MODIFIABLE : 6px = arrondi (cohérent avec les boutons pleins). */
   border-radius: 6px !important;
-  /* 👉 MODIFIABLE : 8px haut/bas + 2px de bordure = même hauteur visuelle que padding: 10px. */
+  /* 👉 MODIFIABLE : 8px haut/bas, 16px gauche/droite. */
   padding: 8px 16px !important;
   font-size: 0.9rem !important;
   font-weight: 600 !important;
+  line-height: 1.4 !important;
   text-decoration: none !important;
   transition: all 0.2s ease !important;  /* (rien à régler) animation fond + texte */
 }
-/* Survol : se remplit de vert, texte crème — miroir inverse des boutons pleins. */
+/* Survol identique pour les deux : remplissage vert, aucun soulignement.
+   text-decoration: none neutralise la règle .jc-bab-voir-tout:hover de la section 9C
+   (spécificité 0,2,1 > 0,1,1 — ce sélecteur gagne même avec !important de part et d'autre). */
 .jc-home-footer .jc-bab-publier:hover,
 .jc-home-footer .jc-bab-voir-tout:hover {
   /* 👉 MODIFIABLE : #2d5a3d = couleur de remplissage au survol. */
   background: #2d5a3d !important;
   color: #faf6f0 !important;
+  text-decoration: none !important;
 }
 
 
