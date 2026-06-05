@@ -203,7 +203,6 @@ html, body,
   padding-top: 20px !important;
 }
 
-
 /* ==========================================================================
    4. BOUTONS — CALENDRIER & RETOUR
    --------------------------------------------------------------------------
@@ -295,22 +294,127 @@ a.gb-text-d96ad459:hover,
 }
 
 
-/* ==========================================================================
+//* ==========================================================================
    5. SONDAGE FORMINATOR
    --------------------------------------------------------------------------
    Style de la boîte de sondage (vote communautaire).
+   Dimensions et apparence alignées sur les cartes d'événements.
    ========================================================================== */
 
-/* Boîte principale du sondage — carte blanche arrondie avec ombre légère. */
+/* Boîte principale du sondage — mêmes dimensions/style qu'une carte événement. */
 .forminator-poll {
-  background: #ffffff !important;
-  /* 👉 MODIFIABLE : 16px = arrondi des coins de la boîte. */
-  border-radius: 16px !important;
-  /* 👉 MODIFIABLE : 26px = espace intérieur de la boîte. */
-  padding: 26px !important;
-  /* 👉 MODIFIABLE : 0.06 = opacité de l'ombre (0 = pas d'ombre, 0.2 = très visible). */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
-  border: 1px solid #eaeaea !important;
+  /* 👉 MODIFIABLE : 280px = largeur (= une carte événement sur desktop). */
+  max-width: 280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;          /* centré */
+  background: #fcfbf7 !important;         /* même fond crème que les cartes */
+  border: 1px solid #e2ded2 !important;   /* même bordure */
+  /* 👉 MODIFIABLE : 12px = arrondi (= cartes événements, était 16px). */
+  border-radius: 12px !important;
+  /* 👉 MODIFIABLE : 20px = espace intérieur (= cartes, était 26px). */
+  padding: 20px !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.04) !important;  /* même ombre légère */
+}
+
+/* Titre de la question du sondage. */
+.forminator-poll .forminator-poll-title {
+  /* 👉 MODIFIABLE : 1.15rem = taille du titre de la question. */
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  /* 👉 MODIFIABLE : 20px = espace sous le titre avant les options. */
+  margin-bottom: 20px !important;
+  line-height: 1.4 !important;
+}
+
+/* Chaque option de réponse (bouton radio). */
+.forminator-poll .forminator-radio {
+  background: #f9fafb !important;
+  border: 1px solid #f3f4f6 !important;
+  /* 👉 MODIFIABLE : 10px = arrondi des options. */
+  border-radius: 10px !important;
+  /* 👉 MODIFIABLE : 12px/14px = espace intérieur des options. */
+  padding: 12px 14px !important;
+  /* 👉 MODIFIABLE : 10px = espace entre deux options. */
+  margin-bottom: 10px !important;
+}
+/* Survol d'une option — légèrement plus foncé. (rien à régler) */
+.forminator-poll .forminator-radio:hover {
+  background: #f3f4f6 !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Bouton "Voter". */
+.forminator-poll .forminator-button-submit {
+  width: 100% !important;                /* (rien à régler) pleine largeur */
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du bouton Voter. */
+  background: #2d5a3d !important;
+  color: #ffffff !important;
+  border: none !important;
+  /* 👉 MODIFIABLE : 8px = arrondi du bouton Voter. */
+  border-radius: 8px !important;
+  /* 👉 MODIFIABLE : 14px = hauteur du bouton Voter. */
+  padding: 14px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin-top: 8px !important;
+  cursor: pointer !important;
+}
+.forminator-poll .forminator-button-submit:hover {
+  /* 👉 MODIFIABLE : #1e3d2a = couleur survol du bouton Voter. */
+  background: #1e3d2a !important;
+}
+
+/* Zone de confirmation après le vote. */
+.forminator-poll .forminator-response-message {
+  /* 👉 MODIFIABLE : #e8f4ec = fond vert très clair du message de confirmation. */
+  background-color: #e8f4ec !important;
+  border: 1px solid #a8d4b4 !important;
+  /* 👉 MODIFIABLE : 4px = épaisseur de la barre verte à gauche du message. */
+  border-left: 4px solid #2d5a3d !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
+}
+
+/* Forminator affiche un message d'erreur en anglais quand on a déjà voté.
+   Astuce : on rend l'original invisible (font-size: 0) et on injecte notre
+   propre texte en français via ::before — sans modifier le HTML WordPress. */
+.forminator-poll .forminator-response-message .forminator-label--forminator-error {
+  font-size: 0 !important;          /* (rien à régler) masque le texte anglais */
+  line-height: 0 !important;
+  color: transparent !important;
+  display: block !important;
+}
+/* Texte français injecté à la place du message d'erreur anglais. */
+.forminator-poll .forminator-response-message .forminator-label--forminator-error::before {
+  /* 👉 MODIFIABLE : changer ce texte pour personnaliser le message "déjà voté". */
+  content: "Vous avez déjà enregistré votre vote. Merci !" !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du texte du message de confirmation. */
+  color: #2d5a3d !important;
+  font-weight: 500 !important;
+  display: block !important;
+}/* ==========================================================================
+   5. SONDAGE FORMINATOR
+   --------------------------------------------------------------------------
+   Style de la boîte de sondage (vote communautaire).
+   Dimensions et apparence alignées sur les cartes d'événements.
+   ========================================================================== */
+
+/* Boîte principale du sondage — mêmes dimensions/style qu'une carte événement. */
+.forminator-poll {
+  /* 👉 MODIFIABLE : 280px = largeur (= une carte événement sur desktop). */
+  max-width: 280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;          /* centré */
+  background: #fcfbf7 !important;         /* même fond crème que les cartes */
+  border: 1px solid #e2ded2 !important;   /* même bordure */
+  /* 👉 MODIFIABLE : 12px = arrondi (= cartes événements, était 16px). */
+  border-radius: 12px !important;
+  /* 👉 MODIFIABLE : 20px = espace intérieur (= cartes, était 26px). */
+  padding: 20px !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.04) !important;  /* même ombre légère */
 }
 
 /* Titre de la question du sondage. */
@@ -393,8 +497,23 @@ a.gb-text-d96ad459:hover,
   font-weight: 500 !important;
   display: block !important;
 }
+/* === Espace superflu autour du sondage === */
 
+/* Masque les <p> décoratifs que WordPress génère avant/après le formulaire. */
+.wp-block-column:has(.forminator-poll) > p {
+  display: none !important;
+}
 
+/* Masque le message de réponse vide (boîte au-dessus du sondage). */
+.forminator-poll .forminator-response-message[aria-hidden="true"] {
+  display: none !important;
+}
+
+/* Annule la marge propre du formulaire. */
+.forminator-poll {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 /* ==========================================================================
    6. ÉLÉMENTS MASQUÉS
    --------------------------------------------------------------------------
@@ -661,7 +780,7 @@ add-to-calendar-button {
     min-width: 0 !important;
   }
   .jc-native-poll-col {
-    /* 👉 MODIFIABLE : 34% = largeur du sondage sur desktop. */
+    /* 👉 MODIFIABLE : 18% = largeur du sondage sur desktop. */
     flex: 1 1 34% !important;
     min-width: 0 !important;
     background-color: #ffffff !important;
@@ -983,7 +1102,13 @@ add-to-calendar-button {
   }
 }
 
-
+/* Sondage : padding réduit sur mobile. */
+@media (max-width: 768px) {
+  .forminator-poll {
+    /* 👉 MODIFIABLE : 12px haut/bas, 16px gauche/droite */
+    padding: 12px 16px !important;
+  }
+}
 /* ==========================================================================
    9. BABILLARD COMMUNAUTAIRE
    --------------------------------------------------------------------------
@@ -1186,9 +1311,112 @@ add-to-calendar-button {
   .jc-home-annonces .jc-bab-card:nth-child(n+5) { display: none !important; }
 }
 
-/* Pied de la section annonces — bouton "Voir toutes les annonces". */
+/* Pied du babillard (accueil) : deux boutons côte à côte, centrés.
+   flex-wrap permet de passer à la ligne si l'écran est trop étroit. */
 .jc-home-footer {
-  text-align: center !important;
-  /* 👉 MODIFIABLE : 20px = espace au-dessus du bouton "Voir toutes les annonces". */
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  /* 👉 MODIFIABLE : 12px = espace entre les deux boutons. */
+  gap: 12px !important;
+  /* 👉 MODIFIABLE : 20px = espace au-dessus des boutons. */
   margin-top: 20px !important;
+}
+
+/* Style outline : distingue ces deux boutons des 3 boutons pleins déjà présents
+   (2 événements + 1 sondage). Scopé à .jc-home-footer pour ne PAS affecter
+   .jc-bab-publier plein sur la page /babillard/. */
+.jc-home-footer .jc-bab-publier,
+.jc-home-footer .jc-bab-voir-tout {
+  display: inline-block !important;
+  background: transparent !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du contour et du texte. */
+  color: #2d5a3d !important;
+  border: 2px solid #2d5a3d !important;
+  /* 👉 MODIFIABLE : 6px = arrondi (cohérent avec les boutons pleins). */
+  border-radius: 6px !important;
+  /* 👉 MODIFIABLE : 8px haut/bas + 2px de bordure = même hauteur visuelle que padding: 10px. */
+  padding: 8px 16px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;  /* (rien à régler) animation fond + texte */
+}
+/* Survol : se remplit de vert, texte crème — miroir inverse des boutons pleins. */
+.jc-home-footer .jc-bab-publier:hover,
+.jc-home-footer .jc-bab-voir-tout:hover {
+  /* 👉 MODIFIABLE : #2d5a3d = couleur de remplissage au survol. */
+  background: #2d5a3d !important;
+  color: #faf6f0 !important;
+}
+
+
+/* ==========================================================================
+   9C. BABILLARD — APERÇU PAGE PRINCIPALE (3 annonces récentes)
+   --------------------------------------------------------------------------
+   Section générée par synchroniserTimelineCitoyenne() dans Code.js,
+   juste après la grille d'événements. Affiche les 3 annonces publiées
+   les plus récentes avec un lien vers la page complète du babillard.
+   Les cartes individuelles réutilisent .jc-bab-card et .jc-bab-grid
+   déjà définis dans la section 9 — aucune règle dupliquée ici.
+   ========================================================================== */
+
+/* Séparateur visuel entre la grille d'événements et l'aperçu babillard.
+   border-top + margin-top créent une pause claire entre les deux sections
+   sans avoir besoin d'un élément HTML supplémentaire. */
+.jc-section-babillard {
+  /* 👉 MODIFIABLE : 48px = espace au-dessus de la section babillard.
+     Monte si les événements et les annonces semblent trop collés. */
+  margin-top: 48px !important;
+  /* 👉 MODIFIABLE : #e2ded2 = couleur de la ligne de séparation. */
+  border-top: 1px solid #e2ded2 !important;
+  /* 👉 MODIFIABLE : 40px = espace entre la ligne de séparation et le titre. */
+  padding-top: 40px !important;
+  /* 👉 MODIFIABLE : 48px = espace sous la section avant le pied de page. */
+  margin-bottom: 48px !important;
+}
+
+/* Titre de section (ex : "Babillard du quartier").
+   Même style que .jc-cal-mois-titre — cohérence visuelle avec le calendrier.
+   Utilisé aussi comme classe générique de titre de section si d'autres
+   sections similaires sont ajoutées plus tard. */
+.jc-section-titre {
+  /* 👉 MODIFIABLE : 1.4rem ≈ 22px = taille du titre de section. */
+  font-size: 1.4rem !important;
+  font-weight: 800 !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du titre (vert forêt). */
+  color: #2d5a3d !important;
+  /* border-bottom = ligne décorative sous le titre, ancrée à gauche.
+     Plus léger qu'un <hr> et contrôlable avec border-bottom seul. */
+  /* 👉 MODIFIABLE : 2px solid #c8dfc8 = épaisseur et couleur de la ligne. */
+  border-bottom: 2px solid #c8dfc8 !important;
+  padding-bottom: 8px !important;
+  /* 👉 MODIFIABLE : 24px = espace entre le titre et la grille de cartes. */
+  margin: 0 0 24px 0 !important;
+  /* capitalize met la première lettre de CHAQUE mot en majuscule.
+     Préférer none ici pour garder "Babillard du quartier" (pas "Du"). (rien à régler) */
+  text-transform: none !important;
+}
+
+/* Lien "Voir toutes les annonces →" affiché sous la grille.
+   display: block + text-align: center = centré sur toute la largeur
+   sans avoir besoin de flexbox ni de margin auto. */
+.jc-bab-voir-tout {
+  display: block !important;           /* (rien à régler) block pour text-align center */
+  text-align: center !important;
+  /* 👉 MODIFIABLE : 24px = espace au-dessus du lien. */
+  margin-top: 24px !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du lien (vert forêt). */
+  color: #2d5a3d !important;
+  font-weight: 600 !important;
+  /* 👉 MODIFIABLE : 0.95rem ≈ 15px = taille du lien. */
+  font-size: 0.95rem !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease !important;  /* (rien à régler) animation douce au survol */
+}
+/* Survol : soulignement + vert plus foncé, feedback visuel clair. */
+.jc-bab-voir-tout:hover {
+  text-decoration: underline !important;
+  /* 👉 MODIFIABLE : #1e3d2a = couleur au survol. */
+  color: #1e3d2a !important;
 }
