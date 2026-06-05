@@ -165,8 +165,8 @@ html, body,
 
 /* Centre le titre H1 sur la page d'accueil en version mobile uniquement. */
 @media (max-width: 767px) {
-  /* 👉 MODIFIABLE : 1807 = ID WordPress de la page d'accueil. Changer si la page est recrée. */
-  .page-id-1807 .entry-title { text-align: center !important; }
+  /* 👉 MODIFIABLE : 3793 = ID WordPress de la page d'accueil. Changer si la page est recrée. */
+  .page-id-3793 .entry-title { text-align: center !important; }
 }
 
 
@@ -1109,6 +1109,36 @@ add-to-calendar-button {
     padding: 12px 16px !important;
   }
 }
+/* Titre d'accueil centré + 2 boutons côte à côte sur mobile. */
+@media (max-width: 768px) {
+  .home .entry-title, .page-id-3793 .entry-title {
+    text-align: center !important;
+    /* 👉 MODIFIABLE : 16px = marges latérales du titre sur mobile. */
+    padding: 0 16px !important;
+  }
+  /* 👉 MODIFIABLE : 10px = espace entre le titre d'accueil et le babillard sur mobile. */
+  .jc-section-babillard { margin-top: 10px !important; }
+  .jc-home-footer {
+    flex-wrap: nowrap !important;          /* (rien à régler) force une seule ligne */
+    align-items: stretch !important;       /* (rien à régler) même hauteur pour les 2 boutons */
+    /* 👉 MODIFIABLE : 8px = espace entre les deux boutons. */
+    gap: 8px !important;
+    /* 👉 MODIFIABLE : 10px haut, 12px bas = espacement autour des boutons. */
+    margin: 10px 0 12px !important;
+  }
+  .jc-home-footer .jc-bab-publier,
+  .jc-home-footer .jc-bab-voir-tout {
+    flex: 1 1 0 !important;               /* (rien à régler) largeur égale */
+    text-align: center !important;
+    /* 👉 MODIFIABLE : 8px = padding interne des boutons sur mobile. */
+    padding: 8px !important;
+    /* 👉 MODIFIABLE : 0.78rem ≈ 12px = taille du texte des boutons sur mobile. */
+    font-size: 0.78rem !important;
+  }
+  /* 👉 MODIFIABLE : 12px = espace sous la liste d'annonces sur mobile. */
+  .jc-home-annonces { padding-bottom: 12px !important; }
+}
+
 /* ==========================================================================
    9. BABILLARD COMMUNAUTAIRE
    --------------------------------------------------------------------------
