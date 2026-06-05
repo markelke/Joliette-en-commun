@@ -1319,8 +1319,8 @@ add-to-calendar-button {
   justify-content: center !important;
   /* 👉 MODIFIABLE : 12px = espace entre les deux boutons. */
   gap: 12px !important;
-  /* 👉 MODIFIABLE : 20px = espace au-dessus des boutons. */
-  margin-top: 20px !important;
+  /* 👉 MODIFIABLE : 16px = espace sous le titre, 24px = espace avant les cartes. */
+  margin: 16px 0 24px !important;
 }
 
 /* Style outline : distingue ces deux boutons des 3 boutons pleins déjà présents
