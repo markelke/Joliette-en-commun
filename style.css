@@ -1093,12 +1093,11 @@ add-to-calendar-button {
   .site-branding { align-items: center !important; }
   p.site-description { text-align: center !important; }
 
-  /* Cache les résultats du sondage sur mobile — l'utilisateur peut voter
-     mais ne voit pas les statistiques (trop encombrant sur petit écran). */
-  .forminator-poll .forminator-radio.forminator-disabled,
-  .forminator-poll .forminator-poll-body,
-  .forminator-poll .forminator-poll-footer {
-    display: none !important;   /* (rien à régler) */
+  /* Cache les options désactivées après le vote sur mobile (barres de stats trop encombrantes).
+     .forminator-poll-body et .forminator-poll-footer sont retirés : ils wrappent aussi
+     le formulaire AVANT le vote, ce qui cachait les choix de réponse et le bouton d'envoi. */
+  .forminator-poll .forminator-radio.forminator-disabled {
+    display: none !important;
   }
 }
 
@@ -1124,14 +1123,14 @@ add-to-calendar-button {
     /* 👉 MODIFIABLE : 8px = espace entre les deux boutons. */
     gap: 8px !important;
     /* 👉 MODIFIABLE : 10px haut, 12px bas = espacement autour des boutons. */
-    margin: 10px 0 12px !important;
+    margin: 10px 15px 12px !important;
   }
   .jc-home-footer .jc-bab-publier,
   .jc-home-footer .jc-bab-voir-tout {
     flex: 1 1 0 !important;               /* (rien à régler) largeur égale */
     text-align: center !important;
     /* 👉 MODIFIABLE : 8px = padding interne des boutons sur mobile. */
-    padding: 8px !important;
+    padding: 12px !important;
     /* 👉 MODIFIABLE : 0.78rem ≈ 12px = taille du texte des boutons sur mobile. */
     font-size: 0.78rem !important;
   }
@@ -1351,7 +1350,7 @@ add-to-calendar-button {
   /* 👉 MODIFIABLE : 12px = espace entre les deux boutons. */
   gap: 12px !important;
   /* 👉 MODIFIABLE : 16px = espace sous le titre, 24px = espace avant les cartes. */
-  margin: 16px 0 24px !important;
+  margin: 16px 14px 24px !important;
 }
 
 /* Style outline : scopé à .jc-home-footer pour ne PAS affecter .jc-bab-publier plein
@@ -1415,10 +1414,10 @@ add-to-calendar-button {
 .jc-section-babillard {
   /* 👉 MODIFIABLE : 0px = espace au-dessus de la section babillard.
      Monte si les événements et les annonces semblent trop collés. */
-  margin-top: 48px !important;
+  margin-top: 0px !important;
   /* 👉 MODIFIABLE : #e2ded2 = couleur de la ligne de séparation. */
-  border-top: 1px solid #e2ded2 !important;
-  /* 👉 MODIFIABLE : 40px = espace entre la ligne de séparation et le titre. */
+  border-top: 0px solid #e2ded2 !important;
+  /* 👉 MODIFIABLE : 30px = espace entre la ligne de séparation et le titre. */
   padding-top: 40px !important;
   /* 👉 MODIFIABLE : 48px = espace sous la section avant le pied de page. */
   margin-bottom: 48px !important;
@@ -1473,4 +1472,15 @@ add-to-calendar-button {
   text-decoration: underline !important;
   /* 👉 MODIFIABLE : #1e3d2a = couleur au survol. */
   color: #1e3d2a !important;
+}
+/* 1. Empêche la colonne du sondage de s'étirer → supprime le vide sous le bouton */
+.wp-block-columns:has(.jc-section-babillard) {
+  align-items: flex-start !important;
+}
+
+/* 2. Descend le sondage pour aligner son haut sur « Babillard du quartier » */
+@media (min-width: 768px) {
+  .wp-block-column:has(.forminator-poll) {
+    margin-top: 180px !important; /* à ajuster en direct dans DevTools */
+  }
 }
