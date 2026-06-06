@@ -1344,7 +1344,7 @@ add-to-calendar-button {
 /* Boutons du babillard (accueil) : outline, alignés à gauche sous le titre.
    justify-content: flex-start = bord gauche (align avec .jc-section-titre). */
 .jc-home-footer {
-  display: flex !important;
+
   flex-wrap: wrap !important;
   justify-content: flex-start !important;
   align-items: center !important;
@@ -1357,23 +1357,35 @@ add-to-calendar-button {
 /* Style outline : scopé à .jc-home-footer pour ne PAS affecter .jc-bab-publier plein
    sur la page /babillard/. box-sizing: border-box garantit que la bordure 2px est incluse
    dans le padding sans faire varier la hauteur selon les navigateurs. (rien à régler) */
+
+/* 1. DEFAULT: MOBILE VIEW (Applies to ALL screen sizes) */
 .jc-home-footer .jc-bab-publier,
 .jc-home-footer .jc-bab-voir-tout {
   display: inline-block !important;
   box-sizing: border-box !important;
   background: transparent !important;
-  /* 👉 MODIFIABLE : #2d5a3d = couleur du contour et du texte. */
   color: #2d5a3d !important;
   border: 2px solid #2d5a3d !important;
-  /* 👉 MODIFIABLE : 6px = arrondi (cohérent avec les boutons pleins). */
   border-radius: 6px !important;
-  /* 👉 MODIFIABLE : 8px haut/bas, 16px gauche/droite. */
-  padding: 8px 16px !important;
+  
+  /* Shared properties that apply everywhere */
   font-size: 0.9rem !important;
   font-weight: 600 !important;
   line-height: 1.4 !important;
   text-decoration: none !important;
-  transition: all 0.2s ease !important;  /* (rien à régler) animation fond + texte */
+  transition: all 0.2s ease !important;
+  
+  /* Mobile-specific padding */
+  padding: 0px 0px !important; 
+}
+
+/* 2. OVERRIDE: DESKTOP & TABLET VIEW */
+@media (min-width: 768px) {
+  .jc-home-footer .jc-bab-publier,
+  .jc-home-footer .jc-bab-voir-tout {
+      /* Desktop-specific padding overrides the mobile one */
+      padding: 8px 16px !important; 
+  }
 }
 /* Survol identique pour les deux : remplissage vert, aucun soulignement.
    text-decoration: none neutralise la règle .jc-bab-voir-tout:hover de la section 9C
@@ -1401,7 +1413,7 @@ add-to-calendar-button {
    border-top + margin-top créent une pause claire entre les deux sections
    sans avoir besoin d'un élément HTML supplémentaire. */
 .jc-section-babillard {
-  /* 👉 MODIFIABLE : 48px = espace au-dessus de la section babillard.
+  /* 👉 MODIFIABLE : 0px = espace au-dessus de la section babillard.
      Monte si les événements et les annonces semblent trop collés. */
   margin-top: 48px !important;
   /* 👉 MODIFIABLE : #e2ded2 = couleur de la ligne de séparation. */
@@ -1433,7 +1445,13 @@ add-to-calendar-button {
      Préférer none ici pour garder "Babillard du quartier" (pas "Du"). (rien à régler) */
   text-transform: none !important;
 }
+/* Titre de section : retrait sur mobile, aligné à gauche sur desktop */
+.jc-section-titre { padding-left: 20px !important; }
 
+@media (min-width: 768px) {
+  /* Classe doublée = spécificité (0,2,0), passe devant une règle concurrente à classe simple */
+  .jc-section-titre.jc-section-titre { padding-left: 0 !important; }
+}
 /* Lien "Voir toutes les annonces →" affiché sous la grille.
    display: block + text-align: center = centré sur toute la largeur
    sans avoir besoin de flexbox ni de margin auto. */
