@@ -146,7 +146,7 @@ html, body,
 .inside-article, .inside-article > *, #primary, .site-main,
 .wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
   /* 👉 MODIFIABLE : #faf6f0 = crème chaude. Changer ici change le fond de tout le site. */
-  background-color: #faf6f0 !important;
+  background-color: #fdefda !important;
 }
 
 /* Supprime les espaces parasites en haut des zones structurelles. (rien à régler) */
@@ -1483,4 +1483,86 @@ add-to-calendar-button {
   .wp-block-column:has(.forminator-poll) {
     margin-top: 180px !important; /* à ajuster en direct dans DevTools */
   }
+}
+
+
+/* ==========================================================================
+   10. RÉPONSES AUX ANNONCES DU BABILLARD
+   --------------------------------------------------------------------------
+   Bloc <details> natif affiché sous chaque carte .jc-bab-card.
+   Utilise <details>/<summary> — pas de checkbox cachée.
+   ========================================================================== */
+
+/* Conteneur principal : soudé visuellement sous la carte. */
+.jc-replies-container {
+  /* 👉 MODIFIABLE : #f5f3ee = fond légèrement crème, distinct de la carte. */
+  background-color: #f5f3ee !important;
+  border: 1px solid #e2ded2 !important;
+  border-top: none !important;           /* fusionne avec la bordure basse de la carte */
+  /* 👉 MODIFIABLE : arrondi seulement en bas pour l'effet "boîte soudée". */
+  border-radius: 0 0 12px 12px !important;
+  /* 👉 MODIFIABLE : 0 16px = espace intérieur gauche/droite (haut géré par summary). */
+  padding: 0 16px !important;
+  overflow: hidden !important;
+}
+
+/* Triangle + étiquette "N réponse(s)". */
+.jc-replies-container summary {
+  cursor: pointer !important;
+  list-style: none !important;   /* cache le triangle WebKit */
+  /* 👉 MODIFIABLE : 0.82rem = taille du libellé du résumé. */
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du libellé. */
+  color: #2d5a3d !important;
+  padding: 10px 0 !important;
+  user-select: none !important;
+}
+/* Cache le marqueur natif sur Firefox. (rien à régler) */
+.jc-replies-container summary::-webkit-details-marker { display: none !important; }
+
+/* Chevron ▾ devant le résumé (fermé). */
+.jc-replies-container summary::before {
+  /* 👉 MODIFIABLE : ▾ = chevron fermé, ▴ = chevron ouvert. */
+  content: "\25be\00a0" !important;
+  font-size: 0.75rem !important;
+}
+/* Chevron ▴ quand le bloc est ouvert. (rien à régler) */
+.jc-replies-container[open] summary::before { content: "\25b4\00a0" !important; }
+
+/* Ajoute un espace sous le summary quand le bloc est ouvert. */
+.jc-replies-container[open] { padding-bottom: 12px !important; }
+
+/* Message "Aucune réponse pour le moment". */
+.jc-reply-empty {
+  /* 👉 MODIFIABLE : #888 = couleur du texte discret. */
+  color: #888 !important;
+  font-style: italic !important;
+  font-size: 0.85rem !important;
+  margin: 4px 0 0 !important;
+}
+
+/* Un item de réponse. */
+.jc-reply-item { padding: 8px 0 !important; }
+/* Séparateur entre réponses (pas avant la première). (rien à régler) */
+.jc-reply-item + .jc-reply-item {
+  /* 👉 MODIFIABLE : #e2ded2 = couleur du séparateur entre réponses. */
+  border-top: 1px solid #e2ded2 !important;
+}
+
+/* Texte de la réponse. */
+.reply-message {
+  /* 👉 MODIFIABLE : 0.875rem = taille du texte, #333 = couleur. */
+  font-size: 0.875rem !important;
+  color: #333 !important;
+  margin: 0 0 4px 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Méta de la réponse (auteur · date). */
+.reply-meta {
+  display: block !important;
+  /* 👉 MODIFIABLE : 0.78rem = taille, #888 = couleur grise. */
+  font-size: 0.78rem !important;
+  color: #888 !important;
 }
