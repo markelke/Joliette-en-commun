@@ -1276,6 +1276,13 @@ add-to-calendar-button {
   margin: 0 !important;
   flex-grow: 1 !important;  /* (rien à régler) occupe l'espace restant */
 }
+/* Message COURT (≤ 3 lignes estimées par Code.js) : pas de troncature, donc
+   pas de « … » ni de « Voir plus » — Code.js n'émet alors ni input ni label. */
+.jc-bab-message--court {
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+}
 /* Le toggle réutilise les classes .jc-toggle-input / .jc-toggle-label de la
    section 7 (case cachée + label cliquable, déjà stylés) — le HTML babillard
    les génère avec l'ordre input → message → label, identique aux événements.
