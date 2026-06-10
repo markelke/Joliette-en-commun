@@ -1195,11 +1195,14 @@ add-to-calendar-button {
 
 /* Carte d'annonce individuelle. */
 .jc-bab-card {
-  /* 👉 MODIFIABLE : #fcfbf7 = fond légèrement crème des cartes. */
-  background-color: #fcfbf7 !important;
+  /* 👉 MODIFIABLE : #ffffff = fond blanc des cartes (contraste max sur le fond crème). */
+  background-color: #ffffff !important;
   border: 1px solid #e2ded2 !important;
   /* 👉 MODIFIABLE : 12px = arrondi des cartes d'annonce. */
   border-radius: 12px !important;
+  /* 👉 MODIFIABLE : 0.06 = intensité de l'ombre portée (0 = pas d'ombre).
+     Fait « flotter » la carte au-dessus du fond crème. */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
   /* 👉 MODIFIABLE : 18px = espace intérieur des cartes d'annonce. */
   padding: 18px !important;
   display: flex !important;
@@ -1273,41 +1276,21 @@ add-to-calendar-button {
   margin: 0 !important;
   flex-grow: 1 !important;  /* (rien à régler) occupe l'espace restant */
 }
-/* ~ = sélecteur « frère général » → s'active quand la case est cochée.
-   unset annule la coupure → le message s'affiche en entier. (rien à régler) */
-.jc-bab-toggle-input:checked ~ .jc-bab-message {
+/* Le toggle réutilise les classes .jc-toggle-input / .jc-toggle-label de la
+   section 7 (case cachée + label cliquable, déjà stylés) — le HTML babillard
+   les génère avec l'ordre input → message → label, identique aux événements.
+   On ne (re)définit ici que les 2 règles spécifiques au babillard.
+
+   1) Révèle le message complet quand la case est cochée. (rien à régler) */
+.jc-toggle-input:checked ~ .jc-bab-message {
   -webkit-line-clamp: unset !important;
   overflow: visible !important;
 }
-
-/* Case à cocher cachée qui pilote le toggle (cf. .jc-toggle-input section 7).
-   position: absolute + opacity: 0 = invisible MAIS focusable au clavier. */
-.jc-bab-toggle-input {
-  position: absolute !important;   /* (rien à régler) sorti du flux mais focusable */
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Lien « Voir plus » / « Voir moins » — texte injecté par ::before (pas dans le HTML). */
-.jc-bab-toggle-label {
-  display: inline-block !important;
-  cursor: pointer !important;
-  /* 👉 MODIFIABLE : #2d5a3d = couleur du lien « Voir plus ». */
-  color: #2d5a3d !important;
-  font-weight: 600 !important;
-  /* 👉 MODIFIABLE : 0.85rem = taille du lien « Voir plus ». */
-  font-size: 0.85rem !important;
-  align-self: flex-start !important;  /* (rien à régler) reste à gauche dans la carte flex */
-}
-/* 👉 MODIFIABLE : "Voir plus \2192" = texte affiché. \2192 = flèche →. */
-.jc-bab-toggle-label::before { content: "Voir plus \2192"; }
-/* 👉 MODIFIABLE : "Voir moins \2191" = texte quand le message est étendu. \2191 = flèche ↑. */
-.jc-bab-toggle-input:checked ~ .jc-bab-toggle-label::before { content: "Voir moins \2191"; }
-/* Contour visible uniquement en navigation clavier (pas au clic souris). (rien à régler) */
-.jc-bab-toggle-label:focus-visible {
-  outline: 2px solid #2d5a3d !important;
-  outline-offset: 2px !important;
-}
+/* 2) Bascule le libellé en « Voir moins » à l'état ouvert.
+   Le label événement vit DANS .jc-card-footer ; ici il est frère DIRECT de la
+   case, donc ce sélecteur (~ .jc-toggle-label) ne cible que le babillard et
+   n'affecte pas les cartes événements. \2191 = flèche ↑. */
+.jc-toggle-input:checked ~ .jc-toggle-label::before { content: "Voir moins \2191" !important; }
 
 /* Pied de carte : méta à gauche, lien "Répondre" à droite. (rien à régler) */
 .jc-bab-footer {
@@ -1600,13 +1583,23 @@ add-to-calendar-button {
   margin: 4px 0 0 !important;
 }
 
-/* Un item de réponse. */
-.jc-reply-item { padding: 8px 0 !important; }
-/* Séparateur entre réponses (pas avant la première). (rien à régler) */
-.jc-reply-item + .jc-reply-item {
-  /* 👉 MODIFIABLE : #e2ded2 = couleur du séparateur entre réponses. */
-  border-top: 1px solid #e2ded2 !important;
+/* Un item de réponse — petit bloc distinct posé sur le fond crème du conteneur.
+   Fond légèrement plus clair + bordure fine + arrondi = chaque réponse se
+   détache nettement de la suivante (plus lisible qu'un simple filet). */
+.jc-reply-item {
+  /* 👉 MODIFIABLE : #faf8f3 = fond très clair de la réponse (contraste sur le crème). */
+  background-color: #faf8f3 !important;
+  /* 👉 MODIFIABLE : #ece7da = bordure fine de la réponse. */
+  border: 1px solid #ece7da !important;
+  /* 👉 MODIFIABLE : 8px = arrondi des blocs de réponse. */
+  border-radius: 8px !important;
+  /* 👉 MODIFIABLE : 10px/12px = espace intérieur des réponses. */
+  padding: 10px 12px !important;
+  /* 👉 MODIFIABLE : 8px = espace entre deux réponses. */
+  margin-bottom: 8px !important;
 }
+/* Dernière réponse sans marge basse (le padding du conteneur gère l'espace). */
+.jc-reply-item:last-child { margin-bottom: 0 !important; }
 
 /* Texte de la réponse. */
 .reply-message {
