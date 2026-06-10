@@ -22,7 +22,7 @@
    PALETTE DE COULEURS
      Pour changer une couleur sur tout le site, utilise Rechercher/Remplacer
      dans VS Code (Cmd+H) — toutes les occurrences seront mises à jour.
-     👉 MODIFIABLE : #faf6f0 → couleur de fond (crème chaude)
+     👉 MODIFIABLE : #f7edd6 → couleur de fond (crème chaude)
      👉 MODIFIABLE : #2d5a3d → couleur principale (vert forêt, en-tête + boutons)
      👉 MODIFIABLE : #1e3d2a → couleur survol (vert foncé)
      👉 MODIFIABLE : #c8dfc8 → couleur accent (vert sauge, bordures + slogan)
@@ -145,8 +145,8 @@ html, body,
 .site-content, .grid-container, .entry-content, .entry-content > *,
 .inside-article, .inside-article > *, #primary, .site-main,
 .wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
-  /* 👉 MODIFIABLE : #faf6f0 = crème chaude. Changer ici change le fond de tout le site. */
-  background-color: #faf6f0 !important;
+  /* 👉 MODIFIABLE : #f7edd6 = crème chaude. Changer ici change le fond de tout le site. */
+  background-color: #f7edd6 !important;
 }
 
 /* Supprime les espaces parasites en haut des zones structurelles. (rien à régler) */
@@ -216,7 +216,7 @@ a.gb-text-169aeb6e,
 a.gb-text-d96ad459 {
   /* 👉 MODIFIABLE : #2d5a3d = vert forêt. */
   background-color: #2d5a3d !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
   border-color: #2d5a3d !important;
 }
 /* Couleur au survol. */
@@ -244,8 +244,8 @@ a.gb-text-d96ad459,
 #jc-load-more-btn {
   /* 👉 MODIFIABLE : #2d5a3d = couleur de fond des boutons. */
   background-color: #2d5a3d !important;
-  /* 👉 MODIFIABLE : #faf6f0 = couleur du texte des boutons. */
-  color: #faf6f0 !important;
+  /* 👉 MODIFIABLE : #f7edd6 = couleur du texte des boutons. */
+  color: #f7edd6 !important;
   border: none !important;
   /* 👉 MODIFIABLE : 6px = arrondi des coins. 0 = carré, 50px = pilule. */
   border-radius: 6px !important;
@@ -268,7 +268,7 @@ a.gb-text-d96ad459:hover,
 #jc-load-more-btn:hover {
   /* 👉 MODIFIABLE : #1e3d2a = couleur de survol des boutons. */
   background-color: #1e3d2a !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
 }
 
 /* Caché sur desktop (8 tuiles visibles d'emblée) ; réapparu sur mobile via @media. */
@@ -1155,7 +1155,7 @@ add-to-calendar-button {
 .jc-bab-publier {
   /* 👉 MODIFIABLE : #2d5a3d = couleur du bouton "Publier". */
   background-color: #2d5a3d !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
   border: none !important;
   /* 👉 MODIFIABLE : 6px = arrondi du bouton "Publier". */
   border-radius: 6px !important;
@@ -1171,7 +1171,7 @@ add-to-calendar-button {
 .jc-bab-publier:hover {
   /* 👉 MODIFIABLE : #1e3d2a = couleur de survol du bouton "Publier". */
   background-color: #1e3d2a !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
 }
 
 /* Grille des cartes d'annonces : 1 colonne mobile → 2 tablette → 3 desktop. */
@@ -1195,11 +1195,14 @@ add-to-calendar-button {
 
 /* Carte d'annonce individuelle. */
 .jc-bab-card {
-  /* 👉 MODIFIABLE : #fcfbf7 = fond légèrement crème des cartes. */
-  background-color: #fcfbf7 !important;
+  /* 👉 MODIFIABLE : #ffffff = fond blanc des cartes (contraste max sur le fond crème). */
+  background-color: #ffffff !important;
   border: 1px solid #e2ded2 !important;
   /* 👉 MODIFIABLE : 12px = arrondi des cartes d'annonce. */
   border-radius: 12px !important;
+  /* 👉 MODIFIABLE : 0.06 = intensité de l'ombre portée (0 = pas d'ombre).
+     Fait « flotter » la carte au-dessus du fond crème. */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
   /* 👉 MODIFIABLE : 18px = espace intérieur des cartes d'annonce. */
   padding: 18px !important;
   display: flex !important;
@@ -1218,23 +1221,32 @@ add-to-calendar-button {
   border-radius: 20px !important;
   align-self: flex-start !important;
 }
-/* Badge "Annonce" — fond beige/brun. */
+/* Badges pleins vivides */
 .jc-bab-annonce .jc-bab-badge {
   /* 👉 MODIFIABLE : couleurs du badge "Annonce" (fond/texte). */
-  background-color: #f5e6cc !important;
-  color: #8a5a14 !important;
+  background-color: #c8963e !important;
+  color: #ffffff !important;
 }
-/* Badge "Je cherche de l'aide" — fond rouge/brique. */
 .jc-bab-cherche .jc-bab-badge {
   /* 👉 MODIFIABLE : couleurs du badge "Je cherche" (fond/texte). */
-  background-color: #f0dcd4 !important;
-  color: #8a3d28 !important;
+  background-color: #c0533e !important;
+  color: #ffffff !important;
 }
-/* Badge "J'offre de l'aide" — fond vert clair. */
 .jc-bab-offre .jc-bab-badge {
   /* 👉 MODIFIABLE : couleurs du badge "J'offre" (fond/texte). */
-  background-color: #d6e6d6 !important;
-  color: #1e3d2a !important;
+  background-color: #2d5a3d !important;
+  color: #ffffff !important;
+}
+
+/* Bordure gauche colorée par type */
+.jc-bab-annonce {
+  border-left: 4px solid #c8963e !important;
+}
+.jc-bab-cherche {
+  border-left: 4px solid #c0533e !important;
+}
+.jc-bab-offre {
+  border-left: 4px solid #2d5a3d !important;
 }
 
 /* Titre de l'annonce. */
@@ -1247,8 +1259,16 @@ add-to-calendar-button {
   line-height: 1.3 !important;
 }
 
-/* Corps du message de l'annonce. */
+/* Corps du message de l'annonce — tronqué à 3 lignes par défaut.
+   Même technique que .jc-timeline-desc (section 7) : -webkit-line-clamp coupe
+   après N lignes avec « … ». Les 3 propriétés -webkit-box/line-clamp/box-orient
+   sont obligatoires ensemble. Le toggle ci-dessous annule la coupure. */
 .jc-bab-message {
+  display: -webkit-box !important;
+  /* 👉 MODIFIABLE : 3 = nombre de lignes visibles avant coupure. */
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;  /* (rien à régler) direction de coupure */
+  overflow: hidden !important;
   /* 👉 MODIFIABLE : 0.9rem = taille du texte du message. */
   font-size: 0.9rem !important;
   /* 👉 MODIFIABLE : #444 = couleur du texte du message. */
@@ -1256,6 +1276,28 @@ add-to-calendar-button {
   margin: 0 !important;
   flex-grow: 1 !important;  /* (rien à régler) occupe l'espace restant */
 }
+/* Message COURT (≤ 3 lignes estimées par Code.js) : pas de troncature, donc
+   pas de « … » ni de « Voir plus » — Code.js n'émet alors ni input ni label. */
+.jc-bab-message--court {
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+}
+/* Le toggle réutilise les classes .jc-toggle-input / .jc-toggle-label de la
+   section 7 (case cachée + label cliquable, déjà stylés) — le HTML babillard
+   les génère avec l'ordre input → message → label, identique aux événements.
+   On ne (re)définit ici que les 2 règles spécifiques au babillard.
+
+   1) Révèle le message complet quand la case est cochée. (rien à régler) */
+.jc-toggle-input:checked ~ .jc-bab-message {
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+}
+/* 2) Bascule le libellé en « Voir moins » à l'état ouvert.
+   Le label événement vit DANS .jc-card-footer ; ici il est frère DIRECT de la
+   case, donc ce sélecteur (~ .jc-toggle-label) ne cible que le babillard et
+   n'affecte pas les cartes événements. \2191 = flèche ↑. */
+.jc-toggle-input:checked ~ .jc-toggle-label::before { content: "Voir moins \2191" !important; }
 
 /* Pied de carte : méta à gauche, lien "Répondre" à droite. (rien à régler) */
 .jc-bab-footer {
@@ -1393,7 +1435,7 @@ add-to-calendar-button {
 .jc-home-footer .jc-bab-voir-tout:hover {
   /* 👉 MODIFIABLE : #2d5a3d = couleur de remplissage au survol. */
   background: #2d5a3d !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
   text-decoration: none !important;
 }
 
@@ -1483,4 +1525,102 @@ add-to-calendar-button {
   .wp-block-column:has(.forminator-poll) {
     margin-top: 180px !important; /* à ajuster en direct dans DevTools */
   }
+}
+
+
+/* ==========================================================================
+   10. RÉPONSES AUX ANNONCES DU BABILLARD
+   --------------------------------------------------------------------------
+   Bloc <details> natif affiché sous chaque carte .jc-bab-card.
+   Utilise <details>/<summary> — pas de checkbox cachée.
+   ========================================================================== */
+
+/* Conteneur principal : DERNIER enfant de .jc-bab-card, tiré pleine largeur.
+   Les marges négatives annulent le padding 18px de la carte → le bloc touche
+   les bords intérieurs (effet "boîte soudée") sans wrapper externe ni
+   changement aux sélecteurs de grille/carrousel.
+   ⚠️ Les -18px doivent suivre le padding de .jc-bab-card (section 9). */
+.jc-replies-container {
+  /* 👉 MODIFIABLE : #f7edd6 = crème chaude de la palette (distinct du fond de carte). */
+  background-color: #f7edd6 !important;
+  /* Séparateur avec le contenu de la carte ; la bordure de la carte gère les côtés/bas. */
+  border-top: 1px solid #e2ded2 !important;
+  /* 👉 MODIFIABLE : arrondi seulement en bas pour épouser les coins de la carte. */
+  border-radius: 0 0 12px 12px !important;
+  /* 👉 MODIFIABLE : -18px = padding de .jc-bab-card. Annule-le pour la pleine largeur. */
+  margin: 0 -18px -18px !important;
+  /* Recrée un retrait horizontal de 18px pour aligner le texte sur la carte. */
+  padding: 0 18px !important;
+  overflow: hidden !important;
+}
+
+/* Chevron + étiquette "N réponse(s)". */
+.jc-replies-container summary {
+  cursor: pointer !important;
+  list-style: none !important;   /* masque le marqueur natif (Firefox + standard) */
+  /* 👉 MODIFIABLE : 0.82rem = taille du libellé du résumé. */
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  /* 👉 MODIFIABLE : #2d5a3d = couleur du libellé. */
+  color: #2d5a3d !important;
+  padding: 10px 0 !important;
+  user-select: none !important;
+}
+/* Masque le marqueur natif sur WebKit (Safari/Chrome). (rien à régler) */
+.jc-replies-container summary::-webkit-details-marker { display: none !important; }
+
+/* Chevron ▾ devant le résumé (fermé). */
+.jc-replies-container summary::before {
+  /* 👉 MODIFIABLE : ▾ = chevron fermé, ▴ = chevron ouvert. */
+  content: "\25be\00a0" !important;
+  font-size: 0.75rem !important;
+}
+/* Chevron ▴ quand le bloc est ouvert. (rien à régler) */
+.jc-replies-container[open] summary::before { content: "\25b4\00a0" !important; }
+
+/* Ajoute un espace sous le summary quand le bloc est ouvert. */
+.jc-replies-container[open] { padding-bottom: 12px !important; }
+
+/* Message discret "Aucune réponse pour l'instant". */
+.jc-reply-empty {
+  /* 👉 MODIFIABLE : #888 = couleur du texte discret. */
+  color: #888 !important;
+  font-style: italic !important;
+  font-size: 0.85rem !important;
+  margin: 4px 0 0 !important;
+}
+
+/* Un item de réponse — petit bloc distinct posé sur le fond crème du conteneur.
+   Fond légèrement plus clair + bordure fine + arrondi = chaque réponse se
+   détache nettement de la suivante (plus lisible qu'un simple filet). */
+.jc-reply-item {
+  /* 👉 MODIFIABLE : #faf8f3 = fond très clair de la réponse (contraste sur le crème). */
+  background-color: #faf8f3 !important;
+  /* 👉 MODIFIABLE : #ece7da = bordure fine de la réponse. */
+  border: 1px solid #ece7da !important;
+  /* 👉 MODIFIABLE : 8px = arrondi des blocs de réponse. */
+  border-radius: 8px !important;
+  /* 👉 MODIFIABLE : 10px/12px = espace intérieur des réponses. */
+  padding: 10px 12px !important;
+  /* 👉 MODIFIABLE : 8px = espace entre deux réponses. */
+  margin-bottom: 8px !important;
+}
+/* Dernière réponse sans marge basse (le padding du conteneur gère l'espace). */
+.jc-reply-item:last-child { margin-bottom: 0 !important; }
+
+/* Texte de la réponse. */
+.reply-message {
+  /* 👉 MODIFIABLE : 0.875rem = taille du texte, #333 = couleur. */
+  font-size: 0.875rem !important;
+  color: #333 !important;
+  margin: 0 0 4px 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Méta de la réponse (auteur · date). */
+.reply-meta {
+  display: block !important;
+  /* 👉 MODIFIABLE : 0.78rem = taille, #888 = couleur grise. */
+  font-size: 0.78rem !important;
+  color: #888 !important;
 }
