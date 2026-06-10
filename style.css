@@ -1493,23 +1493,29 @@ add-to-calendar-button {
    Utilise <details>/<summary> — pas de checkbox cachée.
    ========================================================================== */
 
-/* Conteneur principal : soudé visuellement sous la carte. */
+/* Conteneur principal : DERNIER enfant de .jc-bab-card, tiré pleine largeur.
+   Les marges négatives annulent le padding 18px de la carte → le bloc touche
+   les bords intérieurs (effet "boîte soudée") sans wrapper externe ni
+   changement aux sélecteurs de grille/carrousel.
+   ⚠️ Les -18px doivent suivre le padding de .jc-bab-card (section 9). */
 .jc-replies-container {
-  /* 👉 MODIFIABLE : #f5f3ee = fond légèrement crème, distinct de la carte. */
-  background-color: #f5f3ee !important;
-  border: 1px solid #e2ded2 !important;
-  border-top: none !important;           /* fusionne avec la bordure basse de la carte */
-  /* 👉 MODIFIABLE : arrondi seulement en bas pour l'effet "boîte soudée". */
+  /* 👉 MODIFIABLE : #faf6f0 = crème chaude de la palette (distinct du fond de carte). */
+  background-color: #faf6f0 !important;
+  /* Séparateur avec le contenu de la carte ; la bordure de la carte gère les côtés/bas. */
+  border-top: 1px solid #e2ded2 !important;
+  /* 👉 MODIFIABLE : arrondi seulement en bas pour épouser les coins de la carte. */
   border-radius: 0 0 12px 12px !important;
-  /* 👉 MODIFIABLE : 0 16px = espace intérieur gauche/droite (haut géré par summary). */
-  padding: 0 16px !important;
+  /* 👉 MODIFIABLE : -18px = padding de .jc-bab-card. Annule-le pour la pleine largeur. */
+  margin: 0 -18px -18px !important;
+  /* Recrée un retrait horizontal de 18px pour aligner le texte sur la carte. */
+  padding: 0 18px !important;
   overflow: hidden !important;
 }
 
-/* Triangle + étiquette "N réponse(s)". */
+/* Chevron + étiquette "N réponse(s)". */
 .jc-replies-container summary {
   cursor: pointer !important;
-  list-style: none !important;   /* cache le triangle WebKit */
+  list-style: none !important;   /* masque le marqueur natif (Firefox + standard) */
   /* 👉 MODIFIABLE : 0.82rem = taille du libellé du résumé. */
   font-size: 0.82rem !important;
   font-weight: 600 !important;
@@ -1518,7 +1524,7 @@ add-to-calendar-button {
   padding: 10px 0 !important;
   user-select: none !important;
 }
-/* Cache le marqueur natif sur Firefox. (rien à régler) */
+/* Masque le marqueur natif sur WebKit (Safari/Chrome). (rien à régler) */
 .jc-replies-container summary::-webkit-details-marker { display: none !important; }
 
 /* Chevron ▾ devant le résumé (fermé). */
@@ -1533,7 +1539,7 @@ add-to-calendar-button {
 /* Ajoute un espace sous le summary quand le bloc est ouvert. */
 .jc-replies-container[open] { padding-bottom: 12px !important; }
 
-/* Message "Aucune réponse pour le moment". */
+/* Message discret "Aucune réponse pour l'instant". */
 .jc-reply-empty {
   /* 👉 MODIFIABLE : #888 = couleur du texte discret. */
   color: #888 !important;
