@@ -22,7 +22,7 @@
    PALETTE DE COULEURS
      Pour changer une couleur sur tout le site, utilise Rechercher/Remplacer
      dans VS Code (Cmd+H) — toutes les occurrences seront mises à jour.
-     👉 MODIFIABLE : #faf6f0 → couleur de fond (crème chaude)
+     👉 MODIFIABLE : #f7edd6 → couleur de fond (crème chaude)
      👉 MODIFIABLE : #2d5a3d → couleur principale (vert forêt, en-tête + boutons)
      👉 MODIFIABLE : #1e3d2a → couleur survol (vert foncé)
      👉 MODIFIABLE : #c8dfc8 → couleur accent (vert sauge, bordures + slogan)
@@ -145,8 +145,8 @@ html, body,
 .site-content, .grid-container, .entry-content, .entry-content > *,
 .inside-article, .inside-article > *, #primary, .site-main,
 .wp-block-columns, .wp-block-column, .gb-element-7c28e4a4 {
-  /* 👉 MODIFIABLE : #faf6f0 = crème chaude. Changer ici change le fond de tout le site. */
-  background-color: #fdefda !important;
+  /* 👉 MODIFIABLE : #f7edd6 = crème chaude. Changer ici change le fond de tout le site. */
+  background-color: #f7edd6 !important;
 }
 
 /* Supprime les espaces parasites en haut des zones structurelles. (rien à régler) */
@@ -216,7 +216,7 @@ a.gb-text-169aeb6e,
 a.gb-text-d96ad459 {
   /* 👉 MODIFIABLE : #2d5a3d = vert forêt. */
   background-color: #2d5a3d !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
   border-color: #2d5a3d !important;
 }
 /* Couleur au survol. */
@@ -244,8 +244,8 @@ a.gb-text-d96ad459,
 #jc-load-more-btn {
   /* 👉 MODIFIABLE : #2d5a3d = couleur de fond des boutons. */
   background-color: #2d5a3d !important;
-  /* 👉 MODIFIABLE : #faf6f0 = couleur du texte des boutons. */
-  color: #faf6f0 !important;
+  /* 👉 MODIFIABLE : #f7edd6 = couleur du texte des boutons. */
+  color: #f7edd6 !important;
   border: none !important;
   /* 👉 MODIFIABLE : 6px = arrondi des coins. 0 = carré, 50px = pilule. */
   border-radius: 6px !important;
@@ -268,7 +268,7 @@ a.gb-text-d96ad459:hover,
 #jc-load-more-btn:hover {
   /* 👉 MODIFIABLE : #1e3d2a = couleur de survol des boutons. */
   background-color: #1e3d2a !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
 }
 
 /* Caché sur desktop (8 tuiles visibles d'emblée) ; réapparu sur mobile via @media. */
@@ -1155,7 +1155,7 @@ add-to-calendar-button {
 .jc-bab-publier {
   /* 👉 MODIFIABLE : #2d5a3d = couleur du bouton "Publier". */
   background-color: #2d5a3d !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
   border: none !important;
   /* 👉 MODIFIABLE : 6px = arrondi du bouton "Publier". */
   border-radius: 6px !important;
@@ -1171,7 +1171,7 @@ add-to-calendar-button {
 .jc-bab-publier:hover {
   /* 👉 MODIFIABLE : #1e3d2a = couleur de survol du bouton "Publier". */
   background-color: #1e3d2a !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
 }
 
 /* Grille des cartes d'annonces : 1 colonne mobile → 2 tablette → 3 desktop. */
@@ -1218,23 +1218,32 @@ add-to-calendar-button {
   border-radius: 20px !important;
   align-self: flex-start !important;
 }
-/* Badge "Annonce" — fond beige/brun. */
+/* Badges pleins vivides */
 .jc-bab-annonce .jc-bab-badge {
   /* 👉 MODIFIABLE : couleurs du badge "Annonce" (fond/texte). */
-  background-color: #f5e6cc !important;
-  color: #8a5a14 !important;
+  background-color: #c8963e !important;
+  color: #ffffff !important;
 }
-/* Badge "Je cherche de l'aide" — fond rouge/brique. */
 .jc-bab-cherche .jc-bab-badge {
   /* 👉 MODIFIABLE : couleurs du badge "Je cherche" (fond/texte). */
-  background-color: #f0dcd4 !important;
-  color: #8a3d28 !important;
+  background-color: #c0533e !important;
+  color: #ffffff !important;
 }
-/* Badge "J'offre de l'aide" — fond vert clair. */
 .jc-bab-offre .jc-bab-badge {
   /* 👉 MODIFIABLE : couleurs du badge "J'offre" (fond/texte). */
-  background-color: #d6e6d6 !important;
-  color: #1e3d2a !important;
+  background-color: #2d5a3d !important;
+  color: #ffffff !important;
+}
+
+/* Bordure gauche colorée par type */
+.jc-bab-annonce {
+  border-left: 4px solid #c8963e !important;
+}
+.jc-bab-cherche {
+  border-left: 4px solid #c0533e !important;
+}
+.jc-bab-offre {
+  border-left: 4px solid #2d5a3d !important;
 }
 
 /* Titre de l'annonce. */
@@ -1393,7 +1402,7 @@ add-to-calendar-button {
 .jc-home-footer .jc-bab-voir-tout:hover {
   /* 👉 MODIFIABLE : #2d5a3d = couleur de remplissage au survol. */
   background: #2d5a3d !important;
-  color: #faf6f0 !important;
+  color: #f7edd6 !important;
   text-decoration: none !important;
 }
 
@@ -1499,8 +1508,8 @@ add-to-calendar-button {
    changement aux sélecteurs de grille/carrousel.
    ⚠️ Les -18px doivent suivre le padding de .jc-bab-card (section 9). */
 .jc-replies-container {
-  /* 👉 MODIFIABLE : #faf6f0 = crème chaude de la palette (distinct du fond de carte). */
-  background-color: #faf6f0 !important;
+  /* 👉 MODIFIABLE : #f7edd6 = crème chaude de la palette (distinct du fond de carte). */
+  background-color: #f7edd6 !important;
   /* Séparateur avec le contenu de la carte ; la bordure de la carte gère les côtés/bas. */
   border-top: 1px solid #e2ded2 !important;
   /* 👉 MODIFIABLE : arrondi seulement en bas pour épouser les coins de la carte. */
