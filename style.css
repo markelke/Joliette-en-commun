@@ -1364,6 +1364,12 @@ add-to-calendar-button {
   .jc-home-annonces .jc-bab-card:nth-child(n+5) { display: none !important; }
 }
 
+/* Mobile (≤ 639px) : max 3 annonces empilées sur l'accueil (cache la 4e et +). */
+@media (max-width: 639px) {
+  /* 👉 MODIFIABLE : n+4 = cache à partir de la 4e. n+3 = 2 annonces, n+5 = 4 annonces. */
+  .jc-home-annonces .jc-bab-card:nth-child(n+4) { display: none !important; }
+}
+
 /* Boutons du babillard (accueil) : outline, alignés à gauche sous le titre.
    justify-content: flex-start = bord gauche (align avec .jc-section-titre). */
 .jc-home-footer {
@@ -1375,6 +1381,20 @@ add-to-calendar-button {
   gap: 12px !important;
   /* 👉 MODIFIABLE : 16px = espace sous le titre, 24px = espace avant les cartes. */
   margin: 16px 14px 24px !important;
+}
+
+/* Position du lien "Voir toutes les annonces" selon l'écran. Le HTML (Code.js)
+   génère DEUX footers : .jc-home-footer-desktop AVANT les cartes (avec aussi
+   "Publier"), .jc-home-footer-mobile APRÈS les cartes ("Voir tout" seul). Le
+   CSS ne fait que basculer leur visibilité — le bouton suit l'affichage. */
+.jc-home-footer-mobile { display: none !important; }
+@media (max-width: 639px) {
+  .jc-home-footer-desktop { display: none !important; }
+  .jc-home-footer-mobile {
+    display: block !important;
+    /* 👉 MODIFIABLE : 12px = espace entre la 3e carte et le lien sur mobile. */
+    margin-top: 12px !important;
+  }
 }
 
 /* Style outline : scopé à .jc-home-footer pour ne PAS affecter .jc-bab-publier plein
