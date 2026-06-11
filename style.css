@@ -47,7 +47,18 @@ html, body {
   max-width: 100% !important;
 }
 
-.jc-home-annonces { max-width: 100% !important; }
+/* Chaîne de wrappers entre la page et le carousel d'annonces : un item
+   flex/grid sans min-width:0 conserve sa largeur de CONTENU et élargit la
+   page (carousel mesuré à ~984px sur un écran de 390px). min-width:0 +
+   max-width:100% neutralisent ce débordement à chaque maillon. Le carousel
+   lui-même est borné dans la section 9b. */
+.entry-content,
+.wp-block-columns,
+.wp-block-column,
+.jc-section-babillard {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
 
 .jc-bab-titre,
 .jc-bab-message,
@@ -1279,6 +1290,14 @@ add-to-calendar-button {
 /* Mobile : scroll horizontal avec accrochage de carte (snap). */
 .jc-home-annonces {
   display: flex !important;
+  /* width + max-width + box-sizing = le carousel reste borné à la largeur de
+     son parent et scrolle EN INTERNE au lieu d'élargir la page. min-width:0
+     casse le min-width:auto par défaut des items flex/grid (sinon les cartes
+     forceraient le conteneur à ~984px sur un écran de 390px). (rien à régler) */
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
   /* 👉 MODIFIABLE : 16px = espace entre les cartes dans le carousel. */
   gap: 16px !important;
   overflow-x: auto !important;           /* (rien à régler) active le scroll horizontal */
@@ -1394,6 +1413,10 @@ add-to-calendar-button {
    border-top + margin-top créent une pause claire entre les deux sections
    sans avoir besoin d'un élément HTML supplémentaire. */
 .jc-section-babillard {
+  /* min-width:0 + max-width:100% = ce parent direct du carousel ne se laisse
+     pas élargir par lui (sinon il propage le débordement vers la page). (rien à régler) */
+  min-width: 0 !important;
+  max-width: 100% !important;
   /* 👉 MODIFIABLE : 0px = espace au-dessus de la section babillard.
      Monte si les événements et les annonces semblent trop collés. */
   margin-top: 0px !important;
