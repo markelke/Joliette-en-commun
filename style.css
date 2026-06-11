@@ -608,6 +608,19 @@ a[href*="action=edit"] { display: none !important; }
   min-width: 0 !important;        /* (rien à régler) empêche le débordement en grille */
 }
 
+/* Wrapper interne de la tuile (entre .jc-timeline-item et le footer).
+   DOIT être lui aussi une colonne flex qui REMPLIT la hauteur de la tuile :
+   sans ça, le parent direct de .jc-card-footer est un bloc normal et son
+   margin-top:auto n'a aucun effet → "Voir plus"/"Ajouter au calendrier" ne se
+   collent pas en bas. flex:1 = occupe toute la hauteur de la tuile étirée par
+   la grille ; min-height:0 = laisse la description se tronquer sans déborder. */
+.jc-events-grid-layout .jc-timeline-content {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+}
+
 /* Cache les points de l'ancienne timeline verticale (encore générés par le HTML). (rien à régler) */
 .jc-events-grid-layout .jc-timeline-dot { display: none !important; }
 
