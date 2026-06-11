@@ -1364,6 +1364,12 @@ add-to-calendar-button {
   .jc-home-annonces .jc-bab-card:nth-child(n+5) { display: none !important; }
 }
 
+/* Mobile (≤ 639px) : max 3 annonces empilées sur l'accueil (cache la 4e et +). */
+@media (max-width: 639px) {
+  /* 👉 MODIFIABLE : n+4 = cache à partir de la 4e. n+3 = 2 annonces, n+5 = 4 annonces. */
+  .jc-home-annonces .jc-bab-card:nth-child(n+4) { display: none !important; }
+}
+
 /* Boutons du babillard (accueil) : outline, alignés à gauche sous le titre.
    justify-content: flex-start = bord gauche (align avec .jc-section-titre). */
 .jc-home-footer {
