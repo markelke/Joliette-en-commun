@@ -1383,6 +1383,20 @@ add-to-calendar-button {
   margin: 16px 14px 24px !important;
 }
 
+/* Position du lien "Voir toutes les annonces" selon l'écran. Le HTML (Code.js)
+   génère DEUX footers : .jc-home-footer-desktop AVANT les cartes (avec aussi
+   "Publier"), .jc-home-footer-mobile APRÈS les cartes ("Voir tout" seul). Le
+   CSS ne fait que basculer leur visibilité — le bouton suit l'affichage. */
+.jc-home-footer-mobile { display: none !important; }
+@media (max-width: 639px) {
+  .jc-home-footer-desktop { display: none !important; }
+  .jc-home-footer-mobile {
+    display: block !important;
+    /* 👉 MODIFIABLE : 12px = espace entre la 3e carte et le lien sur mobile. */
+    margin-top: 12px !important;
+  }
+}
+
 /* Style outline : scopé à .jc-home-footer pour ne PAS affecter .jc-bab-publier plein
    sur la page /babillard/. box-sizing: border-box garantit que la bordure 2px est incluse
    dans le padding sans faire varier la hauteur selon les navigateurs. (rien à régler) */
