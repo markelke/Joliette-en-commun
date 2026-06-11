@@ -1319,6 +1319,29 @@ add-to-calendar-button {
   scroll-snap-align: start !important;   /* (rien à régler) accrochage au bord gauche */
 }
 
+/* Mobile (≤ 768px) : on ABANDONNE le carousel horizontal — son contenu (cartes
+   à 78%) débordait et élargissait toute la page. On empile en 1 colonne pleine
+   largeur : pas de scroll horizontal possible, donc plus de débordement. */
+@media (max-width: 768px) {
+  .jc-home-annonces {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    /* 👉 MODIFIABLE : 16px = espace vertical entre les annonces empilées. */
+    gap: 16px !important;
+    overflow-x: visible !important;        /* (rien à régler) plus de zone scrollable */
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    scroll-snap-type: none !important;     /* (rien à régler) snap inutile hors carousel */
+  }
+  .jc-home-annonces .jc-bab-card {
+    flex: none !important;                  /* (rien à régler) annule le flex:0 0 78% */
+    width: 100% !important;
+    max-width: 100% !important;
+    scroll-snap-align: none !important;
+  }
+}
+
 /* Tablette + desktop : grille flex-wrap, cartes de largeur fixe. */
 @media (min-width: 768px) {
   .jc-home-annonces {
