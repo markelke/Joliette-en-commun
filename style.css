@@ -31,6 +31,34 @@
 
 
 /* ==========================================================================
+   0. GARDE-FOU ANTI-DÉBORDEMENT HORIZONTAL (surtout mobile)
+   --------------------------------------------------------------------------
+   Symptôme : sur mobile on pouvait « tasser » la page vers la droite — un
+   élément dépassait la largeur de l'écran.
+     • html, body : coupe tout débordement horizontal résiduel (filet global).
+     • Le carousel d'annonces gère son scroll EN INTERNE (overflow-x:auto plus
+       bas) ; on garantit ici qu'il ne dépasse jamais la largeur de l'écran.
+     • Textes saisis par les résidents (titres/messages/descriptions) : un mot
+       ou une URL insécable (lien collé sans espace) forçait la carte au-delà
+       de l'écran. On casse au besoin plutôt que d'élargir la carte.
+   ========================================================================== */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
+.jc-home-annonces { max-width: 100% !important; }
+
+.jc-bab-titre,
+.jc-bab-message,
+.jc-timeline-title,
+.jc-timeline-desc {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+
+/* ==========================================================================
    1. EN-TÊTE — VERT FORÊT
    --------------------------------------------------------------------------
    WordPress et GeneratePress peuvent utiliser n'importe lequel de ces
