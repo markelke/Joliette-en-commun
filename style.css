@@ -31,6 +31,34 @@
 
 
 /* ==========================================================================
+   0. GARDE-FOU ANTI-DÉBORDEMENT HORIZONTAL (surtout mobile)
+   --------------------------------------------------------------------------
+   Symptôme : sur mobile on pouvait « tasser » la page vers la droite — un
+   élément dépassait la largeur de l'écran.
+     • html, body : coupe tout débordement horizontal résiduel (filet global).
+     • Le carousel d'annonces gère son scroll EN INTERNE (overflow-x:auto plus
+       bas) ; on garantit ici qu'il ne dépasse jamais la largeur de l'écran.
+     • Textes saisis par les résidents (titres/messages/descriptions) : un mot
+       ou une URL insécable (lien collé sans espace) forçait la carte au-delà
+       de l'écran. On casse au besoin plutôt que d'élargir la carte.
+   ========================================================================== */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
+.jc-home-annonces { max-width: 100% !important; }
+
+.jc-bab-titre,
+.jc-bab-message,
+.jc-timeline-title,
+.jc-timeline-desc {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+
+/* ==========================================================================
    1. EN-TÊTE — VERT FORÊT
    --------------------------------------------------------------------------
    WordPress et GeneratePress peuvent utiliser n'importe lequel de ces
@@ -606,6 +634,19 @@ a[href*="action=edit"] { display: none !important; }
   /* 👉 MODIFIABLE : 0.04 = opacité de l'ombre sous les tuiles (0 = pas d'ombre). */
   box-shadow: 0 4px 6px rgba(0,0,0,0.04) !important;
   min-width: 0 !important;        /* (rien à régler) empêche le débordement en grille */
+}
+
+/* Wrapper interne de la tuile (entre .jc-timeline-item et le footer).
+   DOIT être lui aussi une colonne flex qui REMPLIT la hauteur de la tuile :
+   sans ça, le parent direct de .jc-card-footer est un bloc normal et son
+   margin-top:auto n'a aucun effet → "Voir plus"/"Ajouter au calendrier" ne se
+   collent pas en bas. flex:1 = occupe toute la hauteur de la tuile étirée par
+   la grille ; min-height:0 = laisse la description se tronquer sans déborder. */
+.jc-events-grid-layout .jc-timeline-content {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
 }
 
 /* Cache les points de l'ancienne timeline verticale (encore générés par le HTML). (rien à régler) */
